@@ -28,6 +28,10 @@
 
 GtkWidget 			*window_login;
 GtkWidget 			*bar;
+GtkWidget 			*pila_stp;
+GtkWidget			*btn_cancelar_stp;
+GtkWidget			*pag_atras;
+GtkWidget			*pag_sig;
 GtkWidget 			*bienvenido;
 GtkWidget 			*btn_borrar_emp;
 GtkWidget 			*stack_login;
@@ -43,9 +47,13 @@ GtkWidget			*btn_cancelar_adver6;
 GtkWidget			*emp_aceptar_añadir;
 GtkWidget			*inserta_datos_empresa;
 GtkWidget			*btn_cancelar_adver3;
+GtkWidget			*pag_usuarios;
+GtkWidget			*pag_bienvenido;
+GtkWidget			*pag_comp;
+GtkWidget			*pag_sumario;
 GtkEntry 			*g_Entry_Usuario;
 GtkEntry 			*g_Entry_Contraseña;
-GtkToggleButton		*mostrar_calendario;
+GtkStack			*pasos;
 GtkEntry			*entry_buscar;
 GtkEntry			*ety_idpro;
 GtkEntry			*ety_idemp;
@@ -633,13 +641,13 @@ static GtkTreeModel * create_empresa (void)
 	column_emp2 = gtk_tree_view_column_new_with_attributes ("Empresa",renderer,"text", COLidproc,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view),column_emp2);
 	renderer = gtk_cell_renderer_text_new ();
-	column_emp3 = gtk_tree_view_column_new_with_attributes  ("Nombre",renderer,"text", COLnombre,NULL);
+	column_emp3 = gtk_tree_view_column_new_with_attributes ("Nombre",renderer,"text", COLnombre,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view),column_emp3);
 	renderer = gtk_cell_renderer_text_new ();
-	column_emp4 = gtk_tree_view_column_new_with_attributes  ("Direccion",renderer,"text", COLdireccion,NULL);
+	column_emp4 = gtk_tree_view_column_new_with_attributes ("Direccion",renderer,"text", COLdireccion,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view),column_emp4);
 	renderer = gtk_cell_renderer_text_new ();
-	column_emp5 = gtk_tree_view_column_new_with_attributes  ("Telefono",renderer,"text", COLtelefono,NULL);
+	column_emp5 = gtk_tree_view_column_new_with_attributes ("Telefono",renderer,"text", COLtelefono,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view),column_emp5);
 	renderer = gtk_cell_renderer_text_new ();
 	column_emp6 = gtk_tree_view_column_new_with_attributes ("Region",renderer,"text", COLregion,NULL);
@@ -1325,7 +1333,7 @@ void on_acercade_clicked(){
 	}
 	
 void on_acercade_response(){
-	gtk_widget_hide_on_delete(win_acercade);
+	gtk_widget_hide(win_acercade);
 	}
 void on_btn_Sesion_clicked ( gpointer  user_data)
 {
@@ -1704,7 +1712,7 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 //================================================
 
 void on_btn_aceptar_1_clicked(){
-	gtk_widget_hide(dialog_error_datos);
+	gtk_widget_hide_on_delete(dialog_error_datos);
 	}
 //=========== Actualiza datos ====================================
 void on_btn_aceptar__clicked(){
@@ -2451,14 +2459,13 @@ void on_remover_todos_items_clicked(){
 	remove_all();
 	}
 void on_acercade_close (){
-	gtk_dialog_run (GTK_DIALOG (win_acercade));
-	gtk_widget_hide_on_delete(win_acercade);
+	gtk_widget_hide(win_acercade);
 	}
 void on_cerrar_acercade_clicked(){
-	gtk_widget_hide_on_delete(win_acercade);
+	gtk_widget_hide(win_acercade);
 	}
 void on_acercade_destroy(){
-	gtk_widget_hide(win_acercade);
+	gtk_widget_show(win_acercade);
 		}	
 void on_info_close(){
 	gtk_label_set_text(lbl_info,"");
@@ -2505,6 +2512,40 @@ void consulta_usuarios(){
  mysql_close(conn);
  
 }
+
+void cerrar_setup(){
+    gtk_widget_hide(bienvenido);
+//agregar funcion para refrescar usuarios
+    gtk_widget_show(window_login);
+}
+void siguiente(){
+    
+    if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_bienvenido){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_usuarios);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,TRUE);
+    }else if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_usuarios){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_comp);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,TRUE);
+    }else if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_comp){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_sumario);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,TRUE);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_sig) ,FALSE);
+    }
+}
+void atras(){
+    if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_sumario){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_comp);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_sig) ,TRUE);
+    }else if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_comp){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_usuarios);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_sig) ,TRUE);
+    }else if(gtk_stack_get_visible_child (GTK_STACK(pasos))==pag_usuarios){
+	gtk_stack_set_visible_child(GTK_STACK(pasos),pag_bienvenido);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_sig) ,TRUE);
+	gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,FALSE);
+    }
+    
+}
 int main(int argc, char *argv[])
 	{
 		GtkBuilder      	*builder; 
@@ -2515,11 +2556,17 @@ int main(int argc, char *argv[])
 		
 		builder = gtk_builder_new();
 		gtk_builder_add_from_file (builder, "window_main.glade", NULL);
+		pila_stp = GTK_WIDGET(gtk_builder_get_object(builder, "pila_stp"));
 		stack_login = GTK_WIDGET(gtk_builder_get_object(builder, "stack_login"));
+		pag_bienvenido = GTK_WIDGET(gtk_builder_get_object(builder, "pag_bienvenido"));
+		pag_usuarios = GTK_WIDGET(gtk_builder_get_object(builder, "pag_usuarios"));
+		pag_comp = GTK_WIDGET(gtk_builder_get_object(builder, "pag_comp"));
+		pag_sumario = GTK_WIDGET(gtk_builder_get_object(builder, "pag_sumario"));
 		actualiza_datos_empresa = GTK_WIDGET(gtk_builder_get_object(builder, "actualiza_datos_empresa"));
 		btn_cambiar_usuario = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cambiar_usuario"));
 		window_login = GTK_WIDGET(gtk_builder_get_object(builder, "Login_main"));
 		btn_Sesion = GTK_WIDGET(gtk_builder_get_object(builder, "btn_Sesion"));
+		pasos = GTK_STACK(gtk_builder_get_object(builder, "pasos"));
 		window_BD = GTK_WIDGET(gtk_builder_get_object(builder,"Window_BD"));
 		bienvenido = GTK_WIDGET(gtk_builder_get_object(builder,"bienvenido"));
 		actualiza_factura = GTK_WIDGET(gtk_builder_get_object(builder,"actualiza_factura"));
@@ -2566,7 +2613,6 @@ int main(int argc, char *argv[])
 		exportar_pdf = GTK_WIDGET(gtk_builder_get_object(builder,"exportar_pdf"));
 		muestra_func = GTK_WIDGET(gtk_builder_get_object(builder,"muestra_func"));
 		btn_sql_aceptar = GTK_WIDGET(gtk_builder_get_object(builder,"btn_sql_aceptar"));
-		mostrar_calendario = GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder,"mostrar_calendario"));
 		ocultar_btn = GTK_WIDGET(gtk_builder_get_object(builder,"ocultar_btn"));
 		win_acercade = GTK_WIDGET(gtk_builder_get_object(builder,"acercade"));
 		switchgtk = GTK_WIDGET(gtk_builder_get_object(builder,"activador_sql"));
@@ -2675,6 +2721,9 @@ int main(int argc, char *argv[])
 		treeview_pos = GTK_WIDGET(gtk_builder_get_object(builder,"treeview_pos"));
 		inserta_datos_empresa = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_empresa"));
 		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(historial_busqueda));
+		btn_cancelar_stp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_stp"));
+		pag_atras = GTK_WIDGET(gtk_builder_get_object(builder,"pag_atras"));
+		pag_sig = GTK_WIDGET(gtk_builder_get_object(builder,"pag_sig"));
 		
 		init_list(historial_busqueda);
 		for(i=2051;i>=1950;i--){ 
@@ -2720,11 +2769,14 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_cambiar_usuario),"clicked",G_CALLBACK(on_btn_cambiar_usuario_clicked),NULL);
 		g_signal_connect(G_OBJECT(actualiza_datos_empresa),"clicked",G_CALLBACK(on_actualiza_datos_empresa_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_borrar_emp),"clicked",G_CALLBACK(on_btn_borrar_emp_clicked),NULL);		
-				
+		g_signal_connect(G_OBJECT(btn_cancelar_stp),"clicked",G_CALLBACK(cerrar_setup),NULL);	
+		g_signal_connect(G_OBJECT(pag_sig),"clicked",G_CALLBACK(siguiente),NULL);
+		g_signal_connect(G_OBJECT(pag_atras),"clicked",G_CALLBACK(atras),NULL);	
 //g_signal_connect(G_OBJECT(),"clicked",G_CALLBACK(on_),NULL);
 		gtk_builder_connect_signals(builder, NULL);
 		g_object_unref(builder);
 		consulta_usuarios();
-		gtk_widget_show(bienvenido);  
+		gtk_widget_show(window_BD);  
+		gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,FALSE);
 		gtk_main();	
 	}
