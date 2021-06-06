@@ -25,7 +25,6 @@
 #include <gtk/gtk.h>
 #include <mysql.h> 
 #include <stdlib.h>
-#include <webkit2/webkit2.h>
 
 GtkWidget 			*window_login;
 GtkWidget 			*bar;
@@ -241,6 +240,7 @@ GtkWidget			*contenedor_view4;
 GtkWidget			*contenedor_view5;
 GtkWidget			*contenedor_view6;
 GtkWidget			*contenedor_sql;
+GtkWidget 			*acerca_de;
 GtkWidget     *stackgtk;
 GtkWidget			*stack_actualiza;
 MYSQL 				*conn;
@@ -2844,6 +2844,7 @@ int main(int argc, char *argv[])
 		btn_cancelar_stp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_stp"));
 		pag_atras = GTK_WIDGET(gtk_builder_get_object(builder,"pag_atras"));
 		pag_sig = GTK_WIDGET(gtk_builder_get_object(builder,"pag_sig"));
+		acerca_de  = GTK_WIDGET(gtk_builder_get_object(builder,"acerca_de"));
 		
 		init_list(historial_busqueda);
 		for(i=2051;i>=1950;i--){ 
@@ -2907,6 +2908,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_consulta_pos),"toggled",G_CALLBACK(consulta_pos),NULL);
 		g_signal_connect(G_OBJECT(btn_edit_proveedor),"toggled",G_CALLBACK(modifica_proveedor),NULL);
 		g_signal_connect(G_OBJECT(btn_edit_productos),"toggled",G_CALLBACK(modifica_productos),NULL);
+		g_signal_connect(G_OBJECT(acerca_de),"clicked",G_CALLBACK(on_acercade_clicked),NULL);
 		//g_signal_connect(G_OBJECT(),"clicked",G_CALLBACK(on_),NULL);
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
