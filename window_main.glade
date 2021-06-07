@@ -4814,6 +4814,7 @@ Author: Esteban Noe Sarmiento Mtz.
                           <object class="GtkFrame">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="margin-end">5</property>
                             <property name="label-xalign">0</property>
                             <property name="shadow-type">in</property>
                             <child>
@@ -4825,6 +4826,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkComboBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
+                                    <property name="margin-end">5</property>
+                                    <property name="margin-bottom">5</property>
                                     <property name="has-entry">True</property>
                                     <child internal-child="entry">
                                       <object class="GtkEntry">
@@ -4853,6 +4856,7 @@ Author: Esteban Noe Sarmiento Mtz.
                           <object class="GtkFrame">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="margin-end">5</property>
                             <property name="label-xalign">0</property>
                             <property name="shadow-type">in</property>
                             <child>
@@ -4864,6 +4868,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkScrolledWindow" id="contenedor_view2">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="margin-end">5</property>
+                                    <property name="margin-bottom">5</property>
                                     <property name="propagate-natural-width">True</property>
                                     <property name="propagate-natural-height">True</property>
                                     <child>
@@ -4923,6 +4929,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
+                                    <property name="margin-end">5</property>
+                                    <property name="margin-bottom">5</property>
                                     <property name="orientation">vertical</property>
                                     <child>
                                       <object class="GtkScrolledWindow">
