@@ -49,7 +49,7 @@ GtkWidget			  *btn_aceptar_1;
 GtkWidget			  *btn_Rein_Dial;
 GtkWidget 			*btn_consulta_emp;
 GtkWidget			  *btn_cancelar_adver6;
-GtkWidget			  *emp_aceptar_añadir;
+GtkWidget			  *emp_aceptar_anadir;
 GtkWidget	  		*inserta_datos_empresa;
 GtkWidget		  	*btn_cancelar_adver3;
 GtkWidget 			*pag_usuarios;
@@ -61,7 +61,7 @@ GtkWidget 			*webview1;
 GtkWidget 			*btn_servicios;
 GtkEntry        *ety_user_bien;
 GtkEntry  			*g_Entry_Usuario;
-GtkEntry  			*g_Entry_Contraseña;
+GtkEntry  			*g_Entry_Contrasena;
 GtkEntry 			*ety_emp_bien;
 GtkEntry 			*ety_num_bien;
 GtkEntry 			*ety_dir_bien;
@@ -164,7 +164,7 @@ GtkWidget			*pop_calendario;
 GtkLabel			*La_lbl_Titulo_BD;
 GtkLabel			*La_Label_Error_ingreso;
 GtkWidget			*lbl_no_datos;
-GtkLabel			*lbl_añadir_advertencia;
+GtkLabel			*lbl_anadir_advertencia;
 GtkLabel			*lbl_eliminar_advertencia;
 GtkLabel			*lbl_error;
 GtkLabel			*lbl_info;
@@ -224,9 +224,9 @@ GtkWidget    	*debug;
 GtkWidget			*info_bar;
 GtkTextBuffer	*textbuffer_main;
 GtkTextView		*debug_textview;
-GtkWidget    	*advertencia_añadir_fac;
-GtkWidget    	*advertencia_añadir_pro;
-GtkWidget    	*advertencia_añadir_emp;
+GtkWidget    	*advertencia_anadir_fac;
+GtkWidget    	*advertencia_anadir_pro;
+GtkWidget    	*advertencia_anadir_emp;
 GtkWidget 		*advertencia_actualizar_emp;
 GtkWidget     *advertencia_actualizar_fac;
 GtkWidget     *advertencia_actualizar_pro;
@@ -1284,7 +1284,7 @@ static GtkTreeModel * create_and_fill_model_busqueda (void)
 
 void conectar(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char *server = "localhost";
 	conn = mysql_init(NULL);
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0)) 
@@ -1321,7 +1321,7 @@ void conectar(){
 
 void contenido_tablas(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char *server = "localhost";
 	
 	conn = mysql_init(NULL);
@@ -1349,7 +1349,7 @@ while ((row = mysql_fetch_row(res)) != NULL)
 void on_btn_cambiar_usuario_clicked()
 {
 	gtk_entry_set_text(g_Entry_Usuario,"");
-	gtk_entry_set_text(g_Entry_Contraseña,"");
+	gtk_entry_set_text(g_Entry_Contrasena,"");
 	gtk_widget_hide_on_delete(window_BD);
 	gtk_widget_show(window_login);
 	gtk_widget_hide_on_delete (g_Dialog_Error);
@@ -1372,7 +1372,7 @@ void on_btn_Sesion_clicked ( gpointer  user_data)
 	contenido_tablas();
 }
 
-void on_Entry_Contraseña_activate(gpointer  user_data)
+void on_Entry_Contrasena_activate(gpointer  user_data)
 {	
 	conectar();
 	contenido_tablas();
@@ -1386,7 +1386,7 @@ void on_btn_cancelar_adver3_clicked()
 void on_btn_Rein_Dial_clicked()
 	{
 		gtk_entry_set_text(g_Entry_Usuario,"");
-		gtk_entry_set_text(g_Entry_Contraseña,"");
+		gtk_entry_set_text(g_Entry_Contrasena,"");
 		gtk_widget_hide_on_delete (g_Dialog_Error);
 	}
 void refresca_datos_fac(){
@@ -1543,15 +1543,15 @@ void on_cancela_and_factura2_clicked(){
 		gtk_widget_hide(inserta_empresa);
 	}
 void on_btn_cancelar_adver_clicked(){
-	gtk_widget_hide(advertencia_añadir_fac);
+	gtk_widget_hide(advertencia_anadir_fac);
 	}
 void on_cancela_and_factura_clicked(){
 	gtk_widget_hide_on_delete(inserta_factura);
 	}
 	
-void on_fac_aceptar_añadir_clicked(){
+void on_fac_aceptar_anadir_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char anadir_fac[512];
 	char date[12];
 	char *server = "localhost";
@@ -1582,7 +1582,7 @@ void on_fac_aceptar_añadir_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_añadir_fac);
+		gtk_widget_hide(advertencia_anadir_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1603,19 +1603,19 @@ void on_fac_aceptar_añadir_clicked(){
 
 	mysql_free_result(res);
 	mysql_close(conn);
-	gtk_widget_hide(advertencia_añadir_fac);
+	gtk_widget_hide(advertencia_anadir_fac);
 	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	}
 void on_inserta_datos_factura_clicked(){
-		gtk_widget_show(advertencia_añadir_fac);
+		gtk_widget_show(advertencia_anadir_fac);
 	}
 void on_inserta_datos_empresa_clicked(){
-		gtk_widget_show(advertencia_añadir_emp);
+		gtk_widget_show(advertencia_anadir_emp);
 	}
-void on_emp_aceptar_añadir_clicked(){
+void on_emp_aceptar_anadir_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char anadir_emp[512];
 	char *server = "localhost";
 
@@ -1641,7 +1641,7 @@ void on_emp_aceptar_añadir_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_añadir_fac);
+		gtk_widget_hide(advertencia_anadir_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1663,22 +1663,22 @@ void on_emp_aceptar_añadir_clicked(){
 
 	mysql_free_result(res);
 	mysql_close(conn);
-	gtk_widget_hide(advertencia_añadir_emp);
+	gtk_widget_hide(advertencia_anadir_emp);
 	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	}
 void on_btn_cancelar_adver6_clicked(){
-		gtk_widget_hide(advertencia_añadir_emp);
+		gtk_widget_hide(advertencia_anadir_emp);
 	}
 void on_btn_cancelar_adver7_clicked(){
-		gtk_widget_hide(advertencia_añadir_pro);
+		gtk_widget_hide(advertencia_anadir_pro);
 	}
 void on_inserta_datos_empres_clicked(){
-		gtk_widget_show(advertencia_añadir_pro);
+		gtk_widget_show(advertencia_anadir_pro);
 	}
-void on_pro_aceptar_añadir_clicked (){
+void on_pro_aceptar_anadir_clicked (){
 user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char anadir_fac[512];
 	char date[12];
 	char date2[12];
@@ -1716,7 +1716,7 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_añadir_fac);
+		gtk_widget_hide(advertencia_anadir_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1736,7 +1736,7 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 
 	mysql_free_result(res);
 	mysql_close(conn);
-	gtk_widget_hide(advertencia_añadir_pro);
+	gtk_widget_hide(advertencia_anadir_pro);
 	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	}
@@ -1749,7 +1749,7 @@ void on_btn_aceptar_1_clicked(){
 void on_btn_aceptar__clicked(){
 
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char date[13];
 	char actualiza_fac[512];
 	char *server = "localhost";
@@ -1840,7 +1840,7 @@ void on_btn_cancelar_adver4_clicked(){
 	}
 void on_btn_actualiza_emp_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char anadir_fac[512];
 	char *server = "localhost";
 
@@ -1868,7 +1868,7 @@ void on_btn_actualiza_emp_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_añadir_fac);
+		gtk_widget_hide(advertencia_anadir_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1904,7 +1904,7 @@ void on_btn_cancelar_adver5_clicked(){
 	}
 void on_btn_actualiza_pro_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char date[12];
 	char date2[13];
 	char anadir_fac[512];
@@ -1942,7 +1942,7 @@ void on_btn_actualiza_pro_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_añadir_fac);
+		gtk_widget_hide(advertencia_anadir_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1977,7 +1977,7 @@ void on_ety_id_fac_borrar_activate(){
 }
 void on_btn_aceptar_a_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char elimina_fac[50];
 	char *server = "localhost";
 	
@@ -2031,7 +2031,7 @@ void on_btn_cancelar_adver8_clicked(){
 	}
 void on_btn_aceptar_a1_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char elimina_fac[50];
 	char *server = "localhost";
 	
@@ -2081,7 +2081,7 @@ void on_btn_borrar_pro_clicked(){
 	}
 void on_btn_aceptar_a2_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char elimina_fac[50];
 	char *server = "localhost";
 	
@@ -2194,7 +2194,7 @@ void meter_historial(){
 void on_entry_buscar_activate(){
 	refresca_busqueda();
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
 	char *server = "localhost";
 	
@@ -2233,7 +2233,7 @@ void on_entry_buscar_activate(){
 }
 void on_btn_consulta_emp_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
 	char *server = "localhost";
 	
@@ -2276,7 +2276,7 @@ void on_btn_consulta_emp_clicked(){
 }
 void on_btn_consulta_fac_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
 	char *server = "localhost";
 	
@@ -2315,7 +2315,7 @@ void on_btn_consulta_fac_clicked(){
 }
 void on_btn_consulta_pro_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
 	char *server = "localhost";
 	
@@ -2367,7 +2367,7 @@ void on_exportar_pdf_clicked(){
 	char hline[]= "\\hline\n";
 
 	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contraseña);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char *server = "localhost";
 	
 	
@@ -2590,7 +2590,7 @@ void siguiente(){
 		gtk_widget_set_sensitive (GTK_WIDGET(pag_atras) ,TRUE);
 		gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar_bien),FALSE);
 	}else{
-		gtk_label_set_text(lbl_info_bien," Las contraseña no coinciden o estan vacias");
+		gtk_label_set_text(lbl_info_bien," Las Contrasena no coinciden o estan vacias");
 		gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar_bien),TRUE);
 		
 		}
@@ -2616,7 +2616,7 @@ void atras(){
     
 }
 void pagar_servicios(){
-	system("epiphany&");
+	system("epiphany https://unodostres.com.mx &");
 }
 void consigue_datos(){
 const gchar *usuario = gtk_entry_get_text (ety_user_bien);
@@ -2671,7 +2671,7 @@ int main(int argc, char *argv[])
 		info_bar = GTK_WIDGET(gtk_builder_get_object(builder,"info_bar"));
 		info_bar_bien = GTK_WIDGET(gtk_builder_get_object(builder,"info_bar_bien"));
 		g_Entry_Usuario = GTK_ENTRY(gtk_builder_get_object(builder,"Entry_Usuario"));
-		g_Entry_Contraseña = GTK_ENTRY(gtk_builder_get_object(builder,"Entry_Contraseña"));
+		g_Entry_Contrasena = GTK_ENTRY(gtk_builder_get_object(builder,"Entry_Contrasena"));
 		g_Dialog_Error = GTK_WIDGET(gtk_builder_get_object(builder,"Dialog_Error"));
 		lbl_error = GTK_LABEL(gtk_builder_get_object(builder,"lbl_error"));
 		inserta_factura = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_factura"));
@@ -2716,13 +2716,13 @@ int main(int argc, char *argv[])
 		switchgtk = GTK_WIDGET(gtk_builder_get_object(builder,"activador_sql"));
 		source_code = GTK_WIDGET(gtk_builder_get_object(builder,"Codigo_sql"));
 		lbl_no_datos = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_no_datos"));
-		lbl_añadir_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_añadir_advertencia"));
+		lbl_anadir_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_anadir_advertencia"));
 		lbl_eliminar_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_eliminar_advertencia"));
 		lbl_info = GTK_LABEL(gtk_builder_get_object(builder,"lbl_info"));
 		lbl_user_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_user_bien"));
-		advertencia_añadir_fac = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_añadir_fac"));
-		advertencia_añadir_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_añadir_emp"));
-		advertencia_añadir_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_añadir_pro"));
+		advertencia_anadir_fac = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_anadir_fac"));
+		advertencia_anadir_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_anadir_emp"));
+		advertencia_anadir_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_anadir_pro"));
 		advertencia_actualizar_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_emp"));
 		advertencia_actualizar_fac = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_fac"));
 		advertencia_actualizar_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_pro"));
@@ -2879,13 +2879,13 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_cancelar_adver4),"clicked",G_CALLBACK(on_btn_cancelar_adver4_clicked),NULL);
 
 		g_signal_connect(G_OBJECT(btn_Sesion),"clicked",G_CALLBACK(on_btn_Sesion_clicked),NULL);
-		g_signal_connect(G_OBJECT(g_Entry_Contraseña),"activate",G_CALLBACK(on_Entry_Contraseña_activate),NULL);
+		g_signal_connect(G_OBJECT(g_Entry_Contrasena),"activate",G_CALLBACK(on_Entry_Contrasena_activate),NULL);
 		g_signal_connect(G_OBJECT(btn_Rein_Dial),"clicked",G_CALLBACK(on_btn_Rein_Dial_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver3),"clicked",G_CALLBACK(on_btn_cancelar_adver3_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver6),"clicked",G_CALLBACK(on_btn_cancelar_adver6_clicked),NULL);
 		g_signal_connect(G_OBJECT(inserta_datos_empresa),"clicked",G_CALLBACK(on_inserta_datos_empresa_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_consulta_emp),"clicked",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
-		g_signal_connect(G_OBJECT(emp_aceptar_añadir),"clicked",G_CALLBACK(on_emp_aceptar_añadir_clicked),NULL);
+		g_signal_connect(G_OBJECT(emp_aceptar_anadir),"clicked",G_CALLBACK(on_emp_aceptar_anadir_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_aceptar_1),"clicked",G_CALLBACK(on_btn_aceptar_1_clicked),NULL);
 		g_signal_connect(G_OBJECT(bar),"clicked",G_CALLBACK(on_info_close),NULL);
 		g_signal_connect(G_OBJECT(cancela_and_factura3),"clicked",G_CALLBACK(on_cancela_and_factura3_clicked),NULL);
