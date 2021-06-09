@@ -36,6 +36,9 @@ GtkWidget			  *pag_sig;
 GtkWidget 			*bienvenido;
 GtkWidget 			*btn_borrar_emp;
 GtkWidget 			*stack_login;
+GtkWidget 			*switcher;
+GtkStack			*stack_header;
+GtkWidget		*ety_busc_producto;
 GtkLabel       *lbl_user_bien;
 GtkLabel       *lbl_hora;
 GtkWidget 			*actualiza_datos_empresa;
@@ -59,6 +62,7 @@ GtkWidget 			*pag_sumario;
 GtkWidget 			*reveal_proveedor;
 GtkWidget 			*webview1;
 GtkWidget 			*btn_servicios;
+GtkWidget			*swchitcher;
 GtkEntry        *ety_user_bien;
 GtkEntry  			*g_Entry_Usuario;
 GtkEntry  			*g_Entry_Contrasena;
@@ -2559,16 +2563,15 @@ void modifica_proveedor(){
 }
 
 void abre_busca(){
-	gboolean button_state;
-	button_state = gtk_toggle_button_get_active(btn_buscar_pos);
+	gboolean button_state = gtk_toggle_button_get_active(btn_buscar_pos);
 	if (button_state) {
 		// button is active
-		gtk_revealer_set_reveal_child (GTK_REVEALER (revel_bucar),TRUE);
+		gtk_stack_set_visible_child (GTK_STACK(stack_header),ety_busc_producto);
 	}
-	else {
+	else{
 		// button is inactive
-		gtk_revealer_set_reveal_child (GTK_REVEALER (revel_bucar),FALSE);
-}
+		gtk_stack_set_visible_child (GTK_STACK(stack_header),swchitcher);		
+	}
 }
 
 void siguiente(){
@@ -2732,6 +2735,7 @@ int main(int argc, char *argv[])
 		seleccion_view = GTK_TREE_SELECTION(gtk_builder_get_object(builder,"seleccion_view"));
 		seleccion_view2 = GTK_TREE_SELECTION(gtk_builder_get_object(builder,"seleccion_view2"));
 		debug_textview = GTK_TEXT_VIEW(gtk_builder_get_object(builder,"debug_textview"));
+		swchitcher = GTK_WIDGET(gtk_builder_get_object(builder,"swchitcher"));
 		debug = GTK_WIDGET(gtk_builder_get_object(builder,"debug"));
 		textbuffer_main = GTK_TEXT_BUFFER(gtk_builder_get_object(builder, "textbuffer_main"));
 		entry_buscar = GTK_ENTRY(gtk_builder_get_object(builder,"entry_buscar"));
@@ -2744,10 +2748,12 @@ int main(int argc, char *argv[])
 		reveal_proveedor =  GTK_WIDGET(gtk_builder_get_object(builder,"reveal_proveedor"));
 		btn_aceptar_1 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_aceptar_1"));
 		reveal_productos = GTK_WIDGET(gtk_builder_get_object(builder,"reveal_productos"));
+		stack_header = GTK_STACK(gtk_builder_get_object(builder,"stack_header"));
 		ety_emp_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_emp_bien"));
 		ety_num_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_num_bien"));
 		ety_dir_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_dir_bien"));
 		ety_rfc_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_rfc_bien"));
+		ety_busc_producto = GTK_WIDGET(gtk_builder_get_object(builder,"ety_busc_producto"));
 
 		lbl_emp_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_emp_bien"));
 		lbl_num_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_num_bien"));
@@ -2830,6 +2836,7 @@ int main(int argc, char *argv[])
 		cb_dia_proact = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact"));
 		cb_mes_proact = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_proact"));
 		cb_anio_proact = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_proact"));
+		switcher = GTK_WIDGET(gtk_builder_get_object(builder,"switcher"));
 		
 		cb_dia_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact2"));
 		cb_mes_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_proact2"));
