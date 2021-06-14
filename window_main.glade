@@ -506,15 +506,9 @@ Author: Esteban Noe Sarmiento Mtz.
       <object class="GtkHeaderBar">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="title" translatable="yes">Bienvenido</property>
+        <property name="subtitle" translatable="yes">Inicia Secion</property>
         <property name="show-close-button">True</property>
-        <child type="title">
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">Bienvenido</property>
-            <property name="ellipsize">middle</property>
-          </object>
-        </child>
         <child>
           <object class="GtkStack" id="stack_head_login">
             <property name="visible">True</property>
@@ -523,15 +517,6 @@ Author: Esteban Noe Sarmiento Mtz.
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
               </object>
               <packing>
                 <property name="name">page0</property>
@@ -3427,7 +3412,7 @@ ID</property>
                 <property name="can-focus">False</property>
                 <property name="transition-type">slide-left-right</property>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkBox" id="pag_pos">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
@@ -3539,19 +3524,63 @@ ID</property>
                                 <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkAlignment">
+                                    <property name="width-request">300</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="left-padding">12</property>
                                     <child>
-                                      <object class="GtkLabel">
+                                      <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="label" translatable="yes">15.50$</property>
-                                        <property name="ellipsize">end</property>
-                                        <attributes>
-                                          <attribute name="font-desc" value="Roboto Mono Thin for Powerline Bold 57"/>
-                                          <attribute name="foreground" value="#000000000000"/>
-                                        </attributes>
+                                        <property name="halign">center</property>
+                                        <property name="valign">center</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">baseline</property>
+                                            <property name="valign">center</property>
+                                            <property name="label" translatable="yes">0.00</property>
+                                            <property name="justify">center</property>
+                                            <property name="ellipsize">middle</property>
+                                            <property name="max-width-chars">40</property>
+                                            <property name="lines">1</property>
+                                            <attributes>
+                                              <attribute name="font-desc" value="Roboto Bold 45"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">False</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="halign">center</property>
+                                            <property name="valign">center</property>
+                                            <property name="margin-end">5</property>
+                                            <property name="label" translatable="yes">$</property>
+                                            <property name="justify">center</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="max-width-chars">0</property>
+                                            <property name="lines">1</property>
+                                            <property name="xalign">0.5</property>
+                                            <property name="yalign">0.5</property>
+                                            <attributes>
+                                              <attribute name="font-desc" value="Roboto Bold 20"/>
+                                              <attribute name="foreground" value="#000000000000"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">True</property>
+                                            <property name="fill">False</property>
+                                            <property name="pack-type">end</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -4680,21 +4709,49 @@ ID</property>
                         <property name="can-focus">False</property>
                         <property name="margin-bottom">5</property>
                         <child>
-                          <object class="GtkComboBox">
+                          <object class="GtkComboBoxText">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="has-entry">True</property>
-                            <child internal-child="entry">
-                              <object class="GtkEntry">
-                                <property name="can-focus">True</property>
-                                <property name="placeholder-text" translatable="yes">No. de Entradas</property>
-                              </object>
-                            </child>
+                            <property name="active-id">1</property>
+                            <items>
+                              <item translatable="yes">ABARROTES</item>
+                              <item translatable="yes">PRODUCTOS ENLATADOS</item>
+                              <item translatable="yes">LÁCTEOS</item>
+                              <item translatable="yes">BOTANAS</item>
+                              <item translatable="yes">CONFITERÍA/DULCERIA</item>
+                              <item translatable="yes">HARINAS Y PAN</item>
+                              <item translatable="yes">FRUTAS Y VERDURAS</item>
+                              <item translatable="yes">BEBIDAS</item>
+                              <item translatable="yes">BEBIDAS ALCOHÓLICAS</item>
+                              <item translatable="yes">ALIMENTOS PREPARADOS</item>
+                              <item translatable="yes">AUTOMEDICACIÓN</item>
+                              <item translatable="yes">HIGIENE PERSONAL</item>
+                              <item translatable="yes">USO DOMÉSTICO</item>
+                              <item translatable="yes">HELADOS</item>
+                              <item translatable="yes">PRODUCTOS DE LIMPIEZA</item>
+                              <item translatable="yes">OTROS PRODUCTOS</item>
+                              <item id="1" translatable="yes">CATEGORIA</item>
+                            </items>
                           </object>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="active-id">1</property>
+                            <items>
+                              <item id="1" translatable="yes">PROVEEDOR</item>
+                            </items>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
@@ -4786,16 +4843,18 @@ ID</property>
                           <packing>
                             <property name="expand">True</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                         <child>
                           <object class="GtkSearchEntry">
+                            <property name="width-request">250</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="primary-icon-name">edit-find-symbolic</property>
                             <property name="primary-icon-activatable">False</property>
                             <property name="primary-icon-sensitive">False</property>
+                            <property name="placeholder-text" translatable="yes">Buscar por Nombre</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -5051,7 +5110,7 @@ ID</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="halign">start</property>
-                                                    <property name="label" translatable="yes">Stock de Alerta</property>
+                                                    <property name="label" translatable="yes">Sub Categoria</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
@@ -5106,11 +5165,6 @@ ID</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="has-entry">True</property>
-                                                    <child internal-child="entry">
-                                                      <object class="GtkEntry">
-                                                        <property name="can-focus">False</property>
-                                                      </object>
-                                                    </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
@@ -5466,24 +5520,40 @@ ID</property>
                                                   <object class="GtkComboBoxText">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
+                                                    <items>
+                                                      <item translatable="yes">ABARROTES</item>
+                                                      <item translatable="yes">PRODUCTOS ENLATADOS</item>
+                                                      <item translatable="yes">LÁCTEOS</item>
+                                                      <item translatable="yes">BOTANAS</item>
+                                                      <item translatable="yes">CONFITERÍA/DULCERIA</item>
+                                                      <item translatable="yes">HARINAS Y PAN</item>
+                                                      <item translatable="yes">FRUTAS Y VERDURAS</item>
+                                                      <item translatable="yes">BEBIDAS</item>
+                                                      <item translatable="yes">BEBIDAS ALCOHÓLICAS</item>
+                                                      <item translatable="yes">ALIMENTOS PREPARADOS</item>
+                                                      <item translatable="yes">AUTOMEDICACIÓN</item>
+                                                      <item translatable="yes">HIGIENE PERSONAL</item>
+                                                      <item translatable="yes">USO DOMÉSTICO</item>
+                                                      <item translatable="yes">HELADOS</item>
+                                                      <item translatable="yes">PRODUCTOS DE LIMPIEZA</item>
+                                                      <item translatable="yes">OTROS PRODUCTOS</item>
+                                                    </items>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">10</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkComboBoxText">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">False</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
                                                     <property name="fill">False</property>
                                                     <property name="position">11</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkSpinButton">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="text" translatable="yes">0</property>
-                                                    <property name="adjustment">adjustment5</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">12</property>
                                                   </packing>
                                                 </child>
                                               </object>
@@ -6111,48 +6181,84 @@ ID</property>
           </packing>
         </child>
         <child>
-          <object class="GtkToggleButton" id="btn_consulta_pos">
-            <property name="use-action-appearance">True</property>
+          <object class="GtkStack" id="stack_bus_pos">
             <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Consulta de Precios</property>
-            <property name="draw-indicator">True</property>
+            <property name="can-focus">False</property>
+            <property name="transition-type">crossfade</property>
+            <property name="interpolate-size">True</property>
             <child>
-              <object class="GtkImage">
+              <object class="GtkBox" id="child_busqueda_pos">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="icon-name">taxes-finances</property>
+                <child>
+                  <object class="GtkToggleButton" id="btn_consulta_pos">
+                    <property name="use-action-appearance">True</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Consulta de Precios</property>
+                    <property name="draw-indicator">True</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="icon-name">taxes-finances</property>
+                      </object>
+                    </child>
+                    <accelerator key="F5" signal="clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkToggleButton" id="btn_buscar_pos">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="tooltip-text" translatable="yes">Buscar Articulo por Nombre</property>
+                    <property name="draw-indicator">True</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="icon-name">search-icon</property>
+                      </object>
+                    </child>
+                    <accelerator key="F4" signal="clicked"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
+              <packing>
+                <property name="name">page0</property>
+                <property name="title" translatable="yes">page0</property>
+              </packing>
             </child>
-            <accelerator key="F5" signal="clicked"/>
+            <child>
+              <object class="GtkBox" id="child_oculta_bus_pos">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="name">page1</property>
+                <property name="title" translatable="yes">page1</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="position">2</property>
           </packing>
-        </child>
-        <child>
-          <object class="GtkToggleButton" id="btn_buscar_pos">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Buscar Articulo por Nombre</property>
-            <property name="draw-indicator">True</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">search-icon</property>
-              </object>
-            </child>
-            <accelerator key="F4" signal="clicked"/>
-          </object>
-          <packing>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>
@@ -6165,7 +6271,7 @@ ID</property>
     <property name="type-hint">dialog</property>
     <property name="gravity">center</property>
     <property name="transient-for">Window_BD</property>
-    <property name="program-name">Punto de Venta (POS)</property>
+    <property name="program-name">NEO(POS) Punto de Venta</property>
     <property name="version">Beta 0.9</property>
     <property name="copyright" translatable="yes">© 2021 estebansoft :v</property>
     <property name="comments" translatable="yes">(compilado el día 2020-09-07 o después)

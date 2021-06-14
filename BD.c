@@ -45,12 +45,16 @@ GtkWidget 			*switcher;
 GtkWidget			*child_sku;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
+GtkStack			*stack_bus_pos;
+GtkStack			*stack_pos;
 GtkWidget				*popovermenu1;
 GtkStack			*stack_header;
 GtkWidget		*ety_busc_producto;
 GtkLabel       *lbl_user_bien;
 GtkLabel       *lbl_hora;
 GtkWidget 			*actualiza_datos_empresa;
+GtkWidget			*child_busqueda_pos;
+GtkWidget			*child_oculta_bus_pos;
 GtkWidget			  *btn_cambiar_usuario;
 GtkWidget 			*cancela_and_factura3;
 GtkWidget			  *btn_Sesion;
@@ -212,6 +216,7 @@ GtkWidget			*cb_mes_proact2;
 GtkWidget			*cb_anio_proact2;
 
 GtkWidget			*menu_items;
+GtkWidget			*pag_pos;
 GtkWidget			*tabla_items;
 GtkWidget			*muestra_func;
 GtkWidget			*switchgtk;
@@ -422,6 +427,7 @@ enum {
   LIST_ITEM = 0,
   N_COLUMNS_BUS
 };
+
 enum
 {
 	COLid,
@@ -2628,8 +2634,7 @@ void atras(){
 void pagar_servicios(){
 	system("epiphany &");
 }
-void show_gensku(){
-	gtk_stack_set_visible_child(stack_sku,child_sku);	
+void show_gensku(){	
 	const char *temp = gtk_entry_get_text (ety_cbarra);
 	if (strcmp(temp,"") == 0 ){
 		gtk_widget_set_visible (pop_generar_sku,1);
@@ -2638,6 +2643,16 @@ void show_gensku(){
 	gtk_stack_set_visible_child(stack_sku,child_sku);
 }
 }
+void hide_gensku(){
+	 gtk_stack_set_visible_child(stack_sku,child_sku);
+	}
+void header_busqueda(){
+	if(gtk_stack_get_visible_child (stack_pos)==pag_pos){
+			gtk_stack_set_visible_child(stack_bus_pos,child_busqueda_pos);
+		}else{
+			gtk_stack_set_visible_child(stack_bus_pos,child_oculta_bus_pos);
+		}
+	}
 void show_gensku_child(){
 	gtk_stack_set_visible_child(stack_sku,child_tam_sku);
 }
@@ -2781,6 +2796,12 @@ int main(int argc, char *argv[])
 		ety_dir_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_dir_bien"));
 		ety_rfc_bien = GTK_ENTRY(gtk_builder_get_object(builder,"ety_rfc_bien"));
 		ety_busc_producto = GTK_WIDGET(gtk_builder_get_object(builder,"ety_busc_producto"));
+		child_busqueda_pos = GTK_WIDGET(gtk_builder_get_object(builder,"child_busqueda_pos"));
+		child_oculta_bus_pos = GTK_WIDGET(gtk_builder_get_object(builder,"child_oculta_bus_pos"));
+		stack_pos = GTK_STACK(gtk_builder_get_object(builder,"stack_pos"));
+		stack_bus_pos = GTK_STACK(gtk_builder_get_object(builder,"stack_bus_pos"));
+		pag_pos = GTK_WIDGET(gtk_builder_get_object(builder,"pag_pos"));
+		
 
 		lbl_emp_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_emp_bien"));
 		lbl_num_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_num_bien"));
@@ -2816,7 +2837,6 @@ int main(int argc, char *argv[])
 		ety_des = GTK_ENTRY(gtk_builder_get_object(builder,"ety_des"));
 		ety_cbarra = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cbarra"));
 		ety_cneto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cneto"));
-		webview1 = GTK_WIDGET(gtk_builder_get_object(builder,"webview1"));
 		ety_id_empresa = GTK_ENTRY(gtk_builder_get_object(builder,"ety_id_empresa"));
 		ety_id_producto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_id_producto"));
 		ety_nombre_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_nombre_act"));
@@ -2950,17 +2970,15 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_menu_pref_devol),"clicked",G_CALLBACK(regresa_menu),NULL);		
 		g_signal_connect(G_OBJECT(ety_produ_emp),"activate",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-in-event",G_CALLBACK(show_gensku),NULL);
-		g_signal_connect(G_OBJECT(ety_cbarra),"focus-out-event",G_CALLBACK(show_gensku),NULL);
+		g_signal_connect(G_OBJECT(ety_cbarra),"focus-out-event",G_CALLBACK(hide_gensku),NULL);
 		g_signal_connect(G_OBJECT(child_sku),"clicked",G_CALLBACK(show_gensku_child),NULL);
-		//g_signal_connect(G_OBJECT(),"clicked",G_CALLBACK(on_),NULL);
+		g_signal_connect(G_OBJECT(swchitcher),"touch-event",G_CALLBACK(header_busqueda),NULL);
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
 		//consulta_usuarios();
 		gtk_widget_show(window_BD);
 		//gtk_window_fullscreen(GTK_WINDOW(window_BD));
-		//show_gensku();
-		gtk_widget_set_sensitive (GTK_WIDGET(pag_atras),FALSE);
 		gtk_main();			
 		
 	}
