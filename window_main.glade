@@ -1539,7 +1539,7 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="icon-name">emblem-important</property>
-                        <property name="icon_size">1</property>
+                        <property name="icon_size">3</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1637,8 +1637,7 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="pixel-size">256</property>
-                        <property name="icon-name">security-high</property>
-                        <property name="icon_size">6</property>
+                        <property name="icon-name">security-low</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -5165,6 +5164,11 @@ ID</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="has-entry">True</property>
+                                                    <child internal-child="entry">
+                                                      <object class="GtkEntry">
+                                                        <property name="can-focus">False</property>
+                                                      </object>
+                                                    </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
@@ -5517,26 +5521,26 @@ ID</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkComboBoxText">
+                                                  <object class="GtkComboBoxText" id="cb_cat">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <items>
-                                                      <item translatable="yes">ABARROTES</item>
-                                                      <item translatable="yes">PRODUCTOS ENLATADOS</item>
-                                                      <item translatable="yes">LÁCTEOS</item>
-                                                      <item translatable="yes">BOTANAS</item>
-                                                      <item translatable="yes">CONFITERÍA/DULCERIA</item>
-                                                      <item translatable="yes">HARINAS Y PAN</item>
-                                                      <item translatable="yes">FRUTAS Y VERDURAS</item>
-                                                      <item translatable="yes">BEBIDAS</item>
-                                                      <item translatable="yes">BEBIDAS ALCOHÓLICAS</item>
-                                                      <item translatable="yes">ALIMENTOS PREPARADOS</item>
-                                                      <item translatable="yes">AUTOMEDICACIÓN</item>
-                                                      <item translatable="yes">HIGIENE PERSONAL</item>
-                                                      <item translatable="yes">USO DOMÉSTICO</item>
-                                                      <item translatable="yes">HELADOS</item>
-                                                      <item translatable="yes">PRODUCTOS DE LIMPIEZA</item>
-                                                      <item translatable="yes">OTROS PRODUCTOS</item>
+                                                      <item id="0" translatable="yes">ABARROTES</item>
+                                                      <item id="1" translatable="yes">PRODUCTOS ENLATADOS</item>
+                                                      <item id="2" translatable="yes">LÁCTEOS</item>
+                                                      <item id="3" translatable="yes">BOTANAS</item>
+                                                      <item id="4" translatable="yes">CONFITERÍA/DULCERIA</item>
+                                                      <item id="5" translatable="yes">HARINAS Y PAN</item>
+                                                      <item id="6" translatable="yes">FRUTAS Y VERDURAS</item>
+                                                      <item id="7" translatable="yes">BEBIDAS</item>
+                                                      <item id="8" translatable="yes">BEBIDAS ALCOHÓLICAS</item>
+                                                      <item id="9" translatable="yes">ALIMENTOS PREPARADOS</item>
+                                                      <item id="10" translatable="yes">AUTOMEDICACIÓN</item>
+                                                      <item id="11" translatable="yes">HIGIENE PERSONAL</item>
+                                                      <item id="12" translatable="yes">USO DOMÉSTICO</item>
+                                                      <item id="13" translatable="yes">HELADOS</item>
+                                                      <item id="14" translatable="yes">PRODUCTOS DE LIMPIEZA</item>
+                                                      <item id="15" translatable="yes">OTROS PRODUCTOS</item>
                                                     </items>
                                                   </object>
                                                   <packing>
@@ -5546,7 +5550,7 @@ ID</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkComboBoxText">
+                                                  <object class="GtkComboBoxText" id="cb_subcat">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                   </object>
@@ -6281,8 +6285,9 @@ Mediante las bibliotecas en tiempo de ejecución GTK+ v3.24.23 y GLib v2.66.1</p
     <property name="authors">Esteban Noe Sarmiento Mtz.</property>
     <property name="documenters">Esteban Noe Sarmiento Mtz.</property>
     <property name="translator-credits" translatable="yes">Esteban Noe Sarmiento Mtz.</property>
-    <property name="artists">Esteban Noe Sarmiento Mtz.</property>
-    <property name="logo-icon-name">accessories-thesaurus</property>
+    <property name="artists">Esteban Noe Sarmiento Mtz.
+Manuel Morales Nanco</property>
+    <property name="logo-icon-name">accessories-calculator</property>
     <property name="license-type">gpl-2-0-only</property>
     <child internal-child="vbox">
       <object class="GtkBox">

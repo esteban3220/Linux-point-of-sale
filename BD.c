@@ -43,6 +43,8 @@ GtkWidget 			*btn_borrar_emp;
 GtkWidget 			*stack_login;
 GtkWidget 			*switcher;
 GtkWidget			*child_sku;
+GtkWidget			*cb_cat;
+GtkWidget			*cb_subcat;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -2634,6 +2636,77 @@ void atras(){
 void pagar_servicios(){
 	system("epiphany &");
 }
+void cambia_categoria(){
+	int i;
+	gtk_combo_box_text_remove_all (GTK_COMBO_BOX_TEXT (cb_subcat));	
+	const char *categoria = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_cat));
+	//const char *sub_categoria = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_subcat));
+	g_print("%s\n",categoria);
+	if(categoria[1]== 'B'){
+const char *aba[] = {
+"Aceite comestibles",
+"Aderezos",
+"Consome",
+"Crema de cacahuate",
+"Crema para café",
+"Pure de tomate",
+"Alimento para bebe",
+"Alimento para mascotas",
+"Atole",
+"Avena",
+"Azúcar",
+"Café",
+"Cereales",
+"Chile piquín",
+"Especias",
+"Flan en polvo",
+"Formulas infantiles",
+"Gelatinas en polvo/Grenetina",
+"Harina",
+"Harina preparada",
+"Mole",
+"Sal",
+"Salsas envasadas",
+"Sazonadores",
+"Sopas en sobre",
+"Cajeta",
+"Catsup",
+"Mayonesa",
+"Mermelada",
+"Miel",
+"Te",
+"Vinagre",
+"Huevo",
+"Pastas"};
+    
+ for (i = 0; i < G_N_ELEMENTS(aba); i++){
+  	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_subcat), aba[i]);
+  }		
+    
+  }else if(categoria[4]== 'U'){
+	  
+	  
+	  const char *enlatados[] = {
+    "Aceitunas",
+ "Chícharo con zanahoria",
+    "Chícharos enlatados",
+    "Frijoles enlatados",
+    "Frutas en almíbar",
+    "Sardinas",
+    "Atún en agua/aceite",
+    "Chiles enlatados",
+    "Chiles envasados",
+    "Ensaladas enlatadas",
+    "Granos de elote enlatados",
+    "Sopa en lata",
+    "Vegetales en conserva",
+};
+	  for (i = 0; i < G_N_ELEMENTS(enlatados); i++){
+  	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_subcat), enlatados[i]);
+  }
+	  }
+	
+}
 void show_gensku(){	
 	const char *temp = gtk_entry_get_text (ety_cbarra);
 	if (strcmp(temp,"") == 0 ){
@@ -2879,6 +2952,8 @@ int main(int argc, char *argv[])
 		cb_dia_fac_actu = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_fac_actu"));
 		cb_mes_fac_actu = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_fac_actu"));
 		cb_anio_fac_actu = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_fac_actu"));
+		cb_cat = GTK_WIDGET(gtk_builder_get_object(builder,"cb_cat"));
+		cb_subcat = GTK_WIDGET(gtk_builder_get_object(builder,"cb_subcat"));
 		child_tam_sku = GTK_WIDGET(gtk_builder_get_object(builder,"child_tam_sku"));
 		btn_consulta_pos = GTK_TOGGLE_BUTTON(gtk_builder_get_object(builder,"btn_consulta_pos"));
 		cb_dia_proact = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact"));
@@ -2973,6 +3048,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-out-event",G_CALLBACK(hide_gensku),NULL);
 		g_signal_connect(G_OBJECT(child_sku),"clicked",G_CALLBACK(show_gensku_child),NULL);
 		g_signal_connect(G_OBJECT(swchitcher),"touch-event",G_CALLBACK(header_busqueda),NULL);
+		g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
