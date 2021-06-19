@@ -4861,7 +4861,7 @@ ID</property>
                                 <property name="propagate-natural-width">True</property>
                                 <property name="propagate-natural-height">True</property>
                                 <child>
-                                  <object class="GtkTreeView" id="view1">
+                                  <object class="GtkTreeView" id="view3">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
                                     <property name="hscroll-policy">natural</property>
@@ -5136,12 +5136,12 @@ ID</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkComboBoxText">
+                                                  <object class="GtkComboBoxText" id="cb_marcapro">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="has-entry">True</property>
                                                     <child internal-child="entry">
-                                                      <object class="GtkEntry">
+                                                      <object class="GtkEntry" id="ety_marcapro">
                                                         <property name="can-focus">False</property>
                                                       </object>
                                                     </child>
@@ -5450,7 +5450,23 @@ ID</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkSpinButton">
+                                                  <object class="GtkSpinButton" id="spin_compra">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">True</property>
+                                                    <property name="text" translatable="yes">0.00</property>
+                                                    <property name="secondary-icon-name">taxes-finances</property>
+                                                    <property name="adjustment">adjustment3</property>
+                                                    <property name="digits">2</property>
+                                                    <property name="numeric">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">False</property>
+                                                    <property name="position">8</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkSpinButton" id="spin_piezas">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="text" translatable="yes">0</property>
@@ -5465,23 +5481,7 @@ ID</property>
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkSpinButton">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="text" translatable="yes">0.00</property>
-                                                    <property name="secondary-icon-name">taxes-finances</property>
-                                                    <property name="adjustment">adjustment3</property>
-                                                    <property name="digits">2</property>
-                                                    <property name="numeric">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">9</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkSpinButton">
+                                                  <object class="GtkSpinButton" id="spin_venta">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="text" translatable="yes">0.00</property>
@@ -5493,7 +5493,7 @@ ID</property>
                                                   <packing>
                                                     <property name="expand">True</property>
                                                     <property name="fill">False</property>
-                                                    <property name="position">10</property>
+                                                    <property name="position">8</property>
                                                   </packing>
                                                 </child>
                                                 <child>
@@ -5565,7 +5565,7 @@ ID</property>
                                             <property name="transition-type">crossfade</property>
                                             <property name="interpolate-size">True</property>
                                             <child>
-                                              <object class="GtkButton" id="inserta_datos_empresa2">
+                                              <object class="GtkButton" id="inserta_datos_productos">
                                                 <property name="label">gtk-add</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>

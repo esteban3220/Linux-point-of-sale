@@ -30,18 +30,21 @@ GtkWidget 			*window_login;
 GtkWidget 			*bar;
 GtkWidget 			*widget_web;
 GtkWidget 			*pila_stp;
-GtkWidget			  *btn_cancelar_stp;
+GtkWidget			*btn_cancelar_stp;
 GtkButton			*btn_menu_pref;
 GtkButton			*btn_menu_pref_devol;
-GtkWidget					*child_menu;
-GtkWidget					*child_preferencia;
-GtkWidget			  *pag_atras;
-GtkWidget			  *pag_sig;
+GtkWidget			*child_menu;
+GtkWidget			*child_preferencia;
+GtkWidget			*pag_atras;
+GtkWidget			*pag_sig;
+GtkWidget			*spin_piezas;
+GtkWidget			*spin_venta;
+GtkWidget			*spin_compra;
 GtkWidget 			*bienvenido;
-GtkWidget				*btn_menu_pos;
-GtkWidget					*pag_proveedor;
-GtkWidget					*pag_producto;
-GtkWidget					*pag_tickets;
+GtkWidget			*btn_menu_pos;
+GtkWidget			*pag_proveedor;
+GtkWidget			*pag_producto;
+GtkWidget			*pag_tickets;
 GtkWidget 			*btn_borrar_emp;
 GtkWidget 			*switcher;
 GtkWidget			*child_sku;
@@ -51,6 +54,7 @@ GtkWidget			*cb_subcat;
 GtkWidget			*cb_bs_subcat;
 GtkWidget			*cb_estado_emp;
 GtkWidget			*cb_pais_emp;
+GtkWidget			*cb_marcapro;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -65,7 +69,8 @@ GtkWidget			*child_busqueda_pos;
 GtkWidget			*child_oculta_bus_pos;
 GtkWidget			  *btn_cambiar_usuario;
 GtkWidget 			*cancela_and_factura3;
-GtkWidget			  *btn_Sesion;
+GtkWidget			*btn_Sesion;
+GtkWidget			*inserta_datos_productos;
 GtkWidget 			*tree_users;
 GtkWidget 			*bar;
 GtkWidget 			*bar_bien;
@@ -340,6 +345,9 @@ GtkTreeViewColumn 	*column_pro6;
 GtkTreeViewColumn 	*column_pro7;
 GtkTreeViewColumn 	*column_pro8;
 GtkTreeViewColumn 	*column_pro9;
+GtkTreeViewColumn 	*column_pro10;
+GtkTreeViewColumn 	*column_pro11;
+GtkTreeViewColumn 	*column_pro12;
 
 GtkTreeViewColumn 	*column_aud_emp;
 GtkTreeViewColumn 	*column_aud_emp2;
@@ -467,14 +475,17 @@ enum
 enum
 {
 	COLidproducto,
-	COLnomprod,
-	COLmarca,
-	COLfechacaducidad,
-	COLfechaproduccion,
+	COLnomprod, 
+	COLmarca, 
+	COLfechaproduccion, 
+	COLfechacaducidad, 
 	COLnumlote,
-	COLdescripcion,
-	COLcodigobarra,
-	COLcontenidoneto,
+	COLneto, 
+	COLpiezas, 
+	COLcompra, 
+	COLventa, 
+	COLcategoria, 
+	COLsubcategoria, 
 	NUM_COLS_pro
 } ;
 enum
@@ -765,29 +776,35 @@ static GtkTreeModel * create_factura (void)
 static GtkTreeModel *create_producto (void)
 {
 	store3 = gtk_list_store_new (NUM_COLS_pro, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
-	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
+	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
 	
 	gtk_list_store_append (store3, &iter3);
 	gtk_list_store_set (store3, &iter3,COLidproducto, row[0],
 	COLnomprod, row[1],
 	COLmarca, row[2],
-	COLfechacaducidad, row[3],
-	COLfechaproduccion, row[4],
+	COLfechaproduccion, row[3],
+	COLfechacaducidad, row[4],	
 	COLnumlote, row[5],
-	COLdescripcion, row[6],
-	COLcodigobarra, row[7],
-	COLcontenidoneto, row[8],-1);
+	COLneto, row[6],
+	COLpiezas, row[7],
+	COLcompra, row[8],
+	COLventa, row[9],
+	COLcategoria, row[10],
+	COLsubcategoria, row[11],-1);
 	while ((row = mysql_fetch_row(res)) != NULL){
 	gtk_list_store_append (store3, &iter3);
 	gtk_list_store_set (store3, &iter3,COLidproducto, row[0],
 	COLnomprod, row[1],
 	COLmarca, row[2],
-	COLfechacaducidad, row[3],
-	COLfechaproduccion, row[4],
+	COLfechaproduccion, row[3],
+	COLfechacaducidad, row[4],	
 	COLnumlote, row[5],
-	COLdescripcion, row[6],
-	COLcodigobarra, row[7],
-	COLcontenidoneto, row[8],-1);
+	COLneto, row[6],
+	COLpiezas, row[7],
+	COLcompra, row[8],
+	COLventa, row[9],
+	COLcategoria, row[10],
+	COLsubcategoria, row[11],-1);
 }
 	return GTK_TREE_MODEL (store3);
 }
@@ -795,32 +812,41 @@ static GtkTreeModel *create_producto (void)
  static GtkWidget *titulo_producto(void)
 {	
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro = gtk_tree_view_column_new_with_attributes  ("ID Producto",renderer3,"text", COLidproducto,NULL);
+	column_pro = gtk_tree_view_column_new_with_attributes  ("Codigo de Barra",renderer3,"text", COLidproducto,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro2 = gtk_tree_view_column_new_with_attributes ("Nombre",renderer3,"text", COLnomprod,NULL);
+	column_pro2 = gtk_tree_view_column_new_with_attributes ("Nombre y Descripcion",renderer3,"text", COLnomprod,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro2);
 	renderer3 = gtk_cell_renderer_text_new ();
 	column_pro3 = gtk_tree_view_column_new_with_attributes  ("Marca",renderer3,"text", COLmarca,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro3);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro4 = gtk_tree_view_column_new_with_attributes  ("Fecha Cad.",renderer3,"text", COLfechacaducidad,NULL);
+	column_pro4 = gtk_tree_view_column_new_with_attributes  ("Fecha Produccion",renderer3,"text", COLfechaproduccion,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro4);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro5 = gtk_tree_view_column_new_with_attributes  ("Fecha Producción",renderer3,"text", COLfechaproduccion,NULL);
+	column_pro5 = gtk_tree_view_column_new_with_attributes  ("Fecha Caducidad",renderer3,"text", COLfechacaducidad,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro5);
 	renderer3 = gtk_cell_renderer_text_new ();
 	column_pro6 = gtk_tree_view_column_new_with_attributes ("Numero Lote",renderer3,"text", COLnumlote,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro6);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro7 = gtk_tree_view_column_new_with_attributes ("Descripción",renderer3,"text", COLdescripcion,NULL);
+	column_pro7 = gtk_tree_view_column_new_with_attributes ("Can. Neto",renderer3,"text", COLneto,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro7);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro8 = gtk_tree_view_column_new_with_attributes ("Codigo Barras",renderer3,"text", COLcodigobarra,NULL);
+	column_pro8 = gtk_tree_view_column_new_with_attributes ("Piezas",renderer3,"text", COLpiezas,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro8);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro9 = gtk_tree_view_column_new_with_attributes ("Contenido Neto",renderer3,"text", COLcontenidoneto,NULL);
+	column_pro9 = gtk_tree_view_column_new_with_attributes ("Compra",renderer3,"text", COLcompra,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro9);
+	renderer3 = gtk_cell_renderer_text_new ();
+	column_pro10 = gtk_tree_view_column_new_with_attributes ("Venta",renderer3,"text", COLventa,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro10);
+	renderer3 = gtk_cell_renderer_text_new ();
+	column_pro11 = gtk_tree_view_column_new_with_attributes ("Categoria",renderer3,"text", COLcategoria,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro11);
+	renderer3 = gtk_cell_renderer_text_new ();
+	column_pro12 = gtk_tree_view_column_new_with_attributes ("Subcategoria",renderer3,"text", COLsubcategoria,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro12);
 	
 	model3 = create_producto();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view3), model3);
@@ -1278,6 +1304,51 @@ static GtkTreeModel * create_and_fill_model_busqueda (void)
 }
 
 */
+void contenido_ticket(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char *server = "localhost";
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	if (mysql_query(conn, "select * from Ticket"))
+	{ 
+	}
+	res = mysql_use_result(conn);
+while ((row = mysql_fetch_row(res)) != NULL) 
+					if (gtk_tree_model_get_iter_first(model2, &iter2) == FALSE) {
+						 titulo_factura();
+						 return ;
+					}
+	mysql_free_result(res);
+	mysql_close(conn);
+}
+
+void contenido_producto(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char *server = "localhost";
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	if (mysql_query(conn, "select * from Producto"))
+	{ 
+	}
+	res = mysql_use_result(conn);
+while ((row = mysql_fetch_row(res)) != NULL) 
+					if (gtk_tree_model_get_iter_first(model3, &iter3) == FALSE) {
+						 titulo_producto();
+						 return ;
+					} 
+	mysql_free_result(res);
+	mysql_close(conn);
+}
 void conectar(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -1299,7 +1370,7 @@ void conectar(){
 	 
 }
 	 
- if (mysql_query(conn, "show databases")) 
+ if (mysql_query(conn, "select Empresa from Proveedor;")) 
  {
      char tempErr[60];
 	 sprintf(tempErr,"%s", mysql_error(conn));
@@ -1309,11 +1380,13 @@ void conectar(){
  }
  res = mysql_use_result(conn); 
 
- while ((row = mysql_fetch_row(res)) != NULL)
+ while ((row = mysql_fetch_row(res)) != NULL)gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_marcapro),row[0]);
  mysql_free_result(res);
  mysql_close(conn);
  
 }
+
+
 
 void contenido_tablas(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
@@ -1325,7 +1398,7 @@ void contenido_tablas(){
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
 	{	 
 	}
-
+	
 	if (mysql_query(conn, "select * from Proveedor"))
 	{ 
 	}
@@ -1335,35 +1408,11 @@ while ((row = mysql_fetch_row(res)) != NULL)
 					if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
 						 titulo_empresa();
 						 return ;
-					} 
-	mysql_free_result(res);
-
-	if (mysql_query(conn, "select * from Producto"))
-	{ 
-	}
-	res = mysql_use_result(conn);
-//==================================================================================================================
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
-						 titulo_producto();
-						 return ;
-					} 
-	mysql_free_result(res);
-
-	if (mysql_query(conn, "select * from Ticket"))
-	{ 
-	}
-	res = mysql_use_result(conn);
-//==================================================================================================================
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
-						 titulo_factura();
-						 return ;
-					} 
+					}  
 	mysql_free_result(res);
 	mysql_close(conn);
-
-}
+	
+	}
 
 void on_btn_cambiar_usuario_clicked()
 {
@@ -1394,6 +1443,8 @@ void on_Entry_Contrasena_activate(gpointer  user_data)
 {	
 	conectar();
 	contenido_tablas();
+	contenido_producto();
+	contenido_ticket();
 }
 	
 void on_btn_cancelar_adver3_clicked()
@@ -1499,8 +1550,11 @@ void refresca_datos_pro(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro7);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro8);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro9);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro10);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro11);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro12);
 }
-	if (gtk_tree_model_get_iter_first(model6, &iter6) == TRUE) {
+	/*if (gtk_tree_model_get_iter_first(model6, &iter6) == TRUE) {
 		gtk_list_store_clear(store6);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro2);
@@ -1523,7 +1577,7 @@ void refresca_datos_pro(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro19);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro20);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro21);
-}
+}*/
 }
 void refresca_busqueda(){
 	gtk_list_store_clear(store_busqueda);
@@ -1696,17 +1750,22 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 	const char 		*mes2 = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_mes_propro));
 	const char 		*anio2 = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_anio_propro));
 	
+	const char		*cbarra = gtk_entry_get_text(ety_cbarra);
 	const char 		*nombre = gtk_entry_get_text(ety_nombrepro);
 	const char 		*marca = gtk_entry_get_text(ety_marcapro);
 	const char		*nlote = gtk_entry_get_text(ety_nlote);
-	const char		*desc = gtk_entry_get_text(ety_des);
-	const char		*cbarra = gtk_entry_get_text(ety_cbarra);
 	const char		*cneto = gtk_entry_get_text(ety_cneto);
+	const char		*piezas = gtk_entry_get_text(GTK_ENTRY(spin_piezas));
+	const char		*compra = gtk_entry_get_text(GTK_ENTRY(spin_compra));
+	const char		*venta = gtk_entry_get_text(GTK_ENTRY(spin_venta));
+	const char		*categoria = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_cat));
+	const char		*subcat = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_subcat));
+	
 	
 	
 	sprintf(date,"%s-%s-%s",anio,mes,dia);
 	sprintf(date2,"%s-%s-%s",anio2,mes2,dia2);
-	sprintf(anadir_fac,"insert into Producto (Idproducto,Nombre,Marca,Fechacaducidad,Fechaproduccion,Numerolote,Descripcion,Codigobarras,Contenidoneto) values(null,'%s','%s','%s','%s',%s,'%s',%s,'%s')",nombre,marca,date,date2,nlote,desc,cbarra,cneto);
+	sprintf(anadir_fac,"insert into Producto values('%s','%s','%s','%s','%s',%s,'%s','%s','%s','%s','%s','%s')",cbarra,nombre,marca,date,date2,nlote,cneto,piezas,compra,venta,categoria,subcat);
 	
 	conn = mysql_init(NULL);
 
@@ -1727,12 +1786,15 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 		printf("%s",row[0]);
 	}
 	
+	gtk_entry_set_text(ety_cbarra,"");
 	gtk_entry_set_text(ety_nombrepro,"");
 	gtk_entry_set_text(ety_marcapro,"");
 	gtk_entry_set_text(ety_nlote,"");
-	gtk_entry_set_text(ety_des,"");
-	gtk_entry_set_text(ety_cbarra,"");
-	gtk_entry_set_text(ety_cneto,"");
+	gtk_entry_set_text(GTK_ENTRY(spin_piezas),"");
+	gtk_entry_set_text(GTK_ENTRY(spin_compra),"");
+	gtk_entry_set_text(GTK_ENTRY(spin_venta),"");
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_cat),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_subcat),0);
 	
 	refresca_datos_pro();
 	contenido_tablas();
@@ -3394,6 +3456,7 @@ int main(int argc, char *argv[])
 		view4 = GTK_WIDGET(gtk_builder_get_object(builder,"view4"));
 		view5 = GTK_WIDGET(gtk_builder_get_object(builder,"view5"));
 		view6 = GTK_WIDGET(gtk_builder_get_object(builder,"view6"));
+		inserta_datos_productos = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_productos"));
 		view_busc = GTK_WIDGET(gtk_builder_get_object(builder,"view_busc"));
 		contenedor_view = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view"));
 		contenedor_view2 = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view2"));
@@ -3554,6 +3617,7 @@ int main(int argc, char *argv[])
 		cb_dia_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact2"));
 		cb_mes_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_proact2"));
 		cb_anio_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_proact2"));
+		cb_marcapro = GTK_WIDGET(gtk_builder_get_object(builder,"cb_marcapro"));
 		btn_cancelar_adver3 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver3"));
 		cancela_and_factura3= GTK_WIDGET(gtk_builder_get_object(builder,"cancela_and_factura3"));
 		
@@ -3567,6 +3631,9 @@ int main(int argc, char *argv[])
 		acerca_de  = GTK_WIDGET(gtk_builder_get_object(builder,"acerca_de"));
 		stack_menu_pos = GTK_STACK(gtk_builder_get_object(builder,"stack_menu_pos"));
 		child_sku = GTK_WIDGET(gtk_builder_get_object(builder,"child_sku"));
+		spin_compra = GTK_WIDGET(gtk_builder_get_object(builder,"spin_compra"));
+		spin_piezas = GTK_WIDGET(gtk_builder_get_object(builder,"spin_piezas"));
+		spin_venta = GTK_WIDGET(gtk_builder_get_object(builder,"spin_venta"));
 		
 		for(i=2051;i>=1950;i--){ 
 			sprintf(anio,"%d",i);
@@ -3635,6 +3702,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(swchitcher),"touch-event",G_CALLBACK(header_busqueda),NULL);
 		g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
 		g_signal_connect(G_OBJECT(cb_bs_cat),"changed",G_CALLBACK(cambia_bs_categoria),NULL);
+		g_signal_connect(G_OBJECT(inserta_datos_productos),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
