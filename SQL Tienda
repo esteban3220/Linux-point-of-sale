@@ -1,0 +1,46 @@
+create table Proveedor (
+Empresa varchar(45) primary key,
+Nombre varchar (60),
+Direccion varchar(90),
+Telefono bigint,
+Region varchar(50),
+Pais varchar(45),
+RFC varchar(45),
+Estado varchar(45),
+Correo varchar(60)
+);
+
+create table Producto(
+SKU bigint primary key,
+Nombre varchar(100),
+Marca varchar(45),
+Fecha_proc date,
+Fecha_cad date,
+Numero_lote int,
+Neto varchar(10),
+Piezas bigint,
+Compra double(9,2),
+Venta double(9,2),
+Categoria varchar(30),
+Subcategoria varchar(45),
+foreign key (Marca) references Proveedor (Empresa) ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+create table Ticket(
+Id_ticket bigint zerofill auto_increment primary key,
+Usuario varchar(80),
+Total double(9,2),
+Recibido double(9,2),
+Cambio double(9,2),
+Tipo_pago varchar(45) default "Efectivo",
+Query text,
+Fecha_hora varchar(45)
+);
+
+create table Tienda(
+Id_tienda int(3) zerofill auto_increment primary key,
+Nombre varchar(80),
+RFC varchar(45),
+Telefono bigint,
+icono varchar(45)
+);
