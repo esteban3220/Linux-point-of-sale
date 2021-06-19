@@ -422,7 +422,8 @@ GtkTreeViewColumn 	*column_users;
 GtkTreeSelection 	*seleccion_view;
 GtkTreeSelection 	*seleccion_view2;
 GtkTreeSelection 	*selection; 
-
+static guint search_progress_id = 0;
+static guint finish_search_id = 0;
 gboolean timer_handler();
 	
 FILE* 			fichero;
@@ -2191,9 +2192,35 @@ void meter_historial(){
 	gtk_stack_set_visible_child (GTK_STACK(stack_historial),contenedor_historial);
 	gtk_entry_set_text(entry_buscar,"");
 }
-	
+static gboolean
+finish_search (GtkButton *button)
+{
+  g_source_remove (search_progress_id);
+  search_progress_id = 0;
 
+  return FALSE;
+}
+
+static void
+search_progress_done (GtkEntry *entry)
+{
+  gtk_entry_set_progress_fraction (entry, 0.0);
+}
+static gboolean
+search_progress (gpointer data)
+{
+  gtk_entry_progress_pulse (GTK_ENTRY (data));
+
+  return TRUE;
+}
+static gboolean
+start_search_feedback (gpointer data)
+{
+  search_progress_id = g_timeout_add_full (G_PRIORITY_DEFAULT, 10,(GSourceFunc)search_progress, data, (GDestroyNotify)search_progress_done);
+  return FALSE;
+}
 void on_btn_consulta_emp_clicked(){
+	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_produ_emp);
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
@@ -2217,21 +2244,25 @@ void on_btn_consulta_emp_clicked(){
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		sleep(0.1);				
+	while ((row = mysql_fetch_row(res)) != NULL) {			
 			gtk_entry_set_text(ety_nombreemp,row[1]);
 			gtk_entry_set_text(ety_direccion,row[2]);
 			gtk_entry_set_text(ety_telefono,row[3]);
 			gtk_entry_set_text(ety_region,row[4]);
 			//gtk_entry_set_text(ety_pais,row[6]);
 			gtk_entry_set_text(ety_rfc,row[6]);
-			gtk_entry_set_text(ety_correoemp,row[8]);	
+			gtk_entry_set_text(ety_correoemp,row[8]);
+			g_source_remove (finish_search_id);	
 		}
-
+		  
 	mysql_free_result(res);
 	mysql_close(conn);
-	gtk_entry_progress_pulse (ety_produ_emp);
 	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),box_act_emp);
+	
+	finish_search_id = g_timeout_add_seconds (0, (GSourceFunc)finish_search, ety_produ_emp);
+	search_progress_done(ety_produ_emp);
+	g_source_remove (finish_search_id);
+	gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
 }
 void on_btn_consulta_fac_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
