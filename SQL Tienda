@@ -1,3 +1,9 @@
+
+CREATE USER 'esteban' IDENTIFIED BY 'junomava3842';
+GRANT USAGE ON *.* TO 'esteban'@localhost IDENTIFIED BY 'junomava3842';
+GRANT ALL privileges ON *.* TO 'esteban'@localhost;
+create database Tienda;
+
 create table Proveedor (
 Empresa varchar(45) primary key,
 Nombre varchar (60),

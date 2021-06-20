@@ -123,7 +123,7 @@ GtkWidget			*btn_cancelar_adver6;
 GtkWidget			*btn_cancelar_adver7;
 GtkWidget			*btn_cancelar_adver8;
 GtkWidget			*btn_cancelar_adver9;
-
+GtkWidget			*cb_productos_proveedor;
 
 GtkEntry			*id_fac_act;
 GtkEntry			*ety_profac_act;
@@ -1362,12 +1362,8 @@ void conectar(){
      return gtk_widget_show(g_Dialog_Error);
  }else
  {
-	 char temp[60];
-	 sprintf(temp,"Bases de Datos Sobre %s",user);
-	 gtk_label_set_text(La_lbl_Titulo_BD,temp);
 	 gtk_widget_hide_on_delete (window_login);
-	 gtk_widget_show(window_BD);
-	 
+	 gtk_widget_show(window_BD);	 
 }
 	 
  if (mysql_query(conn, "select Empresa from Proveedor;")) 
@@ -1376,17 +1372,39 @@ void conectar(){
 	 sprintf(tempErr,"%s", mysql_error(conn));
 	 gtk_label_set_text(La_Label_Error_ingreso,tempErr);
      return gtk_widget_show(g_Dialog_Error);
-
  }
  res = mysql_use_result(conn); 
 
- while ((row = mysql_fetch_row(res)) != NULL)gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_marcapro),row[0]);
+ while ((row = mysql_fetch_row(res)) != NULL){
+	 gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_marcapro),row[0]);
+	 gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_productos_proveedor),row[0]);
+ }
  mysql_free_result(res);
  mysql_close(conn);
  
 }
 
+void consulta_proveedor(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char *server = "localhost";
+	conn = mysql_init(NULL);
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0)) 
+ {
+}
+	 
+ if (mysql_query(conn, "select Empresa from Proveedor;")) 
+ {
+ }
+ res = mysql_use_result(conn); 
 
+ while ((row = mysql_fetch_row(res)) != NULL){
+ gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_marcapro),row[0]);
+ gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_productos_proveedor),row[0]);
+}
+ mysql_free_result(res);
+ mysql_close(conn); 
+}
 
 void contenido_tablas(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
@@ -1718,8 +1736,9 @@ void on_emp_aceptar_anadir_clicked(){
 	refresca_datos_emp();
 	contenido_tablas();
 
-	mysql_free_result(res);
-	mysql_close(conn);
+	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cb_marcapro));
+	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cb_productos_proveedor));
+	consulta_proveedor();
 	gtk_widget_hide(advertencia_anadir_emp);
 	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
@@ -1734,7 +1753,7 @@ void on_inserta_datos_empres_clicked(){
 		gtk_widget_show(advertencia_anadir_pro);
 	}
 void on_pro_aceptar_anadir_clicked (){
-user = gtk_entry_get_text(g_Entry_Usuario);
+	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char anadir_fac[512];
 	char date[12];
@@ -1789,15 +1808,22 @@ user = gtk_entry_get_text(g_Entry_Usuario);
 	gtk_entry_set_text(ety_cbarra,"");
 	gtk_entry_set_text(ety_nombrepro,"");
 	gtk_entry_set_text(ety_marcapro,"");
+	gtk_entry_set_text(ety_cneto,"");
 	gtk_entry_set_text(ety_nlote,"");
-	gtk_entry_set_text(GTK_ENTRY(spin_piezas),"");
-	gtk_entry_set_text(GTK_ENTRY(spin_compra),"");
-	gtk_entry_set_text(GTK_ENTRY(spin_venta),"");
+	gtk_entry_set_text(GTK_ENTRY(spin_piezas),"0");
+	gtk_entry_set_text(GTK_ENTRY(spin_compra),"0.00");
+	gtk_entry_set_text(GTK_ENTRY(spin_venta),"0.00");
 	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_cat),0);
-	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_subcat),0);
+	gtk_entry_set_text(GTK_ENTRY (entry_subcat),"");	
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_dia_pro),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_mes_pro),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_anio_pro),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_dia_propro),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_mes_propro),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_anio_propro),0);
 	
 	refresca_datos_pro();
-	contenido_tablas();
+	contenido_producto();
 
 	mysql_free_result(res);
 	mysql_close(conn);
@@ -3505,6 +3531,7 @@ int main(int argc, char *argv[])
 		bar = GTK_WIDGET(gtk_builder_get_object(builder,"bar"));
 		bar_bien = GTK_WIDGET(gtk_builder_get_object(builder,"bar_bien"));
 		popovermenu1 = GTK_WIDGET(gtk_builder_get_object(builder,"popovermenu1"));
+		cb_productos_proveedor = GTK_WIDGET(gtk_builder_get_object(builder,"cb_productos_proveedor"));
 		reveal_proveedor =  GTK_WIDGET(gtk_builder_get_object(builder,"reveal_proveedor"));
 		btn_aceptar_1 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_aceptar_1"));
 		reveal_productos = GTK_WIDGET(gtk_builder_get_object(builder,"reveal_productos"));

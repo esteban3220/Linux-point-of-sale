@@ -28,102 +28,6 @@ Author: Esteban Noe Sarmiento Mtz.
   <!-- interface-description Gestor de Bases de Datos -->
   <!-- interface-copyright \302\251 2021 estebansoft :v -->
   <!-- interface-authors Esteban Noe Sarmiento Mtz. -->
-  <object class="GtkMessageDialog" id="Dialog_Error">
-    <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Advertencia</property>
-    <property name="icon-name">package_network</property>
-    <property name="type-hint">dialog</property>
-    <property name="deletable">False</property>
-    <property name="message-type">error</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can-focus">False</property>
-            <property name="layout-style">end</property>
-            <child>
-              <object class="GtkButton" id="btn_cancelar_adver3">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_Rein_Dial">
-                <property name="label">gtk-edit</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <child>
-              <object class="GtkImage" id="image5">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">user-info-symbolic</property>
-                <property name="icon_size">6</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">False</property>
-                <property name="padding">5</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="Label_Error_ingreso">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="padding">5</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-  </object>
   <object class="GtkWindow" id="Login_main">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Login</property>
@@ -433,7 +337,7 @@ Author: Esteban Noe Sarmiento Mtz.
     </child>
   </object>
   <object class="GtkAdjustment" id="adjustment1">
-    <property name="upper">1000</property>
+    <property name="upper">10000000</property>
     <property name="step-increment">10</property>
     <property name="page-increment">10</property>
   </object>
@@ -443,17 +347,17 @@ Author: Esteban Noe Sarmiento Mtz.
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment3">
-    <property name="upper">100</property>
+    <property name="upper">100000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment4">
-    <property name="upper">100</property>
+    <property name="upper">100000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment5">
-    <property name="upper">100</property>
+    <property name="upper">1000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -3280,7 +3184,7 @@ ID</property>
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">answer-correct</property>
+                        <property name="icon-name">button_ok</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -4170,7 +4074,7 @@ ID</property>
                                 <property name="can-focus">True</property>
                                 <property name="hscroll-policy">natural</property>
                                 <property name="vscroll-policy">natural</property>
-                                <property name="search-column">1</property>
+                                <property name="search-column">6</property>
                                 <property name="enable-grid-lines">both</property>
                                 <property name="enable-tree-lines">True</property>
                                 <property name="activate-on-single-click">True</property>
@@ -4681,7 +4585,7 @@ ID</property>
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxText">
+                          <object class="GtkComboBoxText" id="cb_productos_proveedor">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="popup-fixed-width">False</property>
@@ -5446,6 +5350,21 @@ ID</property>
                                                   <packing>
                                                     <property name="expand">True</property>
                                                     <property name="fill">False</property>
+                                                    <property name="position">6</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkSpinButton" id="spin_piezas">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">True</property>
+                                                    <property name="text" translatable="yes">0</property>
+                                                    <property name="adjustment">adjustment2</property>
+                                                    <property name="climb-rate">0.10</property>
+                                                    <property name="numeric">True</property>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">False</property>
                                                     <property name="position">7</property>
                                                   </packing>
                                                 </child>
@@ -5457,21 +5376,6 @@ ID</property>
                                                     <property name="secondary-icon-name">taxes-finances</property>
                                                     <property name="adjustment">adjustment3</property>
                                                     <property name="digits">2</property>
-                                                    <property name="numeric">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">8</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkSpinButton" id="spin_piezas">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="text" translatable="yes">0</property>
-                                                    <property name="adjustment">adjustment2</property>
-                                                    <property name="climb-rate">0.10</property>
                                                     <property name="numeric">True</property>
                                                   </object>
                                                   <packing>
@@ -5493,7 +5397,7 @@ ID</property>
                                                   <packing>
                                                     <property name="expand">True</property>
                                                     <property name="fill">False</property>
-                                                    <property name="position">8</property>
+                                                    <property name="position">9</property>
                                                   </packing>
                                                 </child>
                                                 <child>
