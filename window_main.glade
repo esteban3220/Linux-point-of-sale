@@ -823,7 +823,7 @@ Author: Esteban Noe Sarmiento Mtz.
               <object class="GtkLabel" id="lbl_anadir_advertencia1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">¿Desea anadir los Datos?</property>
+                <property name="label" translatable="yes">¿Desea añadir los Datos?</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -1024,7 +1024,7 @@ Author: Esteban Noe Sarmiento Mtz.
               <object class="GtkLabel" id="lbl_anadir_advertencia2">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">¿Desea anadir los Datos?</property>
+                <property name="label" translatable="yes">¿Desea añadir los Datos?</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -3765,7 +3765,9 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="margin-bottom">5</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="GtkSearchEntry">
+                          <object class="GtkSearchEntry" id="ety_busca_proveedor">
+                            <property name="name">ety_busca_proveedor</property>
+                            <property name="width-request">260</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="primary-icon-name">edit-find-symbolic</property>
@@ -3780,7 +3782,7 @@ Author: Esteban Noe Sarmiento Mtz.
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxText">
+                          <object class="GtkComboBoxText" id="cb_busca_estado">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="active-id">0</property>
@@ -3797,19 +3799,7 @@ Author: Esteban Noe Sarmiento Mtz.
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkComboBoxText">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="active-id">0</property>
-                            <items>
-                              <item id="0" translatable="yes">Empresa</item>
-                            </items>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
+                          <placeholder/>
                         </child>
                         <child>
                           <object class="GtkButtonBox">
@@ -4209,6 +4199,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkComboBoxText" id="cb_pais_emp">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
+                                                    <property name="has-entry">True</property>
                                                     <items>
                                                       <item translatable="yes">Argentina</item>
                                                       <item translatable="yes">Bahamas</item>
@@ -4233,6 +4224,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                                       <item translatable="yes">Perú</item>
                                                       <item translatable="yes">Uruguay</item>
                                                     </items>
+                                                    <child internal-child="entry">
+                                                      <object class="GtkEntry" id="ety_pais_emp">
+                                                        <property name="can-focus">False</property>
+                                                      </object>
+                                                    </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
@@ -4257,10 +4253,16 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkComboBoxText" id="cb_estado_emp">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
+                                                    <property name="has-entry">True</property>
                                                     <items>
                                                       <item translatable="yes">Activo</item>
                                                       <item translatable="yes">Inactivo</item>
                                                     </items>
+                                                    <child internal-child="entry">
+                                                      <object class="GtkEntry" id="ety_estado_emp">
+                                                        <property name="can-focus">False</property>
+                                                      </object>
+                                                    </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>

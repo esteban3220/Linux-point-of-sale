@@ -92,6 +92,7 @@ GtkWidget 			*webview1;
 GtkWidget 			*btn_servicios;
 GtkWidget			*swchitcher;
 GtkWidget			*pop_generar_sku;
+GtkWidget			*cb_busca_estado;
 GtkEntry        *ety_user_bien;
 GtkEntry  			*g_Entry_Usuario;
 GtkEntry  			*g_Entry_Contrasena;
@@ -101,6 +102,8 @@ GtkEntry 			*ety_dir_bien;
 GtkEntry 			*ety_rfc_bien;
 GtkEntry			*ety_contrasena1;
 GtkEntry			*ety_contrasena2;
+GtkEntry			*ety_pais_emp;
+GtkEntry			*ety_estado_emp;
 
 GtkLabel 			*lbl_emp_bien;
 GtkLabel 			*lbl_num_bien;
@@ -116,6 +119,7 @@ GtkEntry  			*ety_precio;
 GtkEntry  			*ety_mpago;
 GtkEntry  			*ety_desc;
 GtkEntry  			*ety_total;
+GtkEntry			*ety_busca_proveedor;
 
 GtkWidget			*btn_cancelar_adver1;
 GtkWidget			*btn_cancelar_adver2;
@@ -1689,6 +1693,8 @@ void on_inserta_datos_factura_clicked(){
 void on_inserta_datos_empresa_clicked(){
 		gtk_widget_show(advertencia_anadir_emp);
 	}
+	
+
 void on_emp_aceptar_anadir_clicked(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -1731,7 +1737,8 @@ void on_emp_aceptar_anadir_clicked(){
 	gtk_entry_set_text(ety_direccion,"");
 	gtk_entry_set_text(ety_telefono,"");
 	gtk_entry_set_text(ety_region,"");
-	gtk_entry_set_text(ety_pais,"");
+	gtk_entry_set_text(ety_pais_emp,"");
+	gtk_entry_set_text(ety_estado_emp,"");
 	gtk_entry_set_text(ety_rfc,"");
 	gtk_entry_set_text(ety_correoemp,"");
 	
@@ -1744,7 +1751,8 @@ void on_emp_aceptar_anadir_clicked(){
 	gtk_widget_hide(advertencia_anadir_emp);
 	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
-	}
+}
+
 void on_btn_cancelar_adver6_clicked(){
 		gtk_widget_hide(advertencia_anadir_emp);
 	}
@@ -1754,6 +1762,8 @@ void on_btn_cancelar_adver7_clicked(){
 void on_inserta_datos_empres_clicked(){
 		gtk_widget_show(advertencia_anadir_pro);
 	}
+	
+	
 void on_pro_aceptar_anadir_clicked (){
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -2309,6 +2319,51 @@ start_search_feedback (gpointer data)
   search_progress_id = g_timeout_add_full (G_PRIORITY_DEFAULT, 10,(GSourceFunc)search_progress, data, (GDestroyNotify)search_progress_done);
   return FALSE;
 }
+
+void busca_proveedor(){
+	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_busca_proveedor);
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char busqueda_fac[100];
+	char *server = "localhost";
+	
+	const char 	*consulta = gtk_entry_get_text(ety_busca_proveedor);
+	const char 	*consulta2 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_busca_estado));
+
+	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%' and Estado ='%s'",consulta,consulta2);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+
+	if (mysql_query(conn, busqueda_fac))
+	{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);
+	}
+	res = mysql_use_result(conn);
+	refresca_datos_emp();
+	while ((row = mysql_fetch_row(res)) != NULL) {
+		if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {						 
+						 titulo_empresa();
+						 return ;
+					}	
+		}
+		  
+	mysql_free_result(res);
+	mysql_close(conn);
+	
+	finish_search_id = g_timeout_add_seconds (0, (GSourceFunc)finish_search, ety_busca_proveedor);
+	search_progress_done(ety_produ_emp);
+	g_source_remove (finish_search_id);
+	gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
+
+}
+
 void on_btn_consulta_emp_clicked(){
 	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_produ_emp);
 	user = gtk_entry_get_text(g_Entry_Usuario);
@@ -3538,6 +3593,7 @@ int main(int argc, char *argv[])
 		btn_actualiza_pro = GTK_WIDGET(gtk_builder_get_object(builder,"btn_actualiza_pro"));
 		reveal_proveedor =  GTK_WIDGET(gtk_builder_get_object(builder,"reveal_proveedor"));
 		btn_aceptar_1 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_aceptar_1"));
+		emp_aceptar_anadir = GTK_WIDGET(gtk_builder_get_object(builder,"emp_aceptar_anadir"));
 		reveal_productos = GTK_WIDGET(gtk_builder_get_object(builder,"reveal_productos"));
 		stack_header = GTK_STACK(gtk_builder_get_object(builder,"stack_header"));
 		stack_sku = GTK_STACK(gtk_builder_get_object(builder,"stack_sku"));
@@ -3582,6 +3638,10 @@ int main(int argc, char *argv[])
 		ety_pais = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pais"));
 		ety_rfc = GTK_ENTRY(gtk_builder_get_object(builder,"ety_rfc"));
 		ety_correoemp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_correoemp"));
+		ety_pais_emp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pais_emp"));
+		ety_estado_emp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_estado_emp"));
+		ety_busca_proveedor = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_proveedor"));
+		
 		
 		ety_nombrepro = GTK_ENTRY(gtk_builder_get_object(builder,"ety_nombrepro"));
 		ety_marcapro = GTK_ENTRY(gtk_builder_get_object(builder,"ety_marcapro"));
@@ -3643,6 +3703,7 @@ int main(int argc, char *argv[])
 		cb_anio_proact = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_proact"));
 		cb_bs_cat = GTK_WIDGET(gtk_builder_get_object(builder,"cb_bs_cat"));
 		cb_bs_subcat = GTK_WIDGET(gtk_builder_get_object(builder,"cb_bs_subcat"));
+		cb_busca_estado = GTK_WIDGET(gtk_builder_get_object(builder,"cb_busca_estado"));
 		switcher = GTK_WIDGET(gtk_builder_get_object(builder,"switcher"));
 		
 		cb_dia_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact2"));
@@ -3733,6 +3794,8 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(swchitcher),"touch-event",G_CALLBACK(header_busqueda),NULL);
 		g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
 		g_signal_connect(G_OBJECT(cb_bs_cat),"changed",G_CALLBACK(cambia_bs_categoria),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_proveedor),"changed",G_CALLBACK(busca_proveedor),NULL);
+		g_signal_connect(G_OBJECT(cb_busca_estado),"changed",G_CALLBACK(busca_proveedor),NULL);
 		g_signal_connect(G_OBJECT(inserta_datos_productos),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(pro_aceptar_anadir),"clicked",G_CALLBACK(on_pro_aceptar_anadir_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_actualiza_pro),"clicked",G_CALLBACK(on_btn_actualiza_pro_clicked),NULL);	
