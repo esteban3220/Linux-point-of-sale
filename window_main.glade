@@ -28,6 +28,102 @@ Author: Esteban Noe Sarmiento Mtz.
   <!-- interface-description Gestor de Bases de Datos -->
   <!-- interface-copyright \302\251 2021 estebansoft :v -->
   <!-- interface-authors Esteban Noe Sarmiento Mtz. -->
+  <object class="GtkMessageDialog" id="Dialog_Error">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Advertencia</property>
+    <property name="icon-name">package_network</property>
+    <property name="type-hint">dialog</property>
+    <property name="deletable">False</property>
+    <property name="message-type">error</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <child>
+              <object class="GtkButton" id="btn_cancelar_adver3">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_Rein_Dial">
+                <property name="label">gtk-edit</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="use-stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkImage" id="image5">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">user-info-symbolic</property>
+                <property name="icon_size">6</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">False</property>
+                <property name="padding">5</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="Label_Error_ingreso">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="padding">5</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+  </object>
   <object class="GtkWindow" id="Login_main">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Login</property>
@@ -398,7 +494,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_actualiza_emp_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -497,7 +592,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_aceptar__clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -593,7 +687,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_actualiza_pro_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -693,7 +786,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_emp_aceptar_anadir_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -895,7 +987,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_pro_aceptar_anadir_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -998,7 +1089,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_aceptar_a1_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -1099,7 +1189,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_aceptar_a_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -1196,7 +1285,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
-                <signal name="clicked" handler="on_btn_aceptar_a2_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -2468,237 +2556,6 @@ Author: Esteban Noe Sarmiento Mtz.
   <object class="GtkEntryCompletion" id="entrycompletion1">
     <property name="model">liststore1</property>
   </object>
-  <object class="GtkPopover" id="pop_calendario">
-    <property name="can-focus">False</property>
-    <property name="position">bottom</property>
-    <property name="constrain-to">none</property>
-    <child>
-      <object class="GtkCalendar">
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="year">2020</property>
-        <property name="month">10</property>
-        <property name="day">13</property>
-        <property name="show-day-names">False</property>
-      </object>
-    </child>
-  </object>
-  <object class="GtkPopover" id="pop_delete_emp">
-    <property name="can-focus">False</property>
-    <property name="constrain-to">none</property>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="spacing">5</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">
-ID</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">2</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Empresa</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="ety_id_emp_borrar">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkPopover" id="pop_delete_fac">
-    <property name="can-focus">False</property>
-    <property name="constrain-to">none</property>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="spacing">5</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">
-ID</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">2</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Factura</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="ety_id_fac_borrar">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <signal name="activate" handler="on_ety_id_fac_borrar_activate" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_borrar_fac">
-            <property name="label">gtk-delete</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="relief">none</property>
-            <property name="use-stock">True</property>
-            <signal name="clicked" handler="on_btn_borrar_fac_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkPopover" id="pop_delete_pro">
-    <property name="can-focus">False</property>
-    <property name="constrain-to">none</property>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="spacing">5</property>
-        <child>
-          <object class="GtkLabel">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label" translatable="yes">
-ID</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">2</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Producto</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="ety_id_pro_borrar">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="btn_borrar_pro">
-            <property name="label">gtk-delete</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="relief">none</property>
-            <property name="use-stock">True</property>
-            <signal name="clicked" handler="on_btn_borrar_pro_clicked" swapped="no"/>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkPopover" id="popovermenu1">
     <property name="can-focus">False</property>
     <child>
@@ -3146,7 +3003,6 @@ ID</property>
     <property name="default-height">720</property>
     <property name="destroy-with-parent">True</property>
     <property name="icon-name">datatype</property>
-    <signal name="destroy" handler="on_Window_BD_destroy" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -3692,7 +3548,6 @@ ID</property>
                                             <property name="use-underline">True</property>
                                             <property name="image-position">top</property>
                                             <property name="always-show-image">True</property>
-                                            <signal name="clicked" handler="on_exportar_pdf_clicked" swapped="no"/>
                                             <child>
                                               <object class="GtkBox">
                                                 <property name="visible">True</property>

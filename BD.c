@@ -31,6 +31,7 @@ GtkWidget 			*bar;
 GtkWidget 			*widget_web;
 GtkWidget 			*pila_stp;
 GtkWidget			*btn_cancelar_stp;
+GtkWidget			*btn_actualiza_pro;
 GtkButton			*btn_menu_pref;
 GtkButton			*btn_menu_pref_devol;
 GtkWidget			*child_menu;
@@ -46,6 +47,7 @@ GtkWidget			*pag_proveedor;
 GtkWidget			*pag_producto;
 GtkWidget			*pag_tickets;
 GtkWidget 			*btn_borrar_emp;
+GtkWidget				*pro_aceptar_anadir;
 GtkWidget 			*switcher;
 GtkWidget			*child_sku;
 GtkWidget			*cb_cat;
@@ -3532,6 +3534,8 @@ int main(int argc, char *argv[])
 		bar_bien = GTK_WIDGET(gtk_builder_get_object(builder,"bar_bien"));
 		popovermenu1 = GTK_WIDGET(gtk_builder_get_object(builder,"popovermenu1"));
 		cb_productos_proveedor = GTK_WIDGET(gtk_builder_get_object(builder,"cb_productos_proveedor"));
+		pro_aceptar_anadir = GTK_WIDGET(gtk_builder_get_object(builder,"pro_aceptar_anadir"));
+		btn_actualiza_pro = GTK_WIDGET(gtk_builder_get_object(builder,"btn_actualiza_pro"));
 		reveal_proveedor =  GTK_WIDGET(gtk_builder_get_object(builder,"reveal_proveedor"));
 		btn_aceptar_1 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_aceptar_1"));
 		reveal_productos = GTK_WIDGET(gtk_builder_get_object(builder,"reveal_productos"));
@@ -3730,6 +3734,9 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
 		g_signal_connect(G_OBJECT(cb_bs_cat),"changed",G_CALLBACK(cambia_bs_categoria),NULL);
 		g_signal_connect(G_OBJECT(inserta_datos_productos),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
+		g_signal_connect(G_OBJECT(pro_aceptar_anadir),"clicked",G_CALLBACK(on_pro_aceptar_anadir_clicked),NULL);
+		g_signal_connect(G_OBJECT(btn_actualiza_pro),"clicked",G_CALLBACK(on_btn_actualiza_pro_clicked),NULL);	
+		
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
