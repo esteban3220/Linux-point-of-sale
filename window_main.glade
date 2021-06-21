@@ -4426,10 +4426,11 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="margin-bottom">5</property>
                         <property name="spacing">2</property>
                         <child>
-                          <object class="GtkSearchEntry">
+                          <object class="GtkSearchEntry" id="ety_busca_producto">
                             <property name="width-request">250</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
+                            <property name="max-length">100</property>
                             <property name="primary-icon-name">edit-find-symbolic</property>
                             <property name="primary-icon-activatable">False</property>
                             <property name="primary-icon-sensitive">False</property>
@@ -4445,11 +4446,15 @@ Author: Esteban Noe Sarmiento Mtz.
                           <object class="GtkComboBoxText" id="cb_productos_proveedor">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="has-entry">True</property>
                             <property name="popup-fixed-width">False</property>
-                            <property name="active-id">0</property>
-                            <items>
-                              <item id="0" translatable="yes">Proveedores</item>
-                            </items>
+                            <child internal-child="entry">
+                              <object class="GtkEntry" id="ety_busca_proveedor_producto">
+                                <property name="can-focus">True</property>
+                                <property name="max-length">45</property>
+                                <property name="placeholder-text" translatable="yes">Buscar por Proveedor</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -4461,10 +4466,9 @@ Author: Esteban Noe Sarmiento Mtz.
                           <object class="GtkComboBoxText" id="cb_bs_cat">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="has-entry">True</property>
                             <property name="popup-fixed-width">False</property>
-                            <property name="active-id">0</property>
                             <items>
-                              <item id="0" translatable="yes">Categoria</item>
                               <item translatable="yes">Abarrotes</item>
                               <item translatable="yes">Productos enlatados</item>
                               <item translatable="yes">Lacteos</item>
@@ -4482,6 +4486,12 @@ Author: Esteban Noe Sarmiento Mtz.
                               <item translatable="yes">Productos de Limpieza</item>
                               <item translatable="yes">Otros Productos</item>
                             </items>
+                            <child internal-child="entry">
+                              <object class="GtkEntry" id="ety_busca_categoria">
+                                <property name="can-focus">True</property>
+                                <property name="placeholder-text" translatable="yes">Busca por Categoria</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -4493,11 +4503,14 @@ Author: Esteban Noe Sarmiento Mtz.
                           <object class="GtkComboBoxText" id="cb_bs_subcat">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
+                            <property name="has-entry">True</property>
                             <property name="popup-fixed-width">False</property>
-                            <property name="active-id">0</property>
-                            <items>
-                              <item id="0" translatable="yes">Subcategoria</item>
-                            </items>
+                            <child internal-child="entry">
+                              <object class="GtkEntry" id="ety_busca_subcategoria">
+                                <property name="can-focus">True</property>
+                                <property name="placeholder-text" translatable="yes">Buscar por Subcategoria</property>
+                              </object>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -5025,7 +5038,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                             <property name="can-focus">False</property>
                                                             <property name="active-id">1</property>
                                                             <items>
-                                                            <item id="1" translatable="yes">Ano</item>
+                                                            <item id="1" translatable="yes">Año</item>
                                                             </items>
                                                           </object>
                                                           <packing>

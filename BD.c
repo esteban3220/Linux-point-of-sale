@@ -57,6 +57,10 @@ GtkWidget			*cb_bs_subcat;
 GtkWidget			*cb_estado_emp;
 GtkWidget			*cb_pais_emp;
 GtkWidget			*cb_marcapro;
+GtkEntry			*ety_busca_producto;
+GtkEntry			*ety_busca_proveedor_producto;
+GtkEntry			*ety_busca_categoria;
+GtkEntry			*ety_busca_subcategoria;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -2292,14 +2296,6 @@ void meter_historial(){
 	gtk_stack_set_visible_child (GTK_STACK(stack_historial),contenedor_historial);
 	gtk_entry_set_text(entry_buscar,"");
 }
-static gboolean
-finish_search (GtkButton *button)
-{
-  g_source_remove (search_progress_id);
-  search_progress_id = 0;
-
-  return FALSE;
-}
 
 static void
 search_progress_done (GtkEntry *entry)
@@ -2316,7 +2312,7 @@ search_progress (gpointer data)
 static gboolean
 start_search_feedback (gpointer data)
 {
-  search_progress_id = g_timeout_add_full (G_PRIORITY_DEFAULT, 10,(GSourceFunc)search_progress, data, (GDestroyNotify)search_progress_done);
+  search_progress_id = g_timeout_add_full (G_PRIORITY_DEFAULT, 100,(GSourceFunc)search_progress, data, (GDestroyNotify)search_progress_done);
   return FALSE;
 }
 
@@ -2324,14 +2320,18 @@ void busca_proveedor(){
 	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_busca_proveedor);
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
-	char busqueda_fac[100];
+	char busqueda_fac[300];
 	char *server = "localhost";
 	
 	const char 	*consulta = gtk_entry_get_text(ety_busca_proveedor);
 	const char 	*consulta2 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_busca_estado));
-
-	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%' and Estado ='%s'",consulta,consulta2);
 	
+	if (consulta2[0]=='E'){
+
+	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%'",consulta);
+}else{
+	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%' and Estado ='%s'",consulta,consulta2);
+	}
 	conn = mysql_init(NULL);
 
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
@@ -2357,10 +2357,55 @@ void busca_proveedor(){
 	mysql_free_result(res);
 	mysql_close(conn);
 	
-	finish_search_id = g_timeout_add_seconds (0, (GSourceFunc)finish_search, ety_busca_proveedor);
+
 	search_progress_done(ety_produ_emp);
 	g_source_remove (finish_search_id);
 	gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
+
+}
+
+void busca_producto(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char busqueda_fac[600];
+	char *server = "localhost";
+	
+	const char 	*consulta = gtk_entry_get_text(ety_busca_producto);
+	const char 	*consulta2 = gtk_entry_get_text(ety_busca_proveedor_producto);
+	const char 	*consulta3 = gtk_entry_get_text(ety_busca_categoria);
+	const char 	*consulta4 = gtk_entry_get_text(ety_busca_subcategoria);
+	
+	sprintf(busqueda_fac,"select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'",consulta,consulta2,consulta3,consulta4);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+
+	if (mysql_query(conn, busqueda_fac))
+	{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);
+	}
+	res = mysql_use_result(conn);
+	refresca_datos_pro();
+	while ((row = mysql_fetch_row(res)) != NULL) {
+		if (gtk_tree_model_get_iter_first(model3, &iter3) == FALSE) {						 
+						 titulo_producto();
+						 return ;
+					}	
+		}
+		  
+	mysql_free_result(res);
+	mysql_close(conn);
+	
+
+	search_progress_done(ety_busca_producto);
+	g_source_remove (finish_search_id);
+	gtk_entry_set_progress_fraction (ety_busca_producto, 0.0);
 
 }
 
@@ -2404,7 +2449,7 @@ void on_btn_consulta_emp_clicked(){
 	mysql_close(conn);
 	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),box_act_emp);
 	
-	finish_search_id = g_timeout_add_seconds (0, (GSourceFunc)finish_search, ety_produ_emp);
+
 	search_progress_done(ety_produ_emp);
 	g_source_remove (finish_search_id);
 	gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
@@ -2756,7 +2801,7 @@ void cambia_bs_categoria(){
 	g_print("%s\n",categoria);
 	if(categoria[1]== 'b'){
 const char *aba[] = {
-"Subcategoria",	
+"",	
 "Aceite comestibles",
 "Aderezos",
 "Consome",
@@ -2799,7 +2844,7 @@ gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
   }else if(categoria[11]== 'n'){
 	  
 	  const char *enlatados[] = {
-		  "Subcategoria",
+		  "",
     "Aceitunas",
  "Chícharo con zanahoria",
     "Chícharos enlatados",
@@ -2820,7 +2865,7 @@ gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 	  } else if  (categoria[0]== 'L'){
 const char *lacteos[] = {
-	"Subcategoria",
+	"",
 "Leche condensada",
 "Leche deslactosada",
 "Leche en polvo",
@@ -2844,7 +2889,7 @@ gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 		  
 	  }else if  (categoria[0]== 'C'){
 const char *dulces[] = {
-	"Subcategoria",
+	"",
 "Caramelos",
 "Dulces enchilados",
 "Chocolate de mesa",
@@ -2863,7 +2908,7 @@ for (i = 0; i < G_N_ELEMENTS(dulces); i++){
  gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);		 
 	  }else if  (categoria[1]== 'a'){
 const char *harinas[] = {
-	"Subcategoria",
+	"",
 "Tortillas de harina/maíz",
 "Galletas dulces",
 "Galletas saladas",
@@ -2879,7 +2924,7 @@ for (i = 0; i < G_N_ELEMENTS(harinas); i++){
 gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 	  }else if  (categoria[2]== 'u'){
 const char *verduras[] = {
-	"Subcategoria",
+	"",
 "Aguacates",
 "Ajos",
 "Cebollas",
@@ -2899,7 +2944,7 @@ for (i = 0; i < G_N_ELEMENTS(verduras); i++){
 }else if  (categoria[11]== 'o'){
 
 const char *alcohol[] = {
-	"Subcategoria",
+	"",
 "Bebidas preparadas",
 "Cerveza",
 "Anís",
@@ -2920,7 +2965,7 @@ for (i = 0; i < G_N_ELEMENTS(alcohol); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);	  	  
 	   }else if  (categoria[2]== 'b'){
 const char *bebidas[] = {
-	"Subcategoria",
+	"",
 "Agua mineral",
 "Agua natural",
 "Agua saborizada",
@@ -2941,7 +2986,7 @@ for (i = 0; i < G_N_ELEMENTS(bebidas); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
   }else if  (categoria[1]== 'e'){
 const char *helados[] = {
-	"Subcategoria",
+	"",
 "Helados / Paletas"
 };
 for (i = 0; i < G_N_ELEMENTS(helados); i++){
@@ -2950,7 +2995,7 @@ for (i = 0; i < G_N_ELEMENTS(helados); i++){
  gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0); 		   	  
 }else if  (categoria[19]== 's' && categoria[18]== 'o'){
 	const char *preparado[] = {
-		"Subcategoria",
+		"",
 "Pastas listas para comer",
 "Sopas en vaso",
 "Carnes y Embutidos",
@@ -2968,7 +3013,7 @@ for (i = 0; i < G_N_ELEMENTS(preparado); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 	}else if  (categoria[1]== 'u'){
 		const char *automedicacion[] = {
-			"Subcategoria",
+			"",
 "Suero",
 "Agua oxigenada",
 "Preservativos",
@@ -2984,7 +3029,7 @@ for (i = 0; i < G_N_ELEMENTS(automedicacion); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);	
 		}else if  (categoria[15]== 'l'){
 			const char *personal[] = {
-				"Subcategoria",
+				"",
 "Toallas húmedas",
 "Aceite para bebe",
 "Toallas femeninas",
@@ -3016,7 +3061,7 @@ for (i = 0; i < G_N_ELEMENTS(personal); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 			}else if  (categoria[0]== 'U'){
 const char *domestico[] = {
-	"Subcategoria",
+	"",
 "Suavizante de telas",
     "Ácido muriático",
     "Sosa caustica",
@@ -3047,7 +3092,7 @@ for (i = 0; i < G_N_ELEMENTS(domestico); i++){
 gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 				}else if  (categoria[13]== 'L'){
 const char *limpieza[] = {
-	"Subcategoria",
+	"",
     "Veladoras/Velas",
     "Cepillo de plástico",
     "Vasos desechables",
@@ -3073,7 +3118,7 @@ for (i = 0; i < G_N_ELEMENTS(limpieza); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);	
 } else if  (categoria[0]== 'O'){
 const char *otros[] = {
-	"Subcategoria",
+	"",
     "Tarjetas telefónicas",
     "Recargas móviles",
     "Hielo",
@@ -3085,7 +3130,7 @@ for (i = 0; i < G_N_ELEMENTS(otros); i++){
   gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);						
 				} else if  (categoria[3]== 'a'){
 const char *botanas[] = {
-	"Subcategoria",
+	"",
 "Papas",
 "Palomitas",
 "Frituras de maíz",
@@ -3100,7 +3145,7 @@ for (i = 0; i < G_N_ELEMENTS(botanas); i++){
 gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 			}else if  (categoria[0]== 'C' && categoria[1]== 'a'){
 const char *botanas[] = {
-	"Subcategoria",
+	"",
 };
 for (i = 0; i < G_N_ELEMENTS(botanas); i++){
   	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_bs_subcat), botanas[i]);
@@ -3521,11 +3566,12 @@ int main(int argc, char *argv[])
 		info_actualizar = GTK_WIDGET(gtk_builder_get_object(builder,"info_actualizar"));
 		info_ananido = GTK_WIDGET(gtk_builder_get_object(builder,"info_ananido"));
 		info_eliminado = GTK_WIDGET(gtk_builder_get_object(builder,"info_eliminado"));
-		pop_calendario = GTK_WIDGET(gtk_builder_get_object(builder,"pop_calendario"));
-		pop_delete_fac = GTK_WIDGET(gtk_builder_get_object(builder,"pop_delete_fac"));
-		pop_delete_pro = GTK_WIDGET(gtk_builder_get_object(builder,"pop_delete_pro"));
-		pop_delete_emp = GTK_WIDGET(gtk_builder_get_object(builder,"pop_delete_emp"));
-		pop_generar_sku = GTK_WIDGET(gtk_builder_get_object(builder,"pop_generar_sku"));
+		
+		ety_busca_producto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_producto"));
+		ety_busca_proveedor_producto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_proveedor_producto"));
+		ety_busca_categoria = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_categoria"));
+		ety_busca_subcategoria = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_subcategoria"));
+		
 		La_lbl_Titulo_BD = GTK_LABEL(gtk_builder_get_object(builder,"lbl_Titulo_BD"));
 		La_Label_Error_ingreso = GTK_LABEL(gtk_builder_get_object(builder,"Label_Error_ingreso"));
 		cb_anio_fac = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_fac"));
@@ -3799,13 +3845,16 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(inserta_datos_productos),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(pro_aceptar_anadir),"clicked",G_CALLBACK(on_pro_aceptar_anadir_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_actualiza_pro),"clicked",G_CALLBACK(on_btn_actualiza_pro_clicked),NULL);	
+		g_signal_connect(G_OBJECT(ety_busca_producto),"changed",G_CALLBACK(busca_producto),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_proveedor_producto),"changed",G_CALLBACK(busca_producto),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_categoria),"changed",G_CALLBACK(busca_producto),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_subcategoria),"changed",G_CALLBACK(busca_producto),NULL);
 		
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
 		//consulta_usuarios();
 		gtk_widget_show(window_login);
-		//gtk_window_fullscreen(GTK_WINDOW(window_BD));
 		gtk_main();			
 		
 	}
