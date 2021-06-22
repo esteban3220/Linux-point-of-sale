@@ -6118,7 +6118,7 @@ Manuel Morales Nanco</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="btn_4cb">
                 <property name="label" translatable="yes">4 Digitos</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
@@ -6143,7 +6143,7 @@ Manuel Morales Nanco</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="btn_8cb">
                 <property name="label" translatable="yes">8 Digitos</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
@@ -6168,8 +6168,8 @@ Manuel Morales Nanco</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton">
-                <property name="label" translatable="yes">13 Digitos</property>
+              <object class="GtkButton" id="btn_13cb">
+                <property name="label" translatable="yes">10 Digitos</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>

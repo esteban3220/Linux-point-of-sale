@@ -34,6 +34,9 @@ GtkWidget			*btn_cancelar_stp;
 GtkWidget			*btn_actualiza_pro;
 GtkButton			*btn_menu_pref;
 GtkButton			*btn_menu_pref_devol;
+GtkButton				*btn_4cb;
+GtkButton				*btn_8cb;
+GtkButton				*btn_13cb;
 GtkWidget			*child_menu;
 GtkWidget			*child_preferencia;
 GtkWidget			*pag_atras;
@@ -840,7 +843,7 @@ static GtkTreeModel *create_producto (void)
 	column_pro6 = gtk_tree_view_column_new_with_attributes ("Numero Lote",renderer3,"text", COLnumlote,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro6);
 	renderer3 = gtk_cell_renderer_text_new ();
-	column_pro7 = gtk_tree_view_column_new_with_attributes ("Can. Neto",renderer3,"text", COLneto,NULL);
+	column_pro7 = gtk_tree_view_column_new_with_attributes ("Nota",renderer3,"text", COLneto,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view3),column_pro7);
 	renderer3 = gtk_cell_renderer_text_new ();
 	column_pro8 = gtk_tree_view_column_new_with_attributes ("Piezas",renderer3,"text", COLpiezas,NULL);
@@ -2377,6 +2380,28 @@ void busca_producto(){
 	
 	sprintf(busqueda_fac,"select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'",consulta,consulta2,consulta3,consulta4);
 	
+	if(strcmp(consulta2,"")!=0){
+		gtk_entry_set_icon_from_icon_name (ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+		gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+			}if(strcmp(consulta3,"")!=0){
+				gtk_entry_set_icon_from_icon_name (ety_busca_categoria,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+				gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+		}if(strcmp(consulta4,"")!=0){
+			gtk_entry_set_icon_from_icon_name (ety_busca_subcategoria,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+			gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+			}
+
+	if(strcmp(consulta2,"")==0){
+		gtk_entry_set_icon_from_icon_name (ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,NULL);
+		gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+			}if(strcmp(consulta3,"")==0){
+				gtk_entry_set_icon_from_icon_name (ety_busca_categoria,GTK_ENTRY_ICON_SECONDARY,NULL);
+				gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+		}if(strcmp(consulta4,"")==0){
+			gtk_entry_set_icon_from_icon_name (ety_busca_subcategoria,GTK_ENTRY_ICON_SECONDARY,NULL);
+			gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
+			}		
+	
 	conn = mysql_init(NULL);
 
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
@@ -3520,7 +3545,36 @@ void consigue_datos3(){
 	const gchar *rfc = gtk_entry_get_text (ety_rfc_bien);
 	gtk_label_set_text (GTK_LABEL(lbl_rfc_bien),rfc);
 }
-
+void borra_busqueda1(){
+	gtk_entry_set_text(ety_busca_proveedor_producto,"");
+	}
+void borra_busqueda2(){
+	gtk_entry_set_text(ety_busca_categoria,"");
+	}
+void borra_busqueda3(){
+	gtk_entry_set_text(ety_busca_subcategoria,"");
+	}
+void cucb(){
+	char ra[4];
+	srand(time(NULL)); //El mayordomo pone a girar la diana
+	int test = rand() %9999;
+	sprintf(ra,"%d",test);
+	gtk_entry_set_text(ety_cbarra,ra);
+	}
+void occb(){
+	char ra[9];
+	srand(time(NULL)); //El mayordomo pone a girar la diana
+	int test = rand() %100000000;
+	sprintf(ra,"%d",test);
+	gtk_entry_set_text(ety_cbarra,ra);
+	}
+void trecb(){
+	char ra[19];
+	srand(time(NULL)); //El mayordomo pone a girar la diana
+	long int test = rand() %99999999999999999;
+	sprintf(ra,"%ld",test);
+	gtk_entry_set_text(ety_cbarra,ra);
+	}
 int main(int argc, char *argv[])
 	{
 		GtkBuilder      	*builder; 
@@ -3656,6 +3710,10 @@ int main(int argc, char *argv[])
 		pag_proveedor = GTK_WIDGET(gtk_builder_get_object(builder,"pag_proveedor"));
 		pag_producto = GTK_WIDGET(gtk_builder_get_object(builder,"pag_producto"));
 		pag_tickets = GTK_WIDGET(gtk_builder_get_object(builder,"pag_tickets"));
+		
+		btn_4cb = GTK_BUTTON(gtk_builder_get_object(builder,"btn_4cb"));
+		btn_8cb = GTK_BUTTON(gtk_builder_get_object(builder,"btn_8cb"));
+		btn_13cb = GTK_BUTTON(gtk_builder_get_object(builder,"btn_13cb"));
 
 		lbl_emp_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_emp_bien"));
 		lbl_num_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_num_bien"));
@@ -3751,6 +3809,7 @@ int main(int argc, char *argv[])
 		cb_bs_subcat = GTK_WIDGET(gtk_builder_get_object(builder,"cb_bs_subcat"));
 		cb_busca_estado = GTK_WIDGET(gtk_builder_get_object(builder,"cb_busca_estado"));
 		switcher = GTK_WIDGET(gtk_builder_get_object(builder,"switcher"));
+		pop_generar_sku = GTK_WIDGET(gtk_builder_get_object(builder,"pop_generar_sku"));
 		
 		cb_dia_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_proact2"));
 		cb_mes_proact2 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_proact2"));
@@ -3849,6 +3908,14 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(ety_busca_proveedor_producto),"changed",G_CALLBACK(busca_producto),NULL);
 		g_signal_connect(G_OBJECT(ety_busca_categoria),"changed",G_CALLBACK(busca_producto),NULL);
 		g_signal_connect(G_OBJECT(ety_busca_subcategoria),"changed",G_CALLBACK(busca_producto),NULL);
+		
+		g_signal_connect(G_OBJECT(ety_busca_proveedor_producto),"icon-press",G_CALLBACK(borra_busqueda1),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_categoria),"icon-press",G_CALLBACK(borra_busqueda2),NULL);
+		g_signal_connect(G_OBJECT(ety_busca_subcategoria),"icon-press",G_CALLBACK(borra_busqueda3),NULL);
+		
+		g_signal_connect(G_OBJECT(btn_4cb),"clicked",G_CALLBACK(cucb),NULL);
+		g_signal_connect(G_OBJECT(btn_8cb),"clicked",G_CALLBACK(occb),NULL);
+		g_signal_connect(G_OBJECT(btn_13cb),"clicked",G_CALLBACK(trecb),NULL);
 		
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
