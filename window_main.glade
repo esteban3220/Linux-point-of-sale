@@ -3040,7 +3040,8 @@ Author: Esteban Noe Sarmiento Mtz.
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">button_ok</property>
+                        <property name="icon-name">stock_yes</property>
+                        <property name="use-fallback">True</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -3414,10 +3415,10 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="spacing">4</property>
                                     <child>
-                                      <object class="GtkImage">
+                                      <object class="GtkLabel">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="icon-name">taxes-finances</property>
+                                        <property name="label" translatable="yes">$</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -5632,6 +5633,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
                                                 <property name="icon-name">delete</property>
+                                                <property name="use-fallback">True</property>
                                               </object>
                                             </child>
                                           </object>
@@ -5650,7 +5652,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkImage">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="icon-name">insert-object</property>
+                                                <property name="icon-name">stock_insert-table</property>
+                                                <property name="use-fallback">True</property>
                                               </object>
                                             </child>
                                           </object>
@@ -5959,12 +5962,14 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Consulta de Precios</property>
+                    <property name="relief">none</property>
+                    <property name="active">True</property>
                     <property name="draw-indicator">True</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">taxes-finances</property>
+                        <property name="label" translatable="yes">$</property>
                       </object>
                     </child>
                     <accelerator key="F3" signal="clicked"/>
@@ -5981,12 +5986,14 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
                     <property name="tooltip-text" translatable="yes">Buscar Articulo por Nombre</property>
+                    <property name="relief">none</property>
                     <property name="draw-indicator">True</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">search-icon</property>
+                        <property name="icon-name">stock_search</property>
+                        <property name="use-fallback">True</property>
                       </object>
                     </child>
                     <accelerator key="F4" signal="clicked"/>
@@ -6045,7 +6052,7 @@ Mediante las bibliotecas en tiempo de ejecución GTK+ v3.24.23 y GLib v2.66.1</p
     <property name="translator-credits" translatable="yes">Esteban Noe Sarmiento Mtz.</property>
     <property name="artists">Esteban Noe Sarmiento Mtz.
 Manuel Morales Nanco</property>
-    <property name="logo-icon-name">accessories-calculator</property>
+    <property name="logo-icon-name">access</property>
     <property name="license-type">gpl-2-0-only</property>
     <child internal-child="vbox">
       <object class="GtkBox">
