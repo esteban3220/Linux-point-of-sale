@@ -2505,6 +2505,16 @@ Author: Esteban Noe Sarmiento Mtz.
       </object>
     </child>
   </object>
+  <object class="GtkImage" id="image7">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">stock_save</property>
+  </object>
+  <object class="GtkImage" id="image9">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="icon-name">stock_save-as</property>
+  </object>
   <object class="GtkListStore" id="liststore1">
     <columns>
       <!-- column-name Categoria -->
@@ -2563,6 +2573,7 @@ Author: Esteban Noe Sarmiento Mtz.
   </object>
   <object class="GtkPopover" id="popovermenu1">
     <property name="can-focus">False</property>
+    <property name="modal">False</property>
     <child>
       <object class="GtkStack" id="stack_menu_pos">
         <property name="visible">True</property>
@@ -4364,6 +4375,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="receives-default">True</property>
                                                     <property name="relief">none</property>
                                                     <property name="use-stock">True</property>
+                                                    <property name="always-show-image">True</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -4379,6 +4391,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="receives-default">True</property>
                                                     <property name="relief">none</property>
                                                     <property name="use-stock">True</property>
+                                                    <property name="always-show-image">True</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -4394,6 +4407,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="receives-default">True</property>
                                                     <property name="relief">none</property>
                                                     <property name="use-stock">True</property>
+                                                    <property name="always-show-image">True</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -4827,7 +4841,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="halign">start</property>
-                                                    <property name="label" translatable="yes">Contenido Neto</property>
+                                                    <property name="label" translatable="yes">Nota</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -4977,6 +4991,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                             <property name="active-id">1</property>
                                                             <items>
                                                             <item id="1" translatable="yes">Dia</item>
+                                                            <item translatable="yes">1</item>
                                                             <item translatable="yes">2</item>
                                                             <item translatable="yes">3</item>
                                                             <item translatable="yes">4</item>
@@ -5035,6 +5050,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                             <property name="active-id">1</property>
                                                             <items>
                                                             <item id="1" translatable="yes">Mes</item>
+                                                            <item translatable="yes">1</item>
                                                             <item translatable="yes">2</item>
                                                             <item translatable="yes">3</item>
                                                             <item translatable="yes">4</item>
@@ -5112,6 +5128,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                             <property name="active-id">1</property>
                                                             <items>
                                                             <item id="1" translatable="yes">Dia</item>
+                                                            <item translatable="yes">1</item>
                                                             <item translatable="yes">2</item>
                                                             <item translatable="yes">3</item>
                                                             <item translatable="yes">4</item>
@@ -5170,6 +5187,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                             <property name="active-id">1</property>
                                                             <items>
                                                             <item id="1" translatable="yes">Mes</item>
+                                                            <item translatable="yes">1</item>
                                                             <item translatable="yes">2</item>
                                                             <item translatable="yes">3</item>
                                                             <item translatable="yes">4</item>
@@ -5235,7 +5253,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="shadow-type">none</property>
-                                                    <property name="secondary-icon-name">edit-select-all-symbolic</property>
+                                                    <property name="secondary-icon-name">format-justify-center</property>
                                                     <property name="input-purpose">number</property>
                                                   </object>
                                                   <packing>
@@ -5249,7 +5267,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="max-length">45</property>
-                                                    <property name="secondary-icon-name">font-x-generic-symbolic</property>
+                                                    <property name="secondary-icon-name">format-text-direction-ltr</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">True</property>
@@ -5340,6 +5358,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <child internal-child="entry">
                                                       <object class="GtkEntry" id="entry_subcat">
                                                         <property name="can-focus">True</property>
+                                                        <property name="secondary-icon-name">task-due</property>
                                                         <property name="completion">entrycompletion1</property>
                                                       </object>
                                                     </child>
@@ -5372,12 +5391,13 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="interpolate-size">True</property>
                                             <child>
                                               <object class="GtkButton" id="inserta_datos_productos">
-                                                <property name="label">gtk-add</property>
+                                                <property name="label">Añadir</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
                                                 <property name="receives-default">True</property>
+                                                <property name="image">image7</property>
                                                 <property name="relief">none</property>
-                                                <property name="use-stock">True</property>
+                                                <property name="always-show-image">True</property>
                                               </object>
                                               <packing>
                                                 <property name="name">page0</property>
@@ -5406,27 +5426,14 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton" id="actualiza_datos_empresa2">
-                                                    <property name="label">gtk-refresh</property>
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="receives-default">True</property>
-                                                    <property name="relief">none</property>
-                                                    <property name="use-stock">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">1</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
                                                   <object class="GtkButton">
                                                     <property name="label" translatable="yes">Recibir</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="receives-default">True</property>
+                                                    <property name="image">image9</property>
                                                     <property name="relief">none</property>
+                                                    <property name="always-show-image">True</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
