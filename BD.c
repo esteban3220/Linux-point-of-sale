@@ -2383,13 +2383,13 @@ void busca_producto(){
 	sprintf(busqueda_fac,"select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'",consulta,consulta2,consulta3,consulta4);
 	
 	if(strcmp(consulta2,"")!=0){
-		gtk_entry_set_icon_from_icon_name (ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+		gtk_entry_set_icon_from_icon_name (ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,"edit-clear-symbolic");
 		gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
 			}if(strcmp(consulta3,"")!=0){
-				gtk_entry_set_icon_from_icon_name (ety_busca_categoria,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+				gtk_entry_set_icon_from_icon_name (ety_busca_categoria,GTK_ENTRY_ICON_SECONDARY,"edit-clear-symbolic");
 				gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
 		}if(strcmp(consulta4,"")!=0){
-			gtk_entry_set_icon_from_icon_name (ety_busca_subcategoria,GTK_ENTRY_ICON_SECONDARY,"clear_left");
+			gtk_entry_set_icon_from_icon_name (ety_busca_subcategoria,GTK_ENTRY_ICON_SECONDARY,"edit-clear-symbolic");
 			gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
 			}
 
