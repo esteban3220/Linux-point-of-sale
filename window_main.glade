@@ -842,103 +842,6 @@ Author: Esteban Noe Sarmiento Mtz.
       <placeholder/>
     </child>
   </object>
-  <object class="GtkMessageDialog" id="advertencia_eliminar_fac">
-    <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Advertencia</property>
-    <property name="modal">True</property>
-    <property name="icon-name">package_network</property>
-    <property name="type-hint">dialog</property>
-    <property name="deletable">False</property>
-    <property name="message-type">warning</property>
-    <property name="text" translatable="yes">Esta a Punto de Eliminar un Elemento</property>
-    <property name="secondary-use-markup">True</property>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can-focus">False</property>
-        <property name="orientation">vertical</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can-focus">False</property>
-            <property name="layout-style">end</property>
-            <child>
-              <object class="GtkButton" id="btn_cancelar_adver2">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_aceptar_a">
-                <property name="label">gtk-ok</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <child>
-              <object class="GtkImage" id="image4">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">dialog-warning-symbolic.symbolic</property>
-                <property name="icon_size">6</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">False</property>
-                <property name="padding">5</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="lbl_eliminar_advertencia">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">¿Desea Continuar?</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="padding">5</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkMessageDialog" id="advertencia_eliminar_pro">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Advertencia</property>
@@ -3141,6 +3044,7 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
+                    <property name="spacing">1</property>
                     <child>
                       <object class="GtkRevealer" id="reveal_consulta">
                         <property name="visible">True</property>
@@ -3200,14 +3104,12 @@ Author: Esteban Noe Sarmiento Mtz.
                                 <property name="can-focus">False</property>
                                 <property name="homogeneous">True</property>
                                 <child>
-                                  <object class="GtkLabel">
+                                  <object class="GtkLabel" id="lbl_usuario">
+                                    <property name="name">lbl_usuario</property>
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="label" translatable="yes">Usuario</property>
+                                    <property name="use-markup">True</property>
                                     <property name="ellipsize">end</property>
-                                    <attributes>
-                                      <attribute name="foreground" value="#11ba0b778f5b"/>
-                                    </attributes>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -3328,6 +3230,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label-xalign">0</property>
+                                <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkAlignment">
                                     <property name="visible">True</property>
@@ -3337,10 +3240,10 @@ Author: Esteban Noe Sarmiento Mtz.
                                       <object class="GtkSpinButton">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
                                         <property name="has-frame">False</property>
-                                        <property name="secondary-icon-name">taxes-finances</property>
+                                        <property name="secondary-icon-name">openttd</property>
                                         <property name="input-purpose">number</property>
                                         <property name="adjustment">adjustment1</property>
                                         <property name="climb-rate">0.10</property>
@@ -3369,6 +3272,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
                                 <property name="label-xalign">0</property>
+                                <property name="shadow-type">in</property>
                                 <child>
                                   <object class="GtkAlignment">
                                     <property name="visible">True</property>
@@ -3379,11 +3283,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="visible">True</property>
                                         <property name="sensitive">False</property>
                                         <property name="can-focus">False</property>
-                                        <property name="margin-end">5</property>
+                                        <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
                                         <property name="editable">False</property>
                                         <property name="has-frame">False</property>
-                                        <property name="secondary-icon-pixbuf">..\share\icons\elementary\status\16\software-update-urgent.svg</property>
+                                        <property name="secondary-icon-name">openttd</property>
                                         <property name="placeholder-text" translatable="yes">30.50</property>
                                       </object>
                                     </child>
@@ -3450,6 +3354,7 @@ Author: Esteban Noe Sarmiento Mtz.
                             <child>
                               <object class="GtkButton">
                                 <property name="use-action-appearance">True</property>
+                                <property name="height-request">50</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -3489,7 +3394,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               <packing>
                                 <property name="expand">False</property>
                                 <property name="fill">True</property>
-                                <property name="padding">8</property>
+                                <property name="padding">2</property>
                                 <property name="position">5</property>
                               </packing>
                             </child>
@@ -5280,6 +5185,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="text" translatable="yes">0</property>
+                                                    <property name="placeholder-text" translatable="yes">Piezas a Recibir</property>
                                                     <property name="adjustment">adjustment2</property>
                                                     <property name="climb-rate">0.10</property>
                                                     <property name="numeric">True</property>
@@ -5295,6 +5201,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="text" translatable="yes">0.00</property>
+                                                    <property name="secondary-icon-name">openttd</property>
                                                     <property name="adjustment">adjustment3</property>
                                                     <property name="digits">2</property>
                                                     <property name="numeric">True</property>
@@ -5310,6 +5217,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
                                                     <property name="text" translatable="yes">0.00</property>
+                                                    <property name="secondary-icon-name">openttd</property>
                                                     <property name="adjustment">adjustment4</property>
                                                     <property name="digits">2</property>
                                                     <property name="numeric">True</property>
@@ -5324,6 +5232,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkComboBoxText" id="cb_cat">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
+                                                    <property name="has-entry">True</property>
                                                     <property name="popup-fixed-width">False</property>
                                                     <items>
                                                       <item translatable="yes">Abarrotes</item>
@@ -5342,6 +5251,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                                       <item translatable="yes">Bebidas</item>
                                                       <item translatable="yes">Otros productos</item>
                                                     </items>
+                                                    <child internal-child="entry">
+                                                      <object class="GtkEntry" id="ety_cat">
+                                                        <property name="can-focus">False</property>
+                                                      </object>
+                                                    </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -5405,7 +5319,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkBox" id="box_act_emp2">
+                                              <object class="GtkBox" id="box_act_pro">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
                                                 <property name="homogeneous">True</property>
@@ -5426,7 +5340,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton">
+                                                  <object class="GtkButton" id="btn_act">
                                                     <property name="label" translatable="yes">Recibir</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
@@ -5442,7 +5356,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   </packing>
                                                 </child>
                                                 <child>
-                                                  <object class="GtkButton" id="btn_borrar_emp2">
+                                                  <object class="GtkButton" id="btn_borrar_pro">
                                                     <property name="label">gtk-delete</property>
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">True</property>
