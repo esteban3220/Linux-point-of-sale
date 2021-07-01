@@ -286,7 +286,6 @@ GtkWidget    	*advertencia_anadir_fac;
 GtkWidget    	*advertencia_anadir_pro;
 GtkWidget    	*advertencia_anadir_emp;
 GtkWidget 		*advertencia_actualizar_emp;
-GtkWidget     *advertencia_actualizar_fac;
 GtkWidget     *advertencia_actualizar_pro;
 GtkWidget     *advertencia_eliminar_fac;
 GtkWidget     *advertencia_eliminar_emp;
@@ -416,6 +415,12 @@ GtkTreeViewColumn 	*column_aud_pro18;
 GtkTreeViewColumn 	*column_aud_pro19;
 GtkTreeViewColumn 	*column_aud_pro20;
 GtkTreeViewColumn 	*column_aud_pro21;
+GtkTreeViewColumn 	*column_aud_pro22;
+GtkTreeViewColumn 	*column_aud_pro23;
+GtkTreeViewColumn 	*column_aud_pro24;
+GtkTreeViewColumn 	*column_aud_pro25;
+GtkTreeViewColumn 	*column_aud_pro26;
+GtkTreeViewColumn 	*column_aud_pro27;
 
 GtkTreeViewColumn 	*column_aud_fac;
 GtkTreeViewColumn 	*column_aud_fac2;
@@ -451,11 +456,6 @@ GtkTreeViewColumn 	*column_fac9_bus;
 
 GtkTreeViewColumn 	*column_users;
 
-GtkTreeSelection 	*seleccion_view;
-GtkTreeSelection 	*seleccion_view2;
-GtkTreeSelection 	*selection; 
-static guint search_progress_id = 0;
-static guint finish_search_id = 0;
 gboolean timer_handler();
 	
 FILE* 			fichero;
@@ -516,26 +516,26 @@ enum
 enum
 {
 	id_aud_emp,
-	id_pro_ant_emp,
+	emp_ant_emp,
 	nom_ant_emp,
 	dir_ant_emp,
 	tel_ant_emp,
 	reg_ant_emp,
 	pais_ant_emp,
 	rfc_ant_emp,
+	estado_ant_emp,
 	corr_ant_emp,
-	id_pro_new_emp,
 	nom_new_emp,
 	dir_new_emp,
 	tel_new_emp,
 	reg_new_emp,
 	pais_new_emp,
 	rfc_new_emp,
+	estado_new_emp,
 	corr_new_emp,
 	user_emp_emp,
 	modifi_emp_emp,
 	accion_emp_emp,
-	id_emp_au_emp,
 	NUM_COLS_au_emp
 } ;
 
@@ -567,27 +567,33 @@ enum
 
 enum
 {
-	idaud_pro,
-	nom_ant_pro,
-	marca_ant_pro,
-	fechacad_ant_pro,
-	fechapro_ant_pro,
-	numlote_ant_pro,
-	desc_ant_pro,
-	codbarra_ant_pro,
-	conneto_ant_pro,
-	nom_new_pro,
-	marca_new_pro,
-	fechacad_new_pro,
-	fechapro_new_pro,
-	numlote_new_pro,
-	desc_new_pro,
-	codbarra_new_pro,
-	conneto_new_pro,
-	user_pro,
-	mod_pro,
-	accion_pro,
-	idpro_au_pro,
+	Id ,             
+	Cod_barra ,
+	Nombre_ant,
+	Marca_ant,
+	Fecha_proc_ant ,
+	Fecha_cad_ant ,
+	Numero_lote_ant,
+	Nota_ant ,
+	Piezas_ant,
+	Compra_ant,
+	Venta_ant,
+	Categoria_ant,
+	Subcategoria_ant,
+	Nombre_new ,
+	Marca_new  ,
+	Fecha_proc_new,
+	Fecha_cad_new,
+	Numero_lote_new ,
+	Nota_new ,
+	Piezas_new,
+	Compra_new ,
+	Venta_new ,
+	Categoria_new ,
+	Subcategoria_new,
+	Usuario ,
+	Fecha_mod,
+	Accion,
 	NUM_COLS_au_pro
 };
 
@@ -878,9 +884,8 @@ static GtkTreeModel *create_producto (void)
 	g_object_unref (model3);
 	return view3;
 }
- /*  
-static GtkTreeModel *create_empresa_auditoria (void)
-{
+ 
+static GtkTreeModel *create_empresa_auditoria (void){
 	store4 = gtk_list_store_new (NUM_COLS_au_emp, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
@@ -888,49 +893,49 @@ static GtkTreeModel *create_empresa_auditoria (void)
 	
 	gtk_list_store_append (store4, &iter4);
 	gtk_list_store_set (store4, &iter4,id_aud_emp,row[0],
-	id_pro_ant_emp,row[1],
+	emp_ant_emp,row[1],
 	nom_ant_emp,row[2],
 	dir_ant_emp,row[3],
 	tel_ant_emp,row[4],
 	reg_ant_emp,row[5],
 	pais_ant_emp,row[6],
 	rfc_ant_emp,row[7],
-	corr_ant_emp,row[8],
-	id_pro_new_emp,row[9],
+	estado_ant_emp,row[8],
+	corr_ant_emp,row[9],
 	nom_new_emp,row[10],
 	dir_new_emp,row[11],
 	tel_new_emp,row[12],
 	reg_new_emp,row[13],
 	pais_new_emp,row[14],
 	rfc_new_emp,row[15],
-	corr_new_emp,row[16],
-	user_emp_emp,row[17],
-	modifi_emp_emp,row[18],
-	accion_emp_emp,row[19],
-	id_emp_au_emp,row[20],-1);
+	estado_new_emp,row[16],
+	corr_new_emp,row[17],
+	user_emp_emp,row[18],
+	modifi_emp_emp,row[19],
+	accion_emp_emp,row[20],-1);
 	while ((row = mysql_fetch_row(res)) != NULL){
 	gtk_list_store_append (store4, &iter4);
 	gtk_list_store_set (store4, &iter4,id_aud_emp,row[0],
-	id_pro_ant_emp,row[1],
+	emp_ant_emp,row[1],
 	nom_ant_emp,row[2],
 	dir_ant_emp,row[3],
 	tel_ant_emp,row[4],
 	reg_ant_emp,row[5],
 	pais_ant_emp,row[6],
 	rfc_ant_emp,row[7],
-	corr_ant_emp,row[8],
-	id_pro_new_emp,row[9],
+	estado_ant_emp,row[8],
+	corr_ant_emp,row[9],
 	nom_new_emp,row[10],
 	dir_new_emp,row[11],
 	tel_new_emp,row[12],
 	reg_new_emp,row[13],
 	pais_new_emp,row[14],
 	rfc_new_emp,row[15],
-	corr_new_emp,row[16],
-	user_emp_emp,row[17],
-	modifi_emp_emp,row[18],
-	accion_emp_emp,row[19],
-	id_emp_au_emp,row[20],-1);
+	estado_new_emp,row[16],
+	corr_new_emp,row[17],
+	user_emp_emp,row[18],
+	modifi_emp_emp,row[19],
+	accion_emp_emp,row[20],-1);
 }
 	return GTK_TREE_MODEL (store4);
 }
@@ -941,7 +946,7 @@ static GtkTreeModel *create_empresa_auditoria (void)
 	column_aud_emp = gtk_tree_view_column_new_with_attributes ("ID",renderer4,"text", id_aud_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp2 = gtk_tree_view_column_new_with_attributes ("ID Producto Ant.",renderer4,"text", id_pro_ant_emp,NULL);
+	column_aud_emp2 = gtk_tree_view_column_new_with_attributes ("Empresa",renderer4,"text", emp_ant_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp2);
 	renderer4 = gtk_cell_renderer_text_new ();
 	column_aud_emp3= gtk_tree_view_column_new_with_attributes ("Nombre Anterior",renderer4,"text", nom_ant_emp,NULL);
@@ -962,10 +967,10 @@ static GtkTreeModel *create_empresa_auditoria (void)
 	column_aud_emp8 = gtk_tree_view_column_new_with_attributes ("RFC Anterior",renderer4,"text", rfc_ant_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp8);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp9 = gtk_tree_view_column_new_with_attributes ("Correo Anterior",renderer4,"text", corr_ant_emp,NULL);
+	column_aud_emp9 = gtk_tree_view_column_new_with_attributes ("Estado Anterior",renderer4,"text", estado_ant_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp9);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp10 = gtk_tree_view_column_new_with_attributes ("ID Producto Nuevo",renderer4,"text", id_pro_new_emp,NULL);
+	column_aud_emp10 = gtk_tree_view_column_new_with_attributes ("Correo Anterior",renderer4,"text", corr_ant_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp10);
 	renderer4 = gtk_cell_renderer_text_new ();
 	column_aud_emp11 = gtk_tree_view_column_new_with_attributes ("Nombre Nuevo",renderer4,"text", nom_new_emp,NULL);
@@ -986,19 +991,19 @@ static GtkTreeModel *create_empresa_auditoria (void)
 	column_aud_emp16 = gtk_tree_view_column_new_with_attributes ("RFC Nuevo",renderer4,"text", rfc_new_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp16);
 	renderer = gtk_cell_renderer_text_new ();
-	column_aud_emp17 = gtk_tree_view_column_new_with_attributes ("Correo Nuevo",renderer4,"text", corr_new_emp,NULL);
+	column_aud_emp17 = gtk_tree_view_column_new_with_attributes ("Estado Nuevo",renderer4,"text", estado_new_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp17);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp18 = gtk_tree_view_column_new_with_attributes ("Usuario",renderer4,"text", user_emp_emp,NULL);
+	column_aud_emp18 = gtk_tree_view_column_new_with_attributes ("Correo Nuevo",renderer4,"text", corr_new_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp18);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp19 = gtk_tree_view_column_new_with_attributes ("Modificado",renderer4,"text", modifi_emp_emp,NULL);
+	column_aud_emp19 = gtk_tree_view_column_new_with_attributes ("Usuario",renderer4,"text", user_emp_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp19);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp20 = gtk_tree_view_column_new_with_attributes ("Accion",renderer4,"text", accion_emp_emp,NULL);
+	column_aud_emp20 = gtk_tree_view_column_new_with_attributes ("Fecha",renderer4,"text", modifi_emp_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp20);
 	renderer4 = gtk_cell_renderer_text_new ();
-	column_aud_emp21 = gtk_tree_view_column_new_with_attributes ("ID Empresa",renderer4,"text", id_emp_au_emp,NULL);
+	column_aud_emp21 = gtk_tree_view_column_new_with_attributes ("Accion",renderer4,"text", accion_emp_emp,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view4),column_aud_emp21);
 	
 	model4 = create_empresa_auditoria();
@@ -1010,6 +1015,7 @@ static GtkTreeModel *create_empresa_auditoria (void)
 static GtkTreeModel *create_factura_auditoria (void)
 {
 	store5 = gtk_list_store_new (NUM_COLS_au_fac, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
+	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
@@ -1140,195 +1146,163 @@ static GtkTreeModel *create_producto_auditoria (void)
 	store6 = gtk_list_store_new (NUM_COLS_au_pro, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
+	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
 	
 	gtk_list_store_append (store6, &iter6);
-	gtk_list_store_set (store6, &iter6,idaud_pro,row[0],
-	nom_ant_pro,row[1],
-	marca_ant_pro,row[2],
-	fechacad_ant_pro,row[3],
-	fechapro_ant_pro,row[4],
-	numlote_ant_pro,row[5],
-	desc_ant_pro,row[6],
-	codbarra_ant_pro,row[7],
-	conneto_ant_pro,row[8],
-	nom_new_pro,row[9],
-	marca_new_pro,row[10],
-	fechacad_new_pro,row[11],
-	fechapro_new_pro,row[12],
-	numlote_new_pro,row[13],
-	desc_new_pro,row[14],
-	codbarra_new_pro,row[15],
-	conneto_new_pro,row[16],
-	user_pro,row[17],
-	mod_pro,row[18],
-	accion_pro,row[19],
-	idpro_au_pro,row[20],-1);
+	gtk_list_store_set (store6, &iter6,
+		Id,row[0],              
+		Cod_barra,row[1],
+		Nombre_ant,row[2],      
+		Marca_ant,row[3],       
+		Fecha_proc_ant,row[4],  
+		Fecha_cad_ant,row[5],   
+		Numero_lote_ant,row[6], 
+		Nota_ant ,row[7],       
+		Piezas_ant,row[8],      
+		Compra_ant,row[9],      
+		Venta_ant,row[10],       
+		Categoria_ant,row[11],   
+		Subcategoria_ant,row[12],
+		Nombre_new,row[13],      
+		Marca_new,row[14],       
+		Fecha_proc_new,row[15],  
+		Fecha_cad_new ,row[16],  
+		Numero_lote_new ,row[17],
+		Nota_new,row[18],        
+		Piezas_new,row[19],      
+		Compra_new ,row[20],     
+		Venta_new,row[21],       
+		Categoria_new,row[22],   
+		Subcategoria_new,row[23],
+		Usuario,row[24],         
+		Fecha_mod,row[25],       
+		Accion,row[26] ,-1);
 	while ((row = mysql_fetch_row(res)) != NULL){
 	gtk_list_store_append (store6, &iter6);
-	gtk_list_store_set (store6, &iter6,idaud_pro,row[0],
-	nom_ant_pro,row[1],
-	marca_ant_pro,row[2],
-	fechacad_ant_pro,row[3],
-	fechapro_ant_pro,row[4],
-	numlote_ant_pro,row[5],
-	desc_ant_pro,row[6],
-	codbarra_ant_pro,row[7],
-	conneto_ant_pro,row[8],
-	nom_new_pro,row[9],
-	marca_new_pro,row[10],
-	fechacad_new_pro,row[11],
-	fechapro_new_pro,row[12],
-	numlote_new_pro,row[13],
-	desc_new_pro,row[14],
-	codbarra_new_pro,row[15],
-	conneto_new_pro,row[16],
-	user_pro,row[17],
-	mod_pro,row[18],
-	accion_pro,row[19],
-	idpro_au_pro,row[20],-1);
+	gtk_list_store_set (store6, &iter6,
+		Id,row[0],              
+		Cod_barra,row[1],
+		Nombre_ant,row[2],      
+		Marca_ant,row[3],       
+		Fecha_proc_ant,row[4],  
+		Fecha_cad_ant,row[5],   
+		Numero_lote_ant,row[6], 
+		Nota_ant ,row[7],       
+		Piezas_ant,row[8],      
+		Compra_ant,row[9],      
+		Venta_ant,row[10],       
+		Categoria_ant,row[11],   
+		Subcategoria_ant,row[12],
+		Nombre_new,row[13],      
+		Marca_new,row[14],       
+		Fecha_proc_new,row[15],  
+		Fecha_cad_new ,row[16],  
+		Numero_lote_new ,row[17],
+		Nota_new,row[18],        
+		Piezas_new,row[19],      
+		Compra_new ,row[20],     
+		Venta_new,row[21],       
+		Categoria_new,row[22],   
+		Subcategoria_new,row[23],
+		Usuario,row[24],         
+		Fecha_mod,row[25],       
+		Accion,row[26] ,-1);
 }
 	return GTK_TREE_MODEL (store6);
 }
+
 static GtkWidget *titulo_producto_auditoria (void)
 {
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro = gtk_tree_view_column_new_with_attributes ("ID",renderer6,"text", idaud_pro,NULL);
+	column_aud_pro = gtk_tree_view_column_new_with_attributes ("ID",renderer6,"text", Id,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro2 = gtk_tree_view_column_new_with_attributes ("Nombre Ant.",renderer6,"text", nom_ant_pro,NULL);
+	column_aud_pro2 = gtk_tree_view_column_new_with_attributes ("SKU",renderer6,"text", Cod_barra,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro2);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro3= gtk_tree_view_column_new_with_attributes ("Marca Ant.",renderer6,"text", marca_ant_pro,NULL);
+	column_aud_pro3= gtk_tree_view_column_new_with_attributes ("Nombre y Descripcion Ant.",renderer6,"text", Nombre_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro3);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro4= gtk_tree_view_column_new_with_attributes ("Fecha Cad. Ant.",renderer6,"text", fechacad_ant_pro,NULL);
+	column_aud_pro4= gtk_tree_view_column_new_with_attributes ("Marca Ant.",renderer6,"text", Marca_ant ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro4);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro5= gtk_tree_view_column_new_with_attributes ("Fecha Prod. Ant.",renderer6,"text", fechapro_ant_pro,NULL);
+	column_aud_pro5= gtk_tree_view_column_new_with_attributes ("Fecha Produccion Ant.",renderer6,"text", Fecha_proc_ant ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro5);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro6= gtk_tree_view_column_new_with_attributes ("Num. Lote Ant.",renderer6,"text", numlote_ant_pro,NULL);
+	column_aud_pro6= gtk_tree_view_column_new_with_attributes ("Fecha Caducidad Ant.",renderer6,"text", Fecha_cad_ant ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro6);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro7 = gtk_tree_view_column_new_with_attributes ("Descripcion Ant.",renderer6,"text", desc_ant_pro,NULL);
+	column_aud_pro7 = gtk_tree_view_column_new_with_attributes ("Numero de Lote Ant",renderer6,"text",Numero_lote_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro7);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro8 = gtk_tree_view_column_new_with_attributes ("Cod. Barras Ant.",renderer6,"text", codbarra_ant_pro,NULL);
+	column_aud_pro8 = gtk_tree_view_column_new_with_attributes ("Nota Anterior",renderer6,"text",Nota_ant ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro8);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro9 = gtk_tree_view_column_new_with_attributes ("Cont. Neto Ant.",renderer6,"text", conneto_ant_pro,NULL);
+	column_aud_pro9 = gtk_tree_view_column_new_with_attributes ("Piezas Anteriores",renderer6,"text", Piezas_ant ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro9);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro10 = gtk_tree_view_column_new_with_attributes ("Nombre Nuevo",renderer6,"text", nom_new_pro,NULL);
+	column_aud_pro10 = gtk_tree_view_column_new_with_attributes ("Compra Ant.",renderer6,"text", Compra_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro10);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro11= gtk_tree_view_column_new_with_attributes ("Marca Nuevo",renderer6,"text", marca_new_pro,NULL);
+	column_aud_pro11= gtk_tree_view_column_new_with_attributes ("Venta Ant.",renderer6,"text",Venta_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro11);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro12= gtk_tree_view_column_new_with_attributes ("Fecha Cad. Nuevo",renderer6,"text", fechacad_new_pro,NULL);
+	column_aud_pro12= gtk_tree_view_column_new_with_attributes ("Categoria Ant.",renderer6,"text",Categoria_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro12);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro13 = gtk_tree_view_column_new_with_attributes ("Fecha Prod. Nuevo",renderer6,"text", fechapro_new_pro,NULL);
+	column_aud_pro13 = gtk_tree_view_column_new_with_attributes ("Subcategoria Ant.",renderer6,"text", Subcategoria_ant,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro13);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro14= gtk_tree_view_column_new_with_attributes ("Num. Lote Nuevo",renderer6,"text", numlote_new_pro,NULL);
+	column_aud_pro14= gtk_tree_view_column_new_with_attributes ("Nombre Nuevo",renderer6,"text",Nombre_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro14);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro15 = gtk_tree_view_column_new_with_attributes ("Descripcion Ant.",renderer6,"text", desc_new_pro,NULL);
+	column_aud_pro15 = gtk_tree_view_column_new_with_attributes ("Marca Nuevo",renderer6,"text",Marca_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro15);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro16 = gtk_tree_view_column_new_with_attributes ("Cod. Barras Nuevo",renderer6,"text", codbarra_new_pro,NULL);
+	column_aud_pro16 = gtk_tree_view_column_new_with_attributes ("Fecha Produccion Nuevo",renderer6,"text",Fecha_proc_new ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro16);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro17 = gtk_tree_view_column_new_with_attributes ("Cont. Neto Nuevo",renderer6,"text", conneto_new_pro,NULL);
+	column_aud_pro17 = gtk_tree_view_column_new_with_attributes ("Fecha Caducidad Nuevo",renderer6,"text", Fecha_cad_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro17);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro18 = gtk_tree_view_column_new_with_attributes ("Usuario",renderer6,"text", user_pro,NULL);
+	column_aud_pro18 = gtk_tree_view_column_new_with_attributes ("Numero de lote Nuevo",renderer6,"text",Numero_lote_new ,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro18);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro19 = gtk_tree_view_column_new_with_attributes ("Modificado",renderer6,"text", mod_pro,NULL);
+	column_aud_pro19 = gtk_tree_view_column_new_with_attributes ("Nota Nuevo",renderer6,"text",Nota_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro19);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro20 = gtk_tree_view_column_new_with_attributes ("Accion",renderer6,"text", accion_pro,NULL);
+	column_aud_pro20 = gtk_tree_view_column_new_with_attributes ("Piezas Nuevo",renderer6,"text",Piezas_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro20);
 	renderer6 = gtk_cell_renderer_text_new ();
-	column_aud_pro21 = gtk_tree_view_column_new_with_attributes ("ID Producto",renderer6,"text", idpro_au_pro,NULL);
+	column_aud_pro21 = gtk_tree_view_column_new_with_attributes ("Compra Nueva",renderer6,"text",Compra_new,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro21);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro22 = gtk_tree_view_column_new_with_attributes ("Venta Nueva",renderer6,"text",Venta_new,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro22);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro23 = gtk_tree_view_column_new_with_attributes ("Categoria Nueva",renderer6,"text",Categoria_new,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro23);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro24 = gtk_tree_view_column_new_with_attributes ("Subcategoria Nueva",renderer6,"text",Subcategoria_new,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro24);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro25 = gtk_tree_view_column_new_with_attributes ("Usuario",renderer6,"text",Usuario ,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro25);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro26 = gtk_tree_view_column_new_with_attributes ("Fecha y Hora",renderer6,"text",Fecha_mod,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro26);
+	renderer6 = gtk_cell_renderer_text_new ();
+	column_aud_pro27 = gtk_tree_view_column_new_with_attributes ("Accion",renderer6,"text",Accion,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view6),column_aud_pro27);
+				
 	
 	model6 = create_producto_auditoria();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view6), model6);
 	g_object_unref (model6);
 	return view6;
 }      
-static GtkTreeModel * create_and_fill_model_busqueda (void)
-{
-	store_busqueda = gtk_list_store_new (NUM_COLS_bus, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
-	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
-	
-	gtk_list_store_append (store_busqueda, &iter_busqueda);
-	gtk_list_store_set (store_busqueda, &iter_busqueda,COLid_bus, row[0],
-	COLnomant_bus, row[1],
-	COLedadant_bus, row[2],
-	COLapodoant_bus, row[3],
-	COLpoderes_bus, row[4],
-	COLsexo_bus, row[5],
-	COLestatura_bus, row[6],
-	Colbarra, row[7],
-	conneto, row[8],-1);
-	while ((row = mysql_fetch_row(res)) != NULL){
-	gtk_list_store_append (store_busqueda, &iter_busqueda);
-	gtk_list_store_set (store_busqueda, &iter_busqueda,COLid_bus, row[0],
-	COLnomant_bus, row[1],
-	COLedadant_bus, row[2],
-	COLapodoant_bus, row[3],
-	COLpoderes_bus, row[4],
-	COLsexo_bus, row[5],
-	COLestatura_bus, row[6],
-	Colbarra, row[7],
-	conneto, row[8],-1);
-}
-	return GTK_TREE_MODEL (store_busqueda);
-}
 
-
- static GtkWidget *titulo_factura_auditoria_busqueda (void)
-{	
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac_bus = gtk_tree_view_column_new_with_attributes  ("ID Pro",renderer,"text", COLid_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac2_bus = gtk_tree_view_column_new_with_attributes ("Nombre",renderer,"text", COLnomant_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac2_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac3_bus = gtk_tree_view_column_new_with_attributes  ("Marca",renderer,"text", COLedadant_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac3_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac4_bus = gtk_tree_view_column_new_with_attributes  ("F. Caducidad",renderer,"text", COLapodoant_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac4_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac5_bus = gtk_tree_view_column_new_with_attributes  ("F. Produccion",renderer,"text", COLpoderes_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac5_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac6_bus = gtk_tree_view_column_new_with_attributes ("N. Lote",renderer,"text", COLsexo_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac6_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac7_bus = gtk_tree_view_column_new_with_attributes ("Descripcion",renderer,"text", COLestatura_bus,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac7_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac8_bus = gtk_tree_view_column_new_with_attributes ("Codigo Barra",renderer,"text", Colbarra,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac8_bus);
-	renderer = gtk_cell_renderer_text_new ();
-	column_fac9_bus = gtk_tree_view_column_new_with_attributes ("Con. Neto",renderer,"text", conneto,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busc),column_fac9_bus);
-	
-	model_busc = create_and_fill_model_busqueda ();
-	gtk_tree_view_set_model (GTK_TREE_VIEW (view_busc), model_busc);
-	g_object_unref (model_busc);
-	return view_busc;
-}
-
-*/
 void contenido_ticket(){
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -1453,6 +1427,55 @@ while ((row = mysql_fetch_row(res)) != NULL)
 	
 	}
 
+void contenido_aud_proveedor(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	
+	if (mysql_query(conn, "select * from Aud_proveedor"))
+	{ 
+	}
+	res = mysql_use_result(conn);
+//==================================================================================================================
+while ((row = mysql_fetch_row(res)) != NULL) 
+					if (gtk_tree_model_get_iter_first(model4, &iter4) == FALSE) {
+						 titulo_empresa_auditoria();
+						 return ;
+					}  
+	mysql_free_result(res);
+	mysql_close(conn);
+	
+	}
+void contenido_aud_producto(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	
+	if (mysql_query(conn, "select * from Aud_producto"))
+	{ 
+	}
+	res = mysql_use_result(conn);
+//==================================================================================================================
+while ((row = mysql_fetch_row(res)) != NULL) 
+					if (gtk_tree_model_get_iter_first(model6, &iter6) == FALSE) {
+						 titulo_producto_auditoria();
+						 return ;
+					}  
+	mysql_free_result(res);
+	mysql_close(conn);
+	
+	}
+
 void on_btn_cambiar_usuario_clicked()
 {
 	gtk_entry_set_text(g_Entry_Usuario,"");
@@ -1478,6 +1501,8 @@ void on_btn_Sesion_clicked ( gpointer  user_data)
 	contenido_tablas();
 	contenido_producto();
 	contenido_ticket();
+	contenido_aud_proveedor();
+	contenido_aud_producto();
 }
 
 void on_Entry_Contrasena_activate(gpointer  user_data)
@@ -1486,19 +1511,26 @@ void on_Entry_Contrasena_activate(gpointer  user_data)
 	contenido_tablas();
 	contenido_producto();
 	contenido_ticket();
+	contenido_aud_proveedor();
+	contenido_aud_producto();
 }
 	
 void on_btn_cancelar_adver3_clicked()
 {
 	gtk_widget_hide(g_Dialog_Error);
 }
-	
+void cierra_error()
+{
+	gtk_widget_hide_on_delete(g_Dialog_Error);
+}
+		
 void on_btn_Rein_Dial_clicked()
 	{
 		gtk_entry_set_text(g_Entry_Usuario,"");
 		gtk_entry_set_text(g_Entry_Contrasena,"");
 		gtk_widget_hide_on_delete (g_Dialog_Error);
 	}
+	/*
 void refresca_datos_fac(){
 	
 	if (gtk_tree_model_get_iter_first(model2, &iter2) == TRUE) {
@@ -1537,8 +1569,8 @@ void refresca_datos_fac(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac20);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac21);
 }
-	
-}
+*/	
+
 void refresca_datos_emp(){
 	
 	if (gtk_tree_model_get_iter_first(model, &iter) == TRUE) {
@@ -1552,7 +1584,7 @@ void refresca_datos_emp(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view), column_emp7);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view), column_emp8);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view), column_emp9);
-} /*
+} 
 	if (gtk_tree_model_get_iter_first(model4, &iter4) == TRUE) {
 		gtk_list_store_clear(store4);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp);
@@ -1575,9 +1607,10 @@ void refresca_datos_emp(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp18);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp19);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp20);
-		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp21); */
-
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view4), column_aud_emp21); 
+  }
 }
+
 void refresca_datos_pro(){
 	
 	if (gtk_tree_model_get_iter_first(model3, &iter3) == TRUE) {
@@ -1595,7 +1628,7 @@ void refresca_datos_pro(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro11);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view3), column_pro12);
 }
-	/*if (gtk_tree_model_get_iter_first(model6, &iter6) == TRUE) {
+	if (gtk_tree_model_get_iter_first(model6, &iter6) == TRUE) {
 		gtk_list_store_clear(store6);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro2);
@@ -1618,21 +1651,14 @@ void refresca_datos_pro(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro19);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro20);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro21);
-}*/
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro22);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro23);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro24);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro25);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro26);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro27);
+		 }
 }
-void refresca_busqueda(){
-	gtk_list_store_clear(store_busqueda);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac2_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac3_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac4_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac5_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac6_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac7_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac8_bus);
-	gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busc), column_fac9_bus);
-	}
-
 void on_cancela_and_factura4_clicked(){
 		gtk_widget_hide(inserta_producto);
 	}
@@ -1710,7 +1736,7 @@ void on_fac_aceptar_anadir_clicked(){
 	gtk_entry_set_text(ety_desc,"");
 	gtk_entry_set_text(ety_total,"");
 	
-	refresca_datos_fac();
+	
 	contenido_tablas();
 
 	mysql_free_result(res);
@@ -1775,6 +1801,7 @@ void on_emp_aceptar_anadir_clicked(){
 	
 	refresca_datos_emp();
 	contenido_tablas();
+	contenido_aud_proveedor();
 
 	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cb_marcapro));
 	gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cb_productos_proveedor));
@@ -1865,9 +1892,7 @@ void on_pro_aceptar_anadir_clicked (){
 	
 	refresca_datos_pro();
 	contenido_producto();
-
-	mysql_free_result(res);
-	mysql_close(conn);
+	contenido_aud_producto();
 	gtk_widget_hide(advertencia_anadir_pro);
 	gtk_label_set_text(lbl_info,"Producto Insertado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
@@ -1912,7 +1937,6 @@ void on_btn_aceptar__clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_actualizar_fac);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -1929,27 +1953,15 @@ void on_btn_aceptar__clicked(){
 	gtk_entry_set_text(ety_descfac_act1,"");
 	gtk_entry_set_text(ety_totalfac_act,"");
 	
-	refresca_datos_fac();
+	
 	contenido_tablas();
 	
 	mysql_free_result(res);
 	mysql_close(conn);
-	gtk_widget_hide(advertencia_actualizar_fac);
 	gtk_label_set_text(lbl_info,"Dato Actualizado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	}
-void on_actualiza_datos_factura_clicked(){
-		gtk_widget_show(advertencia_actualizar_fac);
-	}
-void on_cancela_and_factura1_clicked(){
-		gtk_widget_hide(actualiza_factura);
-	}
-void on_btn_cancelar_adver1_clicked(){
-	gtk_widget_hide(advertencia_actualizar_fac);
-	}
-void on_cancela_and_factura5_clicked(){
-	gtk_widget_hide(actualiza_producto);
-	}
+
 void on_cancela_and_factura3_clicked(){
 	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),inserta_datos_empresa);
 			gtk_entry_set_text(ety_nombreemp,"");
@@ -1996,7 +2008,7 @@ void on_btn_actualiza_emp_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_anadir_fac);
+		gtk_widget_hide(advertencia_anadir_emp);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -2014,6 +2026,7 @@ void on_btn_actualiza_emp_clicked(){
 			gtk_entry_set_text(ety_correoemp,"");
 	
 	refresca_datos_emp();
+	contenido_aud_proveedor();
 	contenido_tablas();
 
 	mysql_free_result(res);
@@ -2032,15 +2045,6 @@ void on_btn_cancelar_adver5_clicked(){
 	gtk_widget_hide(advertencia_actualizar_pro);
 	}
 //=========== Elimina datos =====================================
-void on_btn_borrar_fac_clicked(){
-	gtk_widget_show(advertencia_eliminar_fac);
-}
-void on_ety_id_fac_borrar_activate(){
-	gtk_widget_show(advertencia_eliminar_fac);
-}
-void on_btn_cancelar_adver2_clicked(){
-	gtk_widget_hide(advertencia_eliminar_fac);
-	}
 void on_btn_borrar_emp_clicked(){
 	gtk_widget_show(advertencia_eliminar_emp);
 	}
@@ -2070,7 +2074,7 @@ void on_btn_aceptar_a1_clicked(){
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
 		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_eliminar_fac);
+		gtk_widget_hide(advertencia_eliminar_emp);
 		return gtk_widget_show(dialog_error_datos);
 	}
 	res = mysql_use_result(conn);
@@ -2100,6 +2104,7 @@ void on_btn_aceptar_a1_clicked(){
 	contenido_tablas();
 	contenido_producto();
 	consulta_proveedor();
+	contenido_aud_proveedor();
 	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),inserta_datos_empresa);
 }
 void on_btn_borrar_pro_clicked(){
@@ -2159,14 +2164,11 @@ void on_btn_aceptar_a2_clicked(){
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	refresca_datos_pro();
 	contenido_producto();
+	contenido_aud_producto();
 }
 	
 //================================================
 void on_Window_BD_destroy()
-{
-	gtk_main_quit();
-	}
-void on_window_main_destroy()
 {
     gtk_main_quit();
 }
@@ -2182,76 +2184,29 @@ void on_activador_sql_state_set(){
 		gtk_stack_set_visible_child (GTK_STACK(stack_sql),debug);
 	}
 }
-void remove_item() {
-    
-  GtkListStore *store_bus;
-  GtkTreeIter iter_bus;
-  GtkTreeModel *model_bus;
 
-  store_bus = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(historial_busqueda)));
-  model_bus = gtk_tree_view_get_model(GTK_TREE_VIEW(historial_busqueda));
+void cierra_emp(){
+	gtk_widget_hide_on_delete(advertencia_anadir_emp);
+	}
+void cierra_emp_eli(){
+	gtk_widget_hide_on_delete(advertencia_eliminar_emp);
+	}
+void cierra_pro(){
+	gtk_widget_hide_on_delete(advertencia_anadir_pro);
+	}
+void cierra_pro_eli(){
+	gtk_widget_hide_on_delete(advertencia_eliminar_pro);
+	}
+void cierra_error_datos(){
+	gtk_widget_hide_on_delete(dialog_error_datos);
+	}
+void cierra_act(){
+	gtk_widget_hide_on_delete(advertencia_actualizar_emp);
+	}
 
-  if (gtk_tree_model_get_iter_first(model_bus, &iter_bus) == FALSE) {
-      return;
-  }
-
-  if (gtk_tree_selection_get_selected(GTK_TREE_SELECTION(selection), &model_bus, &iter_bus)) {
-    gtk_list_store_remove(store_bus, &iter_bus);
-  }
-}
-void remove_all() {
-    
-  GtkListStore *store_bus;
-  GtkTreeModel *model_bus;
-  GtkTreeIter  iter_bus;
-
-  store_bus = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(historial_busqueda)));
-  model_bus = gtk_tree_view_get_model(GTK_TREE_VIEW(historial_busqueda));
-
-  if (gtk_tree_model_get_iter_first(model_bus, &iter_bus) == TRUE) {
-	  gtk_list_store_clear(store_bus);
-      return;
-  }
-  gtk_list_store_clear(store_bus);
-  
-}
-
-void meter_historial(){
-	GtkListStore 	*store_bus;
-	GtkTreeIter 	iter_bus;
-
-	const gchar *str = gtk_entry_get_text(entry_buscar); 
-
-	store_bus = GTK_LIST_STORE(gtk_tree_view_get_model(GTK_TREE_VIEW(historial_busqueda)));
-
-	gtk_list_store_append(store_bus, &iter_bus);
-	gtk_list_store_set(store_bus, &iter_bus, LIST_ITEM, str, -1);
-	
-	gtk_stack_set_visible_child (GTK_STACK(stack_historial),contenedor_historial);
-	gtk_entry_set_text(entry_buscar,"");
-}
-
-static void
-search_progress_done (GtkEntry *entry)
-{
-  gtk_entry_set_progress_fraction (entry, 0.0);
-}
-static gboolean
-search_progress (gpointer data)
-{
-  gtk_entry_progress_pulse (GTK_ENTRY (data));
-
-  return TRUE;
-}
-static gboolean
-start_search_feedback (gpointer data)
-{
-  search_progress_id = g_timeout_add_full (G_PRIORITY_DEFAULT, 100,(GSourceFunc)search_progress, data, (GDestroyNotify)search_progress_done);
-  return FALSE;
-}
 
 void busca_proveedor(){
-	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_busca_proveedor);
+
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[300];
@@ -2349,15 +2304,12 @@ void busca_producto(){
 	mysql_free_result(res);
 	mysql_close(conn);
 	
-
-	search_progress_done(ety_busca_producto);
-	g_source_remove (finish_search_id);
 	gtk_entry_set_progress_fraction (ety_busca_producto, 0.0);
 
 }
 
 void on_btn_consulta_emp_clicked(){
-	search_progress_id = g_timeout_add_seconds (0, (GSourceFunc)start_search_feedback, ety_produ_emp);
+
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[50];
@@ -2394,8 +2346,6 @@ void on_btn_consulta_emp_clicked(){
 	mysql_free_result(res);
 	mysql_close(conn);
 
-	search_progress_done(ety_produ_emp);
-	g_source_remove (finish_search_id);
 	gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
 }
 void on_btn_consulta_fac_clicked(){
@@ -2459,16 +2409,16 @@ void consulta_producto(){
 	res = mysql_use_result(conn);
 	while ((row = mysql_fetch_row(res)) != NULL) {
 		
-	gtk_entry_set_text(ety_nombrepro,row[1]);
-	gtk_entry_set_text(ety_marcapro,row[2]);
-	gtk_entry_set_text(ety_nlote,row[5]);
-	gtk_entry_set_text(ety_cneto,row[6]);
-	gtk_entry_set_text(GTK_ENTRY(spin_piezas),"");
-	gtk_entry_set_text(GTK_ENTRY(spin_compra),row[8]);
-	gtk_entry_set_text(GTK_ENTRY(spin_venta),row[9]);
-	gtk_entry_set_text(GTK_ENTRY(ety_cat),row[10]);
-	gtk_entry_set_text(GTK_ENTRY (entry_subcat),row[11]);
-	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza2),box_act_pro);
+			gtk_entry_set_text(ety_nombrepro,row[1]);
+			gtk_entry_set_text(ety_marcapro,row[2]);
+			gtk_entry_set_text(ety_nlote,row[5]);
+			gtk_entry_set_text(ety_cneto,row[6]);
+			gtk_entry_set_text(GTK_ENTRY(spin_piezas),"");
+			gtk_entry_set_text(GTK_ENTRY(spin_compra),row[8]);
+			gtk_entry_set_text(GTK_ENTRY(spin_venta),row[9]);
+			gtk_entry_set_text(GTK_ENTRY(ety_cat),row[10]);
+			gtk_entry_set_text(GTK_ENTRY (entry_subcat),row[11]);
+			gtk_stack_set_visible_child (GTK_STACK(stack_actualiza2),box_act_pro);
 		}
 	
 	mysql_free_result(res);
@@ -2571,12 +2521,7 @@ void on_exportar_pdf_clicked(){
     gtk_label_set_text(lbl_info,"PDF Creado");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
 	}
-void on_remover_item_clicked(){
-	remove_item();
-	}
-void on_remover_todos_items_clicked(){
-	remove_all();
-	}
+
 void on_acercade_close (){
 	gtk_dialog_run (GTK_DIALOG (win_acercade));
 	gtk_widget_hide_on_delete(win_acercade);
@@ -3590,13 +3535,10 @@ int main(int argc, char *argv[])
 		advertencia_anadir_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_anadir_emp"));
 		advertencia_anadir_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_anadir_pro"));
 		advertencia_actualizar_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_emp"));
-		advertencia_actualizar_fac = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_fac"));
 		advertencia_actualizar_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_actualizar_pro"));
 		advertencia_eliminar_fac = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_eliminar_fac"));
 		advertencia_eliminar_pro = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_eliminar_pro"));
 		advertencia_eliminar_emp = GTK_WIDGET(gtk_builder_get_object(builder,"advertencia_eliminar_emp"));
-		seleccion_view = GTK_TREE_SELECTION(gtk_builder_get_object(builder,"seleccion_view"));
-		seleccion_view2 = GTK_TREE_SELECTION(gtk_builder_get_object(builder,"seleccion_view2"));
 		debug_textview = GTK_TEXT_VIEW(gtk_builder_get_object(builder,"debug_textview"));
 		swchitcher = GTK_WIDGET(gtk_builder_get_object(builder,"swchitcher"));
 		debug = GTK_WIDGET(gtk_builder_get_object(builder,"debug"));
@@ -3744,7 +3686,6 @@ int main(int argc, char *argv[])
 		revel_bucar = GTK_WIDGET(gtk_builder_get_object(builder,"revel_bucar"));
 		treeview_pos = GTK_WIDGET(gtk_builder_get_object(builder,"treeview_pos"));
 		inserta_datos_empresa = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_empresa"));
-		selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(historial_busqueda));
 		btn_cancelar_stp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_stp"));
 		pag_atras = GTK_WIDGET(gtk_builder_get_object(builder,"pag_atras"));
 		pag_sig = GTK_WIDGET(gtk_builder_get_object(builder,"pag_sig"));
@@ -3778,14 +3719,21 @@ int main(int argc, char *argv[])
 		btn_servicios = GTK_WIDGET(gtk_builder_get_object(builder,"btn_servicios"));
 		g_signal_connect(G_OBJECT(btn_cancelar_adver9),"clicked",G_CALLBACK(on_btn_cancelar_adver9_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver8),"clicked",G_CALLBACK(on_btn_cancelar_adver8_clicked),NULL);
-		g_signal_connect(G_OBJECT(btn_cancelar_adver2),"clicked",G_CALLBACK(on_btn_cancelar_adver2_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver7),"clicked",G_CALLBACK(on_btn_cancelar_adver7_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver5),"clicked",G_CALLBACK(on_btn_cancelar_adver5_clicked),NULL);
-		g_signal_connect(G_OBJECT(btn_cancelar_adver1),"clicked",G_CALLBACK(on_btn_cancelar_adver1_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver4),"clicked",G_CALLBACK(on_btn_cancelar_adver4_clicked),NULL);
 
 		g_signal_connect(G_OBJECT(btn_Sesion),"clicked",G_CALLBACK(on_btn_Sesion_clicked),NULL);
 		g_signal_connect(G_OBJECT(g_Entry_Contrasena),"activate",G_CALLBACK(on_Entry_Contrasena_activate),NULL);
+		g_signal_connect(G_OBJECT(g_Dialog_Error),"delete-event",G_CALLBACK(cierra_error),NULL);
+		g_signal_connect(G_OBJECT(advertencia_actualizar_emp),"delete-event",G_CALLBACK(cierra_act),NULL);
+		g_signal_connect(G_OBJECT(advertencia_anadir_emp),"delete-event",G_CALLBACK(cierra_emp),NULL);
+		g_signal_connect(G_OBJECT(advertencia_anadir_pro),"delete-event",G_CALLBACK(cierra_pro),NULL);
+		g_signal_connect(G_OBJECT(advertencia_eliminar_emp),"delete-event",G_CALLBACK(cierra_emp_eli),NULL);
+		g_signal_connect(G_OBJECT(advertencia_eliminar_pro),"delete-event",G_CALLBACK(cierra_pro_eli),NULL);
+		g_signal_connect(G_OBJECT(dialog_error_datos),"delete-event",G_CALLBACK(cierra_error_datos),NULL);
+		g_signal_connect(G_OBJECT(window_login),"delete-event",G_CALLBACK(on_Window_BD_destroy),NULL);
+		g_signal_connect(G_OBJECT(window_BD),"delete-event",G_CALLBACK(on_Window_BD_destroy),NULL);
 		g_signal_connect(G_OBJECT(btn_Rein_Dial),"clicked",G_CALLBACK(on_btn_Rein_Dial_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver3),"clicked",G_CALLBACK(on_btn_cancelar_adver3_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver6),"clicked",G_CALLBACK(on_btn_cancelar_adver6_clicked),NULL);
@@ -3793,7 +3741,6 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_consulta_emp),"clicked",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
 		g_signal_connect(G_OBJECT(emp_aceptar_anadir),"clicked",G_CALLBACK(on_emp_aceptar_anadir_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_aceptar_1),"clicked",G_CALLBACK(on_btn_aceptar_1_clicked),NULL);
-		g_signal_connect(G_OBJECT(bar),"clicked",G_CALLBACK(on_info_close),NULL);
 		g_signal_connect(G_OBJECT(cancela_and_factura3),"clicked",G_CALLBACK(on_cancela_and_factura3_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cambiar_usuario),"clicked",G_CALLBACK(on_btn_cambiar_usuario_clicked),NULL);
 		g_signal_connect(G_OBJECT(actualiza_datos_empresa),"clicked",G_CALLBACK(on_actualiza_datos_empresa_clicked),NULL);
@@ -3808,7 +3755,6 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(bar),"response",G_CALLBACK(on_info_close),NULL);
 		g_signal_connect(G_OBJECT(bar_bien),"response",G_CALLBACK(on_info_close2),NULL);
 		g_signal_connect(G_OBJECT(win_acercade),"delete-event",G_CALLBACK(on_acercade_response),NULL);
-		g_signal_connect(G_OBJECT(widget_web),"delete-event",G_CALLBACK(on_web_response),NULL);
 		g_signal_connect(G_OBJECT(win_acercade),"response",G_CALLBACK(on_acercade_response),NULL);
 		g_signal_connect(G_OBJECT(btn_buscar_pos),"toggled",G_CALLBACK(abre_busca),NULL);
 		g_signal_connect(G_OBJECT(btn_consulta_pos),"toggled",G_CALLBACK(consulta_pos),NULL);
