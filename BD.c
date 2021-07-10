@@ -27,7 +27,6 @@
 #include <stdlib.h>
 
 GtkWidget 			*window_login;
-GtkWidget 			*bar;
 GtkWidget 			*widget_web;
 GtkWidget 			*pila_stp;
 GtkWidget			*btn_cancelar_stp;
@@ -36,8 +35,10 @@ GtkButton			*btn_menu_pref_devol;
 GtkButton				*btn_4cb;
 GtkButton				*btn_8cb;
 GtkButton				*btn_13cb;
+GtkWidget			*cb_usuarios;
 GtkButton			*btn_actualiza_emp;
 GtkWidget			*child_menu;
+GdkPixbuf 			*file_pixbuf;
 GtkWidget			*child_preferencia;
 GtkWidget			*ety_cat;
 GtkWidget			*pag_atras;
@@ -52,6 +53,8 @@ GtkWidget			*pag_proveedor;
 GtkWidget			*pag_producto;
 GtkWidget			*pag_tickets;
 GtkWidget 			*btn_borrar_emp;
+GtkWidget			*stack_pop_producto;
+GtkWidget			*lbl_nodatos;
 GtkWidget				*pro_aceptar_anadir;
 GtkWidget 			*switcher;
 GtkWidget			*child_sku;
@@ -63,6 +66,7 @@ GtkWidget			*cb_estado_emp;
 GtkWidget			*cb_pais_emp;
 GtkWidget			*cb_marcapro;
 GtkWidget			*box_act_pro;
+GtkWidget			*pop_busqueda_pos;
 GtkEntry			*ety_busca_producto;
 GtkEntry			*ety_busca_proveedor_producto;
 GtkEntry			*ety_busca_categoria;
@@ -77,6 +81,7 @@ GtkStack			*stack_header;
 GtkWidget		*ety_busc_producto;
 GtkLabel       *lbl_user_bien;
 GtkLabel       *lbl_hora;
+GtkLabel				*lbl_totalpos;
 GtkWidget 			*actualiza_datos_empresa;
 GtkWidget			*child_busqueda_pos;
 GtkWidget			*child_oculta_bus_pos;
@@ -104,6 +109,7 @@ GtkWidget 			*btn_servicios;
 GtkWidget			*swchitcher;
 GtkWidget			*pop_generar_sku;
 GtkWidget			*cb_busca_estado;
+
 GtkEntry        *ety_user_bien;
 GtkEntry  			*g_Entry_Usuario;
 GtkEntry  			*g_Entry_Contrasena;
@@ -142,6 +148,7 @@ GtkWidget			*btn_cancelar_adver6;
 GtkWidget			*btn_cancelar_adver7;
 GtkWidget			*btn_cancelar_adver8;
 GtkWidget			*btn_cancelar_adver9;
+GtkWidget			*cont_view_bus;
 GtkWidget			*cb_productos_proveedor;
 
 GtkWidget				*btn_aceptar_a1;
@@ -163,6 +170,7 @@ GtkEntry			*ety_region;
 GtkEntry			*ety_pais;
 GtkEntry			*ety_rfc;
 GtkEntry			*ety_correoemp;
+GtkEntry			*ety_pos_producto;
 
 GtkEntry			*ety_nombrepro;
 GtkEntry			*ety_marcapro;
@@ -212,6 +220,7 @@ GtkWidget 		*info_eliminado;
 GtkWidget 		*info_ananido;
 GtkWidget 		*info_actualizar;
 GtkWidget		*btn_aceptar_a2;
+GtkWidget		*ety_producto_pos;
 
 GtkWidget			*win_acercade;
 GtkWidget			*source_code;
@@ -272,7 +281,7 @@ GtkWidget    	*view6;
 GtkWidget 		*revel_bucar;
 GtkWidget	 		*treeview_pos;
 GtkWidget			*dialog_error_datos;
-GtkWidget			*view_busc;
+GtkWidget			*view_busqueda;
 GtkWidget			*stack_busqueda;
 GtkWidget			*contenedor_historial;
 GtkWidget			*contenedor_busqueda;
@@ -316,6 +325,7 @@ GtkTreeIter    iter_pos;
 GtkCellRenderer     *renderer;
 GtkCellRenderer     *renderer_pos;
 GtkCellRenderer     *renderer_user;
+GtkCellRenderer     *renderer_bus;
 GtkCellRenderer     *renderer2;
 GtkCellRenderer     *renderer3;
 GtkCellRenderer     *renderer4;
@@ -338,6 +348,15 @@ GtkListStore  		*store4;
 GtkListStore  		*store5;
 GtkListStore  		*store6;
 GtkListStore  		*store_busqueda;
+
+GtkTreeViewColumn 	*column_bus;
+GtkTreeViewColumn 	*column_bus2;
+GtkTreeViewColumn 	*column_bus3;
+
+GtkTreeViewColumn 	*column_pos;
+GtkTreeViewColumn 	*column_pos2;
+GtkTreeViewColumn 	*column_pos3;
+GtkTreeViewColumn 	*column_pos4;
 
 GtkTreeViewColumn 	*column_emp;
 GtkTreeViewColumn 	*column_emp2;
@@ -455,7 +474,6 @@ GtkTreeViewColumn 	*column_fac8_bus;
 GtkTreeViewColumn 	*column_fac9_bus;
 
 GtkTreeViewColumn 	*column_users;
-
 gboolean timer_handler();
 	
 FILE* 			fichero;
@@ -463,11 +481,13 @@ FILE* 			fichero2;
 FILE* 			fichero3;
 const char 		*user;
 const char 		*password;
-char *server = "localhost";
-char *database = "Tienda";
+char 			*server = "localhost";
+char 			*database = "Tienda";
 
 enum {
-  LIST_ITEM = 0,
+  COLproducto_pos ,
+  COLventa_pos ,
+  COL_PIXBUF,
   N_COLUMNS_BUS
 };
 
@@ -619,48 +639,43 @@ enum
 	Colbarra,
 	conneto,
 	NUM_COLS_bus
-};
-
-enum
-{
-	Col_user,
-	NUM_COLS_user
-};
+};;
 
 
-   /*
 static GtkTreeModel * POS (void)
 {
-	store_pos = gtk_list_store_new (NUM_COLS_pos, G_TYPE_INT,G_TYPE_STRING,G_TYPE_DOUBLE,G_TYPE_DOUBLE);
+	store_pos = gtk_list_store_new (NUM_COLS_pos, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
 	
 	gtk_list_store_append (store_pos, &iter_pos);
-	gtk_list_store_set (store_pos, &iter_pos,cantidad_pos, row[0],
-	producto_pos, row[1],
-	punitario_pos, row[2],
-	precio_pos,row[3]-1);
+	gtk_list_store_set (store_pos, &iter_pos,
+	cantidad_pos, row[2],
+	producto_pos, row[0],
+	punitario_pos, row[1],
+	precio_pos,row[3],-1);
 	while ((row = mysql_fetch_row(res)) != NULL){
 	gtk_list_store_append (store_pos, &iter_pos);
-	gtk_list_store_set (store_pos, &iter_pos,cantidad_pos, row[0],
-	producto_pos, row[1],
-	punitario_pos, row[2],
-	precio_pos,row[3]-1);
+	gtk_list_store_set (store_pos, &iter_pos,
+	cantidad_pos, row[2],
+	producto_pos, row[0],
+	punitario_pos, row[1],
+	precio_pos,row[3],-1);
 }
 	return GTK_TREE_MODEL (store_pos);
 }
  static GtkWidget *titulo_POS(void)
 {	
 	renderer_pos = gtk_cell_renderer_text_new ();
-	column_emp = gtk_tree_view_column_new_with_attributes  ("Cantidad",renderer_pos,"text", cantidad_pos,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_emp);
+	column_pos = gtk_tree_view_column_new_with_attributes  ("Cantidad",renderer_pos,"text", cantidad_pos,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_pos);
 	renderer_pos = gtk_cell_renderer_text_new ();
-	column_emp2 = gtk_tree_view_column_new_with_attributes ("Producto",renderer_pos,"text", producto_pos,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_emp2);
+	column_pos2 = gtk_tree_view_column_new_with_attributes ("Producto",renderer_pos,"text", producto_pos,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_pos2);
 	renderer_pos = gtk_cell_renderer_text_new ();
-	column_emp3 = gtk_tree_view_column_new_with_attributes  ("P. Unitario",renderer_pos,"text", punitario_pos,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_emp3);
+	column_pos3 = gtk_tree_view_column_new_with_attributes  ("P. Unitario",renderer_pos,"text", punitario_pos,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_pos3);
 	renderer_pos = gtk_cell_renderer_text_new ();
-	column_emp4 = gtk_tree_view_column_new_with_attributes  ("Total",renderer_pos,"text", precio_pos,NULL);
-	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_emp4);
+	column_pos4 = gtk_tree_view_column_new_with_attributes  ("Subtotal",renderer_pos,"text", precio_pos,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (treeview_pos),column_pos4);
 	
 	
 	model_pos = POS ();
@@ -668,7 +683,47 @@ static GtkTreeModel * POS (void)
 	g_object_unref (model_pos);
 	return treeview_pos;
 }
-	*/
+	
+
+static GtkTreeModel *bus (void)
+{
+	file_pixbuf = gdk_pixbuf_new_from_file  ("cesta-de-la-compra.png", NULL);
+	
+	store_busqueda = gtk_list_store_new (N_COLUMNS_BUS, G_TYPE_STRING,G_TYPE_STRING,GDK_TYPE_PIXBUF);
+	
+	gtk_list_store_append (store_busqueda, &iter_busqueda);
+	gtk_list_store_set (store_busqueda, &iter_busqueda,
+	COLproducto_pos, row[0],
+	COLventa_pos, row[1],
+	COL_PIXBUF,file_pixbuf,-1);
+	while ((row = mysql_fetch_row(res)) != NULL){
+	gtk_list_store_append (store_busqueda, &iter_busqueda);
+	gtk_list_store_set (store_busqueda, &iter_busqueda,
+	COLproducto_pos, row[0],
+	COLventa_pos, row[1],
+	COL_PIXBUF,file_pixbuf,-1);
+}
+	return GTK_TREE_MODEL (store_busqueda);
+}
+ static GtkWidget *titulo_bus(void)
+{	
+	renderer_bus = gtk_cell_renderer_text_new ();
+	column_bus = gtk_tree_view_column_new_with_attributes  ("Producto",renderer_bus,"text", COLproducto_pos ,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busqueda),column_bus);
+	
+	renderer_bus = gtk_cell_renderer_text_new ();
+	column_bus2 = gtk_tree_view_column_new_with_attributes ("Precío",renderer_bus,"markup", COLventa_pos,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busqueda),column_bus2);
+	
+	renderer_bus = gtk_cell_renderer_pixbuf_new();
+	column_bus3 = gtk_tree_view_column_new_with_attributes ("Añadir al carrito",renderer_bus,"pixbuf", COL_PIXBUF,NULL);
+	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_busqueda),column_bus3);
+	
+	model_busc = bus();
+	gtk_tree_view_set_model (GTK_TREE_VIEW (view_busqueda), model_busc);
+	g_object_unref (model_busc);
+	return view_busqueda;
+}
 static GtkTreeModel * create_empresa (void)
 {
 	store = gtk_list_store_new (NUM_COLS, G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,
@@ -1317,9 +1372,8 @@ void contenido_ticket(){
 	}
 	res = mysql_use_result(conn);
 while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model2, &iter2) == FALSE) {
+					{
 						 titulo_factura();
-						 return ;
 					}
 	mysql_free_result(res);
 	mysql_close(conn);
@@ -1338,11 +1392,7 @@ void contenido_producto(){
 	{ 
 	}
 	res = mysql_use_result(conn);
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model3, &iter3) == FALSE) {
-						 titulo_producto();
-						 return ;
-					} 
+	 while ((row = mysql_fetch_row(res)) != NULL)titulo_producto();
 	mysql_free_result(res);
 	mysql_close(conn);
 }
@@ -1362,7 +1412,7 @@ void conectar(){
 	 gtk_widget_show(window_BD);	 
 }
 	 
- if (mysql_query(conn, "select Empresa from Proveedor;")) 
+ if (mysql_query(conn, "select Empresa from Proveedor")) 
  {
      char tempErr[60];
 	 sprintf(tempErr,"%s", mysql_error(conn));
@@ -1378,7 +1428,7 @@ void conectar(){
  }
  mysql_free_result(res);
  mysql_close(conn);
- 
+
 }
 
 void consulta_proveedor(){
@@ -1399,7 +1449,7 @@ void consulta_proveedor(){
  gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_productos_proveedor),row[0]);
 }
  mysql_free_result(res);
- mysql_close(conn); 
+ mysql_close(conn);
 }
 
 void contenido_tablas(){
@@ -1416,12 +1466,7 @@ void contenido_tablas(){
 	{ 
 	}
 	res = mysql_use_result(conn);
-//==================================================================================================================
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {
-						 titulo_empresa();
-						 return ;
-					}  
+	while ((row = mysql_fetch_row(res)) != NULL) titulo_empresa();
 	mysql_free_result(res);
 	mysql_close(conn);
 	
@@ -1441,12 +1486,7 @@ void contenido_aud_proveedor(){
 	{ 
 	}
 	res = mysql_use_result(conn);
-//==================================================================================================================
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model4, &iter4) == FALSE) {
-						 titulo_empresa_auditoria();
-						 return ;
-					}  
+while ((row = mysql_fetch_row(res)) != NULL) titulo_empresa_auditoria();
 	mysql_free_result(res);
 	mysql_close(conn);
 	
@@ -1466,14 +1506,9 @@ void contenido_aud_producto(){
 	}
 	res = mysql_use_result(conn);
 //==================================================================================================================
-while ((row = mysql_fetch_row(res)) != NULL) 
-					if (gtk_tree_model_get_iter_first(model6, &iter6) == FALSE) {
-						 titulo_producto_auditoria();
-						 return ;
-					}  
+while ((row = mysql_fetch_row(res)) != NULL) titulo_producto_auditoria();
 	mysql_free_result(res);
 	mysql_close(conn);
-	
 	}
 
 void on_btn_cambiar_usuario_clicked()
@@ -1495,7 +1530,7 @@ void on_acercade_response(){
 void on_web_response(){
 	gtk_widget_hide_on_delete(widget_web);
 	}
-void on_btn_Sesion_clicked ( gpointer  user_data)
+void on_btn_Sesion_clicked ( )
 {
 	conectar();
 	contenido_tablas();
@@ -1505,7 +1540,7 @@ void on_btn_Sesion_clicked ( gpointer  user_data)
 	contenido_aud_producto();
 }
 
-void on_Entry_Contrasena_activate(gpointer  user_data)
+void on_Entry_Contrasena_activate()
 {	
 	conectar();
 	contenido_tablas();
@@ -1657,6 +1692,26 @@ void refresca_datos_pro(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro25);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro26);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view6), column_aud_pro27);
+		 }
+}
+void refresca_busquedapos(){
+	
+	if (gtk_tree_model_get_iter_first(model_busc, &iter_busqueda) == TRUE) {
+		gtk_list_store_clear(store_busqueda);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busqueda), column_bus);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busqueda), column_bus2);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view_busqueda), column_bus3);
+		 }
+}
+
+void refresca_pos(){
+	
+	if (gtk_tree_model_get_iter_first(model_pos, &iter_pos) == TRUE) {
+		gtk_list_store_clear(store_pos);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(treeview_pos), column_pos);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(treeview_pos), column_pos2);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(treeview_pos), column_pos3);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(treeview_pos), column_pos4);
 		 }
 }
 void on_cancela_and_factura4_clicked(){
@@ -2013,7 +2068,6 @@ void on_btn_actualiza_emp_clicked(){
 	}
 	res = mysql_use_result(conn);
 	while ((row = mysql_fetch_row(res)) != NULL) {
-		printf("%s",row[0]);
 	}
 	
 			gtk_entry_set_text(ety_nombreemp,"");
@@ -2203,7 +2257,42 @@ void cierra_error_datos(){
 void cierra_act(){
 	gtk_widget_hide_on_delete(advertencia_actualizar_emp);
 	}
+void busca_producto_pos(){
+	gtk_stack_set_visible_child(GTK_STACK(stack_pop_producto),lbl_nodatos);
+		user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	char busqueda_fac[300];
+	const char 	*consulta = gtk_entry_get_text(GTK_ENTRY(ety_producto_pos));
 
+	sprintf(busqueda_fac,"select Nombre , Venta from Producto where Nombre LIKE '%%%s%%' or SKU ='%s'",consulta,consulta);
+
+	conn = mysql_init(NULL);
+	if (strcmp(consulta,"") == 0){
+		gtk_widget_hide(pop_busqueda_pos);
+	}else{
+		gtk_widget_set_visible (pop_busqueda_pos,1);
+	}
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+
+	if (mysql_query(conn, busqueda_fac))
+	{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);
+	}
+	res = mysql_use_result(conn);
+		refresca_busquedapos();
+	while ((row = mysql_fetch_row(res)) != NULL) 
+		if (gtk_tree_model_get_iter_first(model_busc, &iter_busqueda) == FALSE) titulo_bus();
+	gtk_stack_set_visible_child(GTK_STACK(stack_pop_producto),cont_view_bus);
+	  
+	mysql_free_result(res);
+	mysql_close(conn);
+	}
 
 void busca_proveedor(){
 
@@ -2215,9 +2304,9 @@ void busca_proveedor(){
 	
 	if (consulta2[0]=='E'){
 
-	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%'",consulta);
+	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%%%s%%'",consulta);
 }else{
-	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%s%%' and Estado ='%s'",consulta,consulta2);
+	sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%%%s%%' and Estado ='%s'",consulta,consulta2);
 	}
 	conn = mysql_init(NULL);
 
@@ -2234,13 +2323,7 @@ void busca_proveedor(){
 	}
 	res = mysql_use_result(conn);
 	refresca_datos_emp();
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		if (gtk_tree_model_get_iter_first(model, &iter) == FALSE) {						 
-						 titulo_empresa();
-						 return ;
-					}	
-		}
-		  
+	while ((row = mysql_fetch_row(res)) != NULL) titulo_empresa();		  
 	mysql_free_result(res);
 	mysql_close(conn);
 
@@ -2294,13 +2377,8 @@ void busca_producto(){
 	}
 	res = mysql_use_result(conn);
 	refresca_datos_pro();
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		if (gtk_tree_model_get_iter_first(model3, &iter3) == FALSE) {						 
-						 titulo_producto();
-						 return ;
-					}	
-		}
-		  
+	while ((row = mysql_fetch_row(res)) != NULL) 					 
+	titulo_producto();
 	mysql_free_result(res);
 	mysql_close(conn);
 	
@@ -2570,7 +2648,7 @@ void consulta_usuarios(){
  }
  res = mysql_use_result(conn); 
 
- while ((row = mysql_fetch_row(res)) != NULL) ;
+ while ((row = mysql_fetch_row(res)) != NULL) gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_usuarios),row[0]);
  
  mysql_free_result(res);
  mysql_close(conn);
@@ -2624,7 +2702,7 @@ void abre_busca(){
 	gboolean button_state = gtk_toggle_button_get_active(btn_buscar_pos);
 	if (button_state) {
 		// button is active
-		gtk_stack_set_visible_child (GTK_STACK(stack_header),ety_busc_producto);
+		gtk_stack_set_visible_child (GTK_STACK(stack_header),ety_producto_pos);
 	}
 	else{
 		// button is inactive
@@ -3436,15 +3514,83 @@ void trecb(){
 	sprintf(ra,"%ld",test);
 	gtk_entry_set_text(ety_cbarra,ra);
 	}
+	
+	
+void ver_carrito(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	if (mysql_query(conn, "select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto"))
+	{
+	}
+	res = mysql_use_result(conn);
+	while ((row = mysql_fetch_row(res)) != NULL)titulo_POS();
+
+	mysql_free_result(res);
+	mysql_close(conn);
+}
+
+void ver_total(){
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	if (mysql_query(conn, "select SUM(P_unitario) as Total from Carrito_compra;"))
+	{
+	}
+	res = mysql_use_result(conn);
+	while ((row = mysql_fetch_row(res)) != NULL)gtk_label_set_text(lbl_totalpos,row[0]);
+
+	mysql_free_result(res);
+	mysql_close(conn);
+}
+	
+		
+void anadir_productocarrito(){
+	char anadir_pro[200];
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+
+	const char 		*sku = gtk_entry_get_text(ety_pos_producto);
+
+	sprintf(anadir_pro,"insert into Carrito_compra(Producto,P_unitario) select  Nombre,Venta from Producto where SKU = '%s'",sku);
+	
+	conn = mysql_init(NULL);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+
+	if (mysql_query(conn, anadir_pro))
+	{
+		gtk_label_set_text(lbl_error,"Producto no Encontrado");
+		return gtk_widget_show(dialog_error_datos);
+	}
+	res = mysql_use_result(conn);
+	while ((row = mysql_fetch_row(res)) != NULL) 
+
+	mysql_free_result(res);
+	mysql_close(conn);
+	refresca_pos();
+	ver_carrito();
+	ver_total();
+}
+
 int main(int argc, char *argv[])
 	{
 		GtkBuilder      	*builder; 
-		
 		char anio[256];
 		int i;
 		gtk_init(&argc, &argv);
-		
-		
 		
 		builder = gtk_builder_new();
 		gtk_builder_add_from_file (builder, "window_main.glade", NULL);
@@ -3501,7 +3647,7 @@ int main(int argc, char *argv[])
 		view5 = GTK_WIDGET(gtk_builder_get_object(builder,"view5"));
 		view6 = GTK_WIDGET(gtk_builder_get_object(builder,"view6"));
 		inserta_datos_productos = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_productos"));
-		view_busc = GTK_WIDGET(gtk_builder_get_object(builder,"view_busc"));
+		view_busqueda = GTK_WIDGET(gtk_builder_get_object(builder,"view_busqueda"));
 		contenedor_view = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view"));
 		contenedor_view2 = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view2"));
 		contenedor_view3 = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view3"));
@@ -3525,7 +3671,6 @@ int main(int argc, char *argv[])
 		win_acercade = GTK_WIDGET(gtk_builder_get_object(builder,"acercade"));
 		switchgtk = GTK_WIDGET(gtk_builder_get_object(builder,"activador_sql"));
 		source_code = GTK_WIDGET(gtk_builder_get_object(builder,"Codigo_sql"));
-		lbl_no_datos = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_no_datos"));
 		lbl_anadir_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_anadir_advertencia"));
 		lbl_eliminar_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_eliminar_advertencia"));
 		lbl_info = GTK_LABEL(gtk_builder_get_object(builder,"lbl_info"));
@@ -3570,6 +3715,7 @@ int main(int argc, char *argv[])
 		stack_pos = GTK_STACK(gtk_builder_get_object(builder,"stack_pos"));
 		stack_bus_pos = GTK_STACK(gtk_builder_get_object(builder,"stack_bus_pos"));
 		pag_pos = GTK_WIDGET(gtk_builder_get_object(builder,"pag_pos"));
+		cont_view_bus = GTK_WIDGET(gtk_builder_get_object(builder,"cont_view_bus"));
 		pag_proveedor = GTK_WIDGET(gtk_builder_get_object(builder,"pag_proveedor"));
 		pag_producto = GTK_WIDGET(gtk_builder_get_object(builder,"pag_producto"));
 		pag_tickets = GTK_WIDGET(gtk_builder_get_object(builder,"pag_tickets"));
@@ -3583,6 +3729,7 @@ int main(int argc, char *argv[])
 		lbl_dir_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_dir_bien"));
 		lbl_rfc_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_rfc_bien"));		
 		lbl_info_bien = GTK_LABEL(gtk_builder_get_object(builder,"lbl_info_bien"));
+		lbl_totalpos = GTK_LABEL(gtk_builder_get_object(builder,"lbl_totalpos"));
 	
 		ety_idpro = GTK_ENTRY(gtk_builder_get_object(builder,"ety_idpro"));
 		ety_idemp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_idemp"));
@@ -3625,6 +3772,7 @@ int main(int argc, char *argv[])
 		ety_pais_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pais_act"));
 		ety_rfc_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_rfc_act"));
 		ety_correo_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_correo_act"));
+		ety_pos_producto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pos_producto"));
 		
 		id_fac_act = GTK_ENTRY(gtk_builder_get_object(builder,"id_fac_act"));
 		ety_profac_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_profac_act"));
@@ -3682,7 +3830,10 @@ int main(int argc, char *argv[])
 		cb_marcapro = GTK_WIDGET(gtk_builder_get_object(builder,"cb_marcapro"));
 		btn_cancelar_adver3 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver3"));
 		cancela_and_factura3= GTK_WIDGET(gtk_builder_get_object(builder,"cancela_and_factura3"));
+		ety_producto_pos = GTK_WIDGET(gtk_builder_get_object(builder,"ety_producto_pos"));
 		
+		stack_pop_producto = GTK_WIDGET(gtk_builder_get_object(builder,"stack_pop_producto"));
+		lbl_nodatos = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_nodatos"));
 		revel_bucar = GTK_WIDGET(gtk_builder_get_object(builder,"revel_bucar"));
 		treeview_pos = GTK_WIDGET(gtk_builder_get_object(builder,"treeview_pos"));
 		inserta_datos_empresa = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_empresa"));
@@ -3697,16 +3848,11 @@ int main(int argc, char *argv[])
 		spin_venta = GTK_WIDGET(gtk_builder_get_object(builder,"spin_venta"));
 		btn_aceptar_a2 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_aceptar_a2"));
 		cancela_and_factura2 = GTK_WIDGET(gtk_builder_get_object(builder,"cancela_and_factura2"));
-		
-		for(i=2051;i>=1950;i--){ 
-			sprintf(anio,"%d",i);
-			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_pro),anio);
-			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_propro),anio);
-		}
-		
-		
+		pop_busqueda_pos = GTK_WIDGET(gtk_builder_get_object(builder,"pop_busqueda_pos"));
+		btn_servicios = GTK_WIDGET(gtk_builder_get_object(builder,"btn_servicios"));
 		btn_borrar_emp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_borrar_emp"));
 		btn_consulta_emp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_consulta_emp"));
+		cb_usuarios = GTK_WIDGET(gtk_builder_get_object(builder,"cb_usuarios"));
 		btn_cancelar_adver8 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver8"));
 		btn_cancelar_adver2 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver2"));
 		btn_cancelar_adver9 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver9"));
@@ -3715,8 +3861,13 @@ int main(int argc, char *argv[])
 		btn_cancelar_adver1 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver1"));
 		btn_cancelar_adver4 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver4"));
 		btn_cancelar_adver6 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver6"));
+				
+		for(i=2051;i>=1950;i--){ 
+			sprintf(anio,"%d",i);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_pro),anio);
+			gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_propro),anio);
+		}
 		
-		btn_servicios = GTK_WIDGET(gtk_builder_get_object(builder,"btn_servicios"));
 		g_signal_connect(G_OBJECT(btn_cancelar_adver9),"clicked",G_CALLBACK(on_btn_cancelar_adver9_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver8),"clicked",G_CALLBACK(on_btn_cancelar_adver8_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver7),"clicked",G_CALLBACK(on_btn_cancelar_adver7_clicked),NULL);
@@ -3766,6 +3917,8 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(ety_produ_emp),"activate",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-in-event",G_CALLBACK(show_gensku),NULL);
 		g_signal_connect(G_OBJECT(ety_cbarra),"activate",G_CALLBACK(consulta_producto),NULL);
+		g_signal_connect(G_OBJECT(ety_pos_producto),"activate",G_CALLBACK(anadir_productocarrito),NULL);
+		
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-out-event",G_CALLBACK(hide_gensku),NULL);
 		g_signal_connect(G_OBJECT(child_sku),"clicked",G_CALLBACK(show_gensku_child),NULL);
 		g_signal_connect(G_OBJECT(btn_actualiza_emp),"clicked",G_CALLBACK(on_btn_actualiza_emp_clicked),NULL);
@@ -3773,10 +3926,11 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(cancela_and_factura2),"clicked",G_CALLBACK(on_cancela_and_factura2_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_borrar_pro),"clicked",G_CALLBACK(on_btn_borrar_pro_clicked),NULL);		
 		
-		g_signal_connect(G_OBJECT(swchitcher),"touch-event",G_CALLBACK(header_busqueda),NULL);
 		g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
 		g_signal_connect(G_OBJECT(cb_bs_cat),"changed",G_CALLBACK(cambia_bs_categoria),NULL);
 		g_signal_connect(G_OBJECT(ety_busca_proveedor),"changed",G_CALLBACK(busca_proveedor),NULL);
+		g_signal_connect(G_OBJECT(ety_producto_pos),"changed",G_CALLBACK(busca_producto_pos),NULL);
+		
 		g_signal_connect(G_OBJECT(cb_busca_estado),"changed",G_CALLBACK(busca_proveedor),NULL);
 		g_signal_connect(G_OBJECT(inserta_datos_productos),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(pro_aceptar_anadir),"clicked",G_CALLBACK(on_pro_aceptar_anadir_clicked),NULL);
@@ -3793,10 +3947,12 @@ int main(int argc, char *argv[])
 		
 		g_signal_connect(G_OBJECT(btn_4cb),"clicked",G_CALLBACK(cucb),NULL);
 		g_signal_connect(G_OBJECT(btn_8cb),"clicked",G_CALLBACK(occb),NULL);
-		g_signal_connect(G_OBJECT(btn_13cb),"clicked",G_CALLBACK(trecb),NULL);
-		
+		g_signal_connect(G_OBJECT(btn_13cb),"clicked",G_CALLBACK(trecb),NULL);		
 		g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		
+		GdkColor color = {0, 500<<8, 500<<8 ,500<<8};
+		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Usuario), GTK_STATE_NORMAL, &color);
+		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Contrasena), GTK_STATE_NORMAL, &color);
 		
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
