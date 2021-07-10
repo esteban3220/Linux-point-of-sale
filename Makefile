@@ -13,7 +13,7 @@ PTHREAD=-pthread
 
 CCFLAGS=$(DEBUG) $(OPT) $(WARN) $(PTHREAD) -pipe
 
-GTKLIB=`pkg-config --cflags --libs gtk+-3.0 ` `mariadb_config --cflags --libs`
+GTKLIB=`pkg-config --cflags --libs gtk+-3.0 ` `mysql_config --cflags --libs`
 
 # linker
 LD=gcc
