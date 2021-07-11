@@ -2891,7 +2891,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="left-padding">12</property>
                                     <child>
-                                      <object class="GtkSpinButton">
+                                      <object class="GtkSpinButton" id="ety_recibido">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="margin-end">7</property>
@@ -2934,16 +2934,15 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="left-padding">12</property>
                                     <child>
-                                      <object class="GtkEntry">
+                                      <object class="GtkEntry" id="ety_cambio">
                                         <property name="visible">True</property>
-                                        <property name="sensitive">False</property>
                                         <property name="can-focus">False</property>
                                         <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
                                         <property name="editable">False</property>
                                         <property name="has-frame">False</property>
-                                        <property name="text" translatable="yes">30.50</property>
-                                        <property name="xalign">0.38999998569488525</property>
+                                        <property name="text" translatable="yes">0.00</property>
+                                        <property name="xalign">0.5</property>
                                         <property name="primary-icon-pixbuf">currency_dollar_icon_172528.svg</property>
                                       </object>
                                     </child>

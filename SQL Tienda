@@ -147,7 +147,7 @@ Total double(9,2),
 Recibido double(9,2),
 Cambio double(9,2),
 Tipo_pago varchar(45) default "Efectivo",
-Query text,
+Query varchar(45),
 Fecha_hora varchar(45)
 );
 

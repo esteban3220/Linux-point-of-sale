@@ -71,6 +71,8 @@ GtkEntry			*ety_busca_producto;
 GtkEntry			*ety_busca_proveedor_producto;
 GtkEntry			*ety_busca_categoria;
 GtkEntry			*ety_busca_subcategoria;
+GtkEntry			*ety_recibido;
+GtkEntry			*ety_cambio;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -3493,6 +3495,29 @@ void borra_busqueda2(){
 void borra_busqueda3(){
 	gtk_entry_set_text(ety_busca_subcategoria,"");
 	}
+	
+void calcula_cambio(){
+	double x,y,z;
+	char dif[200];
+	const char 		*recibido = gtk_entry_get_text(ety_recibido);
+	const char 		*total = gtk_label_get_text(lbl_totalpos);
+	
+	x = atof(total);
+	y = atof(recibido);
+	z = x-y;
+	
+	sprintf(dif,"%9.2f",z);
+	
+	gtk_entry_set_text(ety_cambio,dif);
+	
+	if((dif[0] == '-' )| (dif[1] == '-') | (dif[2] == '-') | (dif[3] == '-') | (dif[4] == '-')| (dif[5] == '0')){
+		GdkColor color = {0, 255<<4, 255<<4 ,255<<4};
+		gtk_widget_modify_fg (GTK_WIDGET(ety_cambio), GTK_STATE_NORMAL, &color);
+	 }else{
+		GdkColor color = {0, 255<<8, 20<<8 ,20<<8};
+		gtk_widget_modify_fg (GTK_WIDGET(ety_cambio), GTK_STATE_NORMAL, &color);
+		 }
+	}
 void cucb(){
 	char ra[4];
 	srand(time(NULL)); //El mayordomo pone a girar la diana
@@ -3552,6 +3577,7 @@ void ver_total(){
 
 	mysql_free_result(res);
 	mysql_close(conn);
+	calcula_cambio();
 }
 	
 		
@@ -3584,6 +3610,35 @@ void anadir_productocarrito(){
 	ver_carrito();
 	ver_total();
 }
+
+ void ingresa_venta(){
+	char anadir_pro[200];
+	GDateTime *date_time;
+    gchar *dt_format;
+    date_time = g_date_time_new_now_local();
+    dt_format = g_date_time_format(date_time, "%d/%m/%y %H:%M:%S"); 
+	user = gtk_entry_get_text(g_Entry_Usuario);
+	password = gtk_entry_get_text(g_Entry_Contrasena);
+	
+	
+	conn = mysql_init(NULL);
+	
+	sprintf(anadir_pro,"CREATE TABLE '%s' AS  select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto;",dt_format);
+	//sprintf(anadir_pro2,"CREATE TABLE '%s' AS  select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto;",dt_format);
+
+ if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+	{	 
+	}
+	if (mysql_query(conn, anadir_pro))
+	{
+	}
+	res = mysql_use_result(conn);
+	while ((row = mysql_fetch_row(res)) != NULL);
+
+	mysql_free_result(res);
+	mysql_close(conn);
+}
+
 
 int main(int argc, char *argv[])
 	{
@@ -3795,6 +3850,9 @@ int main(int argc, char *argv[])
 		ety_id_emp_borrar = GTK_ENTRY(gtk_builder_get_object(builder,"ety_id_emp_borrar"));
 		ety_id_pro_borrar = GTK_ENTRY(gtk_builder_get_object(builder,"ety_id_pro_borrar"));
 		
+		ety_recibido = GTK_ENTRY(gtk_builder_get_object(builder,"ety_recibido"));
+		ety_cambio = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cambio"));
+		
 		entry_subcat = GTK_ENTRY(gtk_builder_get_object(builder,"entry_subcat"));
 		cb_dia_fac = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_fac"));
 		cb_mes_fac = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_fac"));
@@ -3918,6 +3976,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-in-event",G_CALLBACK(show_gensku),NULL);
 		g_signal_connect(G_OBJECT(ety_cbarra),"activate",G_CALLBACK(consulta_producto),NULL);
 		g_signal_connect(G_OBJECT(ety_pos_producto),"activate",G_CALLBACK(anadir_productocarrito),NULL);
+		g_signal_connect(G_OBJECT(ety_recibido),"changed",G_CALLBACK(calcula_cambio),NULL);
 		
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-out-event",G_CALLBACK(hide_gensku),NULL);
 		g_signal_connect(G_OBJECT(child_sku),"clicked",G_CALLBACK(show_gensku_child),NULL);
@@ -3950,7 +4009,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_13cb),"clicked",G_CALLBACK(trecb),NULL);		
 		g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		
-		GdkColor color = {0, 500<<8, 500<<8 ,500<<8};
+		GdkColor color = {0, 255<<8, 255<<8 ,255<<8};
 		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Usuario), GTK_STATE_NORMAL, &color);
 		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Contrasena), GTK_STATE_NORMAL, &color);
 		
