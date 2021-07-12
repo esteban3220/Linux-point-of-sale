@@ -236,7 +236,19 @@ Author: Esteban Noe Sarmiento Mtz.
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
             </child>
           </object>
           <packing>
@@ -1945,11 +1957,8 @@ Author: Esteban Noe Sarmiento Mtz.
             </child>
             <child>
               <object class="GtkBox">
-                <property name="width-request">100</property>
-                <property name="height-request">80</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -1957,7 +1966,8 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="valign">start</property>
                     <property name="xalign">0.5</property>
                     <property name="yalign">0.5</property>
-                    <property name="pixbuf">usuario.png</property>
+                    <property name="icon-name">1CD8_rundll32.0</property>
+                    <property name="icon_size">3</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1966,104 +1976,10 @@ Author: Esteban Noe Sarmiento Mtz.
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="valign">end</property>
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">5</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="label" translatable="yes">Usuario</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Roboto Medium 13"/>
-                          <attribute name="foreground" value="#ffffffffffff"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkComboBoxText">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="has-entry">True</property>
-                        <child internal-child="entry">
-                          <object class="GtkEntry" id="Entry_Usuario">
-                            <property name="name">cb_usuarios</property>
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="primary-icon-name">user-available-symbolic</property>
-                            <property name="placeholder-text" translatable="yes">Selecciona tu Usuario</property>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="Label_Contrasena">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="label" translatable="yes">Contraseña</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Roboto Medium 13"/>
-                          <attribute name="foreground" value="#ffffffffffff"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkEntry" id="Entry_Contrasena">
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="visibility">False</property>
-                        <property name="invisible-char">●</property>
-                        <property name="primary-icon-name">dialog-password-symbolic</property>
-                        <property name="placeholder-text" translatable="yes">Escribe la Contraseña</property>
-                        <property name="input-purpose">password</property>
-                        <property name="enable-emoji-completion">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="btn_Sesion">
-                        <property name="label">Iniciar Sesión</property>
-                        <property name="width-request">118</property>
-                        <property name="height-request">32</property>
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="receives-default">True</property>
-                        <property name="valign">end</property>
-                        <property name="image">image2</property>
-                        <property name="image-position">right</property>
-                        <property name="always-show-image">True</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="padding">12</property>
-                        <property name="position">4</property>
-                      </packing>
-                    </child>
+                    <property name="label" translatable="yes">Creado por Esteban Noé</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2073,8 +1989,125 @@ Author: Esteban Noe Sarmiento Mtz.
                 </child>
               </object>
               <packing>
-                <property name="x">280</property>
-                <property name="y">55</property>
+                <property name="x">2</property>
+                <property name="y">510</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="width-request">250</property>
+                <property name="height-request">80</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="valign">end</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">8</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Usuario</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Roboto Medium 13"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBoxText">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="has-entry">True</property>
+                    <child internal-child="entry">
+                      <object class="GtkEntry" id="Entry_Usuario">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="primary-icon-name">user-available-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="Label_Contrasena">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Contraseña</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Roboto Medium 13"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="Entry_Contrasena">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="visibility">False</property>
+                    <property name="invisible-char">●</property>
+                    <property name="primary-icon-name">dialog-password-symbolic</property>
+                    <property name="placeholder-text" translatable="yes">Contraseña</property>
+                    <property name="input-purpose">password</property>
+                    <property name="enable-emoji-completion">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_Sesion">
+                    <property name="label">Iniciar Sesión</property>
+                    <property name="width-request">118</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">center</property>
+                    <property name="valign">end</property>
+                    <property name="image">image2</property>
+                    <property name="image-position">right</property>
+                    <property name="always-show-image">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">12</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">300</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage">
+                <property name="width-request">100</property>
+                <property name="height-request">80</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="pixbuf">usuario.png</property>
+                <property name="icon_size">6</property>
+              </object>
+              <packing>
+                <property name="x">40</property>
+                <property name="y">20</property>
               </packing>
             </child>
           </object>
@@ -2089,7 +2122,7 @@ Author: Esteban Noe Sarmiento Mtz.
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="title" translatable="yes">Bienvenido</property>
-        <property name="subtitle" translatable="yes">Inicia Secion</property>
+        <property name="subtitle" translatable="yes">Login</property>
         <property name="show-close-button">True</property>
         <child>
           <object class="GtkStack" id="stack_head_login">
@@ -2896,8 +2929,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="can-focus">True</property>
                                         <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
-                                        <property name="has-frame">False</property>
+                                        <property name="max-length">30</property>
                                         <property name="xalign">0.5</property>
+                                        <property name="shadow-type">none</property>
                                         <property name="primary-icon-pixbuf">currency_dollar_icon_172528.svg</property>
                                         <property name="input-purpose">number</property>
                                         <property name="adjustment">adjustment1</property>
@@ -2940,9 +2974,10 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
                                         <property name="editable">False</property>
-                                        <property name="has-frame">False</property>
                                         <property name="text" translatable="yes">0.00</property>
                                         <property name="xalign">0.5</property>
+                                        <property name="shadow-type">none</property>
+                                        <property name="caps-lock-warning">False</property>
                                         <property name="primary-icon-pixbuf">currency_dollar_icon_172528.svg</property>
                                       </object>
                                     </child>
@@ -3007,7 +3042,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="btn_venta">
                                 <property name="use-action-appearance">True</property>
                                 <property name="height-request">50</property>
                                 <property name="visible">True</property>
@@ -5295,6 +5330,7 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkFrame">
+                            <property name="width-request">420</property>
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="label-xalign">0</property>
@@ -5317,9 +5353,10 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="can-focus">True</property>
                                         <property name="shadow-type">in</property>
                                         <child>
-                                          <object class="GtkTreeView">
+                                          <object class="GtkTreeView" id="view_venta">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
+                                            <property name="enable-grid-lines">horizontal</property>
                                             <child internal-child="selection">
                                               <object class="GtkTreeSelection"/>
                                             </child>
@@ -5336,6 +5373,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                       <object class="GtkButtonBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="halign">center</property>
                                         <property name="layout-style">start</property>
                                         <child>
                                           <object class="GtkButton">
