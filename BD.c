@@ -72,7 +72,7 @@ GtkEntry			*ety_busca_proveedor_producto;
 GtkEntry			*ety_busca_categoria;
 GtkEntry			*ety_busca_subcategoria;
 GtkEntry			*ety_recibido;
-GtkEntry			*ety_cambio;
+GtkLabel			*ety_cambio;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -1999,62 +1999,6 @@ void on_btn_aceptar_1_clicked(){
 	gtk_widget_hide(dialog_error_datos);
 	}
 //=========== Actualiza datos ====================================
-void on_btn_aceptar__clicked(){
-
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
-	char date[13];
-	char actualiza_fac[512];
-	
-	const char 		*id = gtk_entry_get_text(id_fac_act);
-	const char 		*idpro = gtk_entry_get_text(ety_profac_act);
-	const char 		*idemp = gtk_entry_get_text(ety_empfact_act);
-	const char		*cantidad = gtk_entry_get_text(ety_cantidafac_act);
-	const char		*precio = gtk_entry_get_text(ety_preci_act);
-	const char		*mpago = gtk_entry_get_text(ety_mpago_act);
-	const char		*descuento = gtk_entry_get_text(ety_descfac_act1);
-	const char		*total = gtk_entry_get_text(ety_totalfac_act);
-	
-	const char 		*dia = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_dia_fac_actu));
-	const char 		*mes = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_mes_fac_actu));
-	const char 		*anio2 = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_anio_fac_actu));
-
-	sprintf(date,"'%s-%s-%s'",anio2,mes,dia);
-	sprintf(actualiza_fac,"update Factura set Idproducto=%s, Idempresa=%s, Fechadeventa=%s, cantidad=%s, precio='%s', ModoPago='%s',Descuento=%s,Total=%s where idfactura=%s",idpro,idemp,date,cantidad,precio,mpago,descuento,total,id);
-	
-	conn = mysql_init(NULL);
-
- if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{	 
-	}
-
-	if (mysql_query(conn, actualiza_fac))
-	{
-		char tempErr[60];
-		sprintf(tempErr,"%s", mysql_error(conn));
-		gtk_label_set_text(lbl_error,tempErr);
-		return gtk_widget_show(dialog_error_datos);
-	}
-	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		printf("%s",row[0]);
-	}
-	
-	gtk_entry_set_text(id_fac_act,"");
-	gtk_entry_set_text(ety_profac_act,"");
-	gtk_entry_set_text(ety_empfact_act,"");
-	gtk_entry_set_text(ety_cantidafac_act,"");
-	gtk_entry_set_text(ety_preci_act,"");
-	gtk_entry_set_text(ety_mpago_act,"");
-	gtk_entry_set_text(ety_descfac_act1,"");
-	gtk_entry_set_text(ety_totalfac_act,"");	
-	contenido_tablas();
-	
-	mysql_free_result(res);
-	mysql_close(conn);
-	gtk_label_set_text(lbl_info,"Dato Actualizado Exitosamente");
-	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
-	}
 
 void on_cancela_and_factura3_clicked(){
 	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),inserta_datos_empresa);
@@ -2117,10 +2061,6 @@ void on_btn_actualiza_emp_clicked(){
 			gtk_entry_set_text(ety_rfc,"");
 			gtk_entry_set_text(ety_estado_emp,"");
 			gtk_entry_set_text(ety_correoemp,"");
-	
-	refresca_datos_emp();
-	contenido_aud_proveedor();
-	contenido_tablas();
 
 	mysql_free_result(res);
 	mysql_close(conn);
@@ -2128,7 +2068,10 @@ void on_btn_actualiza_emp_clicked(){
 	
 	gtk_label_set_text(lbl_info,"Provedor Actualizado Exitosamente");
 	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
-gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),inserta_datos_empresa);
+	gtk_stack_set_visible_child (GTK_STACK(stack_actualiza),inserta_datos_empresa);
+	refresca_datos_emp();
+	contenido_aud_proveedor();
+	contenido_tablas();
 	}
 	
 void on_actualiza_datos_producto_clicked(){
@@ -2263,7 +2206,13 @@ void on_btn_aceptar_a2_clicked(){
 //================================================
 void on_Window_BD_destroy()
 {
+	const char 		*total = gtk_label_get_text(lbl_totalpos);
+	if((strcmp(total,"0.00") == 0) | (strcmp(total,"") == 0)){
     gtk_main_quit();
+}else{
+	gtk_label_set_text(lbl_error,"La venta no se a concluido");
+	gtk_widget_show(dialog_error_datos);
+	}
 }
 void on_btn_cerrar_acd_clicked (){
 	gtk_widget_hide (win_acercade);
@@ -3528,6 +3477,7 @@ void calcula_cambio()
 {
 	double x,y,z;
 	char dif[200];
+	char dif2[200];
 	const char 		*recibido = gtk_entry_get_text(ety_recibido);
 	const char 		*total = gtk_label_get_text(lbl_totalpos);
 	
@@ -3536,14 +3486,15 @@ void calcula_cambio()
 	z = x-y;
 	
 	sprintf(dif,"%9.2f",z);
-	
-	gtk_entry_set_text(ety_cambio,dif);
+	sprintf(dif2,"%-f",z);
+	g_print("%s\n%s\n\n",dif,dif2);
+	gtk_label_set_text(ety_cambio,dif);
 	if(total[0] == '0'){
 			gtk_label_set_text(lbl_error,"No hay nada en el carrito de compra");
 			gtk_entry_set_text(ety_recibido,"0.00");
 			return gtk_widget_show(dialog_error_datos);
 		}
-	if((dif[0] == '-' )| (dif[1] == '-') | (dif[2] == '-') | (dif[3] == '-') | (dif[4] == '-')| (dif[5] == '0' && dif[4] == '-')| (dif[5] == '0' && dif[7] == '0' && dif[8] == '0'))
+	if((strcmp(dif,"     0.00") == 0) |(dif2[0] == '-'))
 	{
 		GdkColor color = {0, 255<<4, 255<<4 ,255<<4};
 		gtk_widget_modify_fg (GTK_WIDGET(ety_cambio), GTK_STATE_NORMAL, &color);
@@ -3586,7 +3537,7 @@ void ver_total(){
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
 	{	 
 	}
-	if (mysql_query(conn, "select SUM(P_unitario) as Total from Carrito_compra;"))
+	if (mysql_query(conn, "select SUM(P_unitario) as Total from Carrito_compra"))
 	{
 	}
 	res = mysql_use_result(conn);
@@ -3639,7 +3590,7 @@ void anadir_productocarrito(){
 	char anadir_pro2[200];
 	const char 		*recibido = gtk_entry_get_text(ety_recibido);
 	const char 		*total = gtk_label_get_text(lbl_totalpos);
-	const char 		*cambio = gtk_entry_get_text(ety_cambio);
+	const char 		*cambio = gtk_label_get_text(ety_cambio);
 		
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -3683,7 +3634,7 @@ void anadir_productocarrito(){
 		contenido_ticket();
 		gtk_entry_set_text(ety_recibido,"0.00");
 		gtk_label_set_text(lbl_totalpos,"0.00");
-		gtk_entry_set_text(ety_cambio,"0.00");
+		gtk_label_set_text(ety_cambio,"0.00");
 		GdkColor color = {0, 255<<4, 255<<4 ,255<<4};
 		gtk_widget_modify_fg (GTK_WIDGET(ety_cambio), GTK_STATE_NORMAL, &color);
 		gtk_widget_set_sensitive(btn_venta,TRUE);
@@ -3954,7 +3905,7 @@ int main(int argc, char *argv[])
 		ety_id_pro_borrar = GTK_ENTRY(gtk_builder_get_object(builder,"ety_id_pro_borrar"));
 		
 		ety_recibido = GTK_ENTRY(gtk_builder_get_object(builder,"ety_recibido"));
-		ety_cambio = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cambio"));
+		ety_cambio = GTK_LABEL(gtk_builder_get_object(builder,"ety_cambio"));
 		
 		entry_subcat = GTK_ENTRY(gtk_builder_get_object(builder,"entry_subcat"));
 		cb_dia_fac = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_fac"));

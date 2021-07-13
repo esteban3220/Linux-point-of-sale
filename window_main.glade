@@ -2852,6 +2852,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="valign">center</property>
                                             <property name="label" translatable="yes">0.00</property>
                                             <property name="justify">center</property>
+                                            <property name="wrap">True</property>
+                                            <property name="wrap-mode">char</property>
                                             <property name="ellipsize">middle</property>
                                             <property name="max-width-chars">50</property>
                                             <property name="lines">1</property>
@@ -2930,8 +2932,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="margin-end">7</property>
                                         <property name="margin-bottom">5</property>
                                         <property name="max-length">30</property>
-                                        <property name="xalign">0.5</property>
                                         <property name="shadow-type">none</property>
+                                        <property name="overwrite-mode">True</property>
                                         <property name="primary-icon-pixbuf">currency_dollar_icon_172528.svg</property>
                                         <property name="input-purpose">number</property>
                                         <property name="adjustment">adjustment1</property>
@@ -2968,17 +2970,40 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="left-padding">12</property>
                                     <child>
-                                      <object class="GtkEntry" id="ety_cambio">
+                                      <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="margin-end">7</property>
-                                        <property name="margin-bottom">5</property>
-                                        <property name="editable">False</property>
-                                        <property name="text" translatable="yes">0.00</property>
-                                        <property name="xalign">0.5</property>
-                                        <property name="shadow-type">none</property>
-                                        <property name="caps-lock-warning">False</property>
-                                        <property name="primary-icon-pixbuf">currency_dollar_icon_172528.svg</property>
+                                        <property name="margin-bottom">2</property>
+                                        <property name="spacing">3</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">$</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="ety_cambio">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">0.00</property>
+                                            <property name="wrap">True</property>
+                                            <property name="wrap-mode">char</property>
+                                            <attributes>
+                                              <attribute name="font-desc" value="Roboto 12"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">2</property>
+                                          </packing>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
