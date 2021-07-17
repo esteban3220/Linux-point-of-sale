@@ -3430,7 +3430,6 @@ void calcula_cambio()
 	
 	sprintf(dif,"%9.2f",z);
 	sprintf(dif2,"%-f",z);
-	g_print("%s\n%s\n\n",dif,dif2);
 	gtk_label_set_text(ety_cambio,dif);
 	if(total[0] == '0'){
 			gtk_label_set_text(lbl_error,"No hay nada en el carrito de compra");
@@ -3548,7 +3547,7 @@ void anadir_productocarrito(){
 	
 	sprintf(anadir_pro,"CREATE TABLE `%s` AS  (select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto)",dt_format);
 	sprintf(anadir_pro2,"insert into Ticket (Usuario,Total,Recibido,Cambio,Query,Fecha_hora) values (USER(),'%s','%s','%s','%s',NOW())",total,recibido,cambio,dt_format);
-	sprintf(anadir_pro3,"UPDATE Producto join `%s` on Producto.Piezas=`%s`.No set Piezas=Piezas-No",dt_format,dt_format);
+	sprintf(anadir_pro3,"update Producto inner join `%s` on Producto.Nombre = `%s`.Producto set Producto.Piezas=Producto.Piezas-`%s`.No;",dt_format,dt_format,dt_format);
 
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
 	{	 
@@ -3584,8 +3583,11 @@ void anadir_productocarrito(){
 		while ((row = mysql_fetch_row(res)) != NULL);
 		refresca_datos_fac();
 		refresca_pos();
+		refresca_datos_pro();
 		ver_carrito();
 		contenido_ticket();
+		contenido_producto();
+		contenido_aud_producto();
 		gtk_entry_set_text(ety_recibido,"0.00");
 		gtk_label_set_text(lbl_totalpos,"0.00");
 		gtk_label_set_text(ety_cambio,"0.00");

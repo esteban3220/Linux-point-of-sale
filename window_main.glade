@@ -1967,7 +1967,7 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="xalign">0.5</property>
                     <property name="yalign">0.5</property>
                     <property name="icon-name">1CD8_rundll32.0</property>
-                    <property name="icon_size">3</property>
+                    <property name="icon_size">1</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2013,6 +2013,7 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="label" translatable="yes">Usuario</property>
                     <attributes>
                       <attribute name="font-desc" value="Roboto Medium 13"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
                     </attributes>
                   </object>
                   <packing>
@@ -2048,6 +2049,7 @@ Author: Esteban Noe Sarmiento Mtz.
                     <property name="label" translatable="yes">Contraseña</property>
                     <attributes>
                       <attribute name="font-desc" value="Roboto Medium 13"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
                     </attributes>
                   </object>
                   <packing>
@@ -5396,6 +5398,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="enable-grid-lines">both</property>
                                         <property name="enable-tree-lines">True</property>
                                         <property name="activate-on-single-click">True</property>
+                                        <child internal-child="selection">
+                                          <object class="GtkTreeSelection"/>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -5495,6 +5500,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="enable-grid-lines">both</property>
                                         <property name="enable-tree-lines">True</property>
                                         <property name="activate-on-single-click">True</property>
+                                        <child internal-child="selection">
+                                          <object class="GtkTreeSelection"/>
+                                        </child>
                                       </object>
                                     </child>
                                   </object>
@@ -5529,6 +5537,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="enable-grid-lines">both</property>
                                     <property name="enable-tree-lines">True</property>
                                     <property name="activate-on-single-click">True</property>
+                                    <child internal-child="selection">
+                                      <object class="GtkTreeSelection"/>
+                                    </child>
                                   </object>
                                 </child>
                               </object>
@@ -6222,7 +6233,7 @@ Mediante las bibliotecas en tiempo de ejecución GTK+ v3.24.23 y GLib v2.66.1</p
     <property name="translator-credits" translatable="yes">Esteban Noé Sarmiento Martinez</property>
     <property name="artists">Esteban Noé Sarmiento Martinez
 Manuel Morales Nanco</property>
-    <property name="logo">currency_dollar_icon_172528.svg</property>
+    <property name="logo">ico.png</property>
     <property name="license-type">gpl-2-0-only</property>
     <child internal-child="vbox">
       <object class="GtkBox">
