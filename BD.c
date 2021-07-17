@@ -725,7 +725,7 @@ static GtkTreeModel *bus (void)
 	
 	model_busc = bus();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view_busqueda), model_busc);
-	g_object_unref (model_busc);
+	//g_object_unref (model_busc);
 	return view_busqueda;
 }
 
@@ -769,7 +769,7 @@ static GtkTreeModel *venta_ticket (void)
 	
 	model_venta = venta_ticket();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view_venta), model_venta);
-	g_object_unref (model_busc);
+	//g_object_unref (model_busc);
 	return view_venta;
 }
 
@@ -895,7 +895,7 @@ static GtkTreeModel * create_factura (void)
 	
 	model2 = create_factura ();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view2), model2);
-	g_object_unref (model2);
+	//g_object_unref (model2);
 	return view2;
 }
 static GtkTreeModel *create_producto (void)
@@ -1787,63 +1787,6 @@ void on_btn_cambiar_usuario_clicked()
 	refresca_datos_pro();
 	refresca_pos();
 }	
-void on_fac_aceptar_anadir_clicked(){
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
-	char anadir_fac[512];
-	char date[12];
-
-	const char 		*dia = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_dia_fac));
-	const char 		*mes = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_mes_fac));
-	const char 		*anio = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(cb_anio_fac));
-	const char 		*id_pro = gtk_entry_get_text(ety_idpro);
-	const char 		*id_emp = gtk_entry_get_text(ety_idemp);
-	const char		*cantidad = gtk_entry_get_text(ety_catidad);
-	const char		*precio = gtk_entry_get_text(ety_precio);
-	const char		*mpago = gtk_entry_get_text(ety_mpago);
-	const char		*descuento = gtk_entry_get_text(ety_desc);
-	const char		*total = gtk_entry_get_text(ety_total);
-	
-	
-	sprintf(date,"%s-%s-%s",anio,mes,dia);
-	sprintf(anadir_fac,"insert into Factura (Idfactura,Idproducto,Idempresa,Fechadeventa,cantidad,precio,ModoPago,Descuento,Total) values(null,%s,%s,'%s',%s,%s,'%s',%s,%s)",id_pro,id_emp,date,cantidad,precio,mpago,descuento,total);
-	
-	conn = mysql_init(NULL);
-
- if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{	 
-	}
-
-	if (mysql_query(conn, anadir_fac))
-	{
-		char tempErr[60];
-		sprintf(tempErr,"%s", mysql_error(conn));
-		gtk_label_set_text(lbl_error,tempErr);
-		gtk_widget_hide(advertencia_anadir_fac);
-		return gtk_widget_show(dialog_error_datos);
-	}
-	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		printf("%s",row[0]);
-	}
-	
-	gtk_entry_set_text(ety_idpro,"");
-	gtk_entry_set_text(ety_idemp,"");
-	gtk_entry_set_text(ety_catidad,"");
-	gtk_entry_set_text(ety_precio,"");
-	gtk_entry_set_text(ety_mpago,"");
-	gtk_entry_set_text(ety_desc,"");
-	gtk_entry_set_text(ety_total,"");
-	
-	
-	contenido_tablas();
-
-	mysql_free_result(res);
-	mysql_close(conn);
-	gtk_widget_hide(advertencia_anadir_fac);
-	gtk_label_set_text(lbl_info,"Dato Insertado Exitosamente");
-	gtk_revealer_set_reveal_child (GTK_REVEALER (info_bar),TRUE);
-	}
 void on_inserta_datos_factura_clicked(){
 		gtk_widget_show(advertencia_anadir_fac);
 	}
@@ -2208,7 +2151,7 @@ void on_Window_BD_destroy()
 {
 	const char 		*total = gtk_label_get_text(lbl_totalpos);
 	if((strcmp(total,"0.00") == 0) | (strcmp(total,"") == 0)){
-    gtk_main_quit();
+    //_quit();
 }else{
 	gtk_label_set_text(lbl_error,"La venta no se a concluido");
 	gtk_widget_show(dialog_error_datos);
@@ -3588,6 +3531,7 @@ void anadir_productocarrito(){
     dt_format = g_date_time_format(date_time, "Ticket_%d%m%y%H%M%S");
 	char anadir_pro[200];
 	char anadir_pro2[200];
+	char anadir_pro3[200];
 	const char 		*recibido = gtk_entry_get_text(ety_recibido);
 	const char 		*total = gtk_label_get_text(lbl_totalpos);
 	const char 		*cambio = gtk_label_get_text(ety_cambio);
@@ -3604,6 +3548,7 @@ void anadir_productocarrito(){
 	
 	sprintf(anadir_pro,"CREATE TABLE `%s` AS  (select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto)",dt_format);
 	sprintf(anadir_pro2,"insert into Ticket (Usuario,Total,Recibido,Cambio,Query,Fecha_hora) values (USER(),'%s','%s','%s','%s',NOW())",total,recibido,cambio,dt_format);
+	sprintf(anadir_pro3,"UPDATE Producto join `%s` on Producto.Piezas=`%s`.No set Piezas=Piezas-No",dt_format,dt_format);
 
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
 	{	 
@@ -3622,9 +3567,18 @@ void anadir_productocarrito(){
 		gtk_label_set_text(lbl_error,tempErr);
 		return gtk_widget_show(dialog_error_datos);
 	}
+		if (mysql_query(conn,anadir_pro3 ))
+	{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);
+	}
 	if (mysql_query(conn, "DELETE FROM Carrito_compra"))
 	{
+
 	}
+
 		res = mysql_use_result(conn);
 		refresca_datos_fac();
 		while ((row = mysql_fetch_row(res)) != NULL);
@@ -4068,11 +4022,11 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_venta),"clicked",G_CALLBACK(ingresa_venta),NULL);
 		g_signal_connect(G_OBJECT(select1),"changed",G_CALLBACK(tree_selection_changed_cb),NULL);
-		/*
+		
 		GdkColor color = {0, 255<<8, 255<<8 ,255<<8};
 		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Usuario), GTK_STATE_NORMAL, &color);
 		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Contrasena), GTK_STATE_NORMAL, &color);
-		*/
+		
 		gtk_builder_connect_signals(builder, NULL);
 		g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
 		gtk_button_set_image (GTK_BUTTON (btn_menu_pos), gtk_image_new_from_icon_name ("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
