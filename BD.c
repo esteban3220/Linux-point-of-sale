@@ -3030,9 +3030,7 @@ for (i = 0; i < G_N_ELEMENTS(botanas); i++){
   }
 gtk_combo_box_set_active (GTK_COMBO_BOX (cb_bs_subcat),0);
 			}else if  (categoria[0]== 'C' && categoria[1]== 'a'){
-const char *botanas[] = {
-	"",
-};
+const char *botanas[] = {""};
 for (i = 0; i < G_N_ELEMENTS(botanas); i++){
   	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_bs_subcat), botanas[i]);
   }
@@ -3581,7 +3579,6 @@ void anadir_productocarrito(){
 		res = mysql_use_result(conn);
 		refresca_datos_fac();
 		while ((row = mysql_fetch_row(res)) != NULL);
-		refresca_datos_fac();
 		refresca_pos();
 		refresca_datos_pro();
 		ver_carrito();
@@ -3653,6 +3650,42 @@ void tree_selection_changed_cb(GtkTreeSelection *selection, gpointer data){
 					g_free(id);
         }	
 	}
+static gboolean key_event(GtkWidget *widget,GdkEventKey *event){
+	g_printerr("%s\n",gdk_keyval_name (event->keyval));
+	const char *produc;
+	char consu[200];
+	if(strcmp(gdk_keyval_name (event->keyval),"minus") == 0 ){
+		    gtk_tree_model_get (model_pos, &iter_pos, producto_pos, &produc, -1);
+            sprintf(consu,"delete from Carrito_compra where Producto = '%s' limit 1",produc);
+		conn = mysql_init(NULL);
+					if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+					{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		gtk_widget_show(dialog_error_datos);	 
+					}
+					if (mysql_query(conn, consu ))
+					{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		gtk_widget_show(dialog_error_datos);
+					}
+					res = mysql_use_result(conn);
+					//while row = mysql_fetch_row(res)
+					
+					mysql_free_result(res);
+					mysql_close(conn);
+					
+	refresca_pos();
+	ver_carrito();
+	ver_total();
+					g_print("%s",produc);
+					
+	}
+	return FALSE;
+}
 int main(int argc, char *argv[])
 	{
 		GtkBuilder      	*builder; 
@@ -3820,8 +3853,7 @@ int main(int argc, char *argv[])
 		ety_pais_emp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pais_emp"));
 		ety_estado_emp = GTK_ENTRY(gtk_builder_get_object(builder,"ety_estado_emp"));
 		ety_busca_proveedor = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_proveedor"));
-		
-		
+				
 		ety_nombrepro = GTK_ENTRY(gtk_builder_get_object(builder,"ety_nombrepro"));
 		ety_marcapro = GTK_ENTRY(gtk_builder_get_object(builder,"ety_marcapro"));
 		ety_nlote = GTK_ENTRY(gtk_builder_get_object(builder,"ety_nlote"));
@@ -4024,6 +4056,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_venta),"clicked",G_CALLBACK(ingresa_venta),NULL);
 		g_signal_connect(G_OBJECT(select1),"changed",G_CALLBACK(tree_selection_changed_cb),NULL);
+		g_signal_connect(treeview_pos, "key-release-event", G_CALLBACK(key_event), NULL);
 		
 		GdkColor color = {0, 255<<8, 255<<8 ,255<<8};
 		gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Usuario), GTK_STATE_NORMAL, &color);
