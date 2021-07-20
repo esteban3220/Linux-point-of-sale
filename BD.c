@@ -35,6 +35,7 @@ GtkButton			*btn_menu_pref_devol;
 GtkButton			*btn_4cb;
 GtkButton			*btn_8cb;
 GtkButton			*btn_13cb;
+GtkButton			*btn_proveedorpdf;
 GtkWidget			*cb_usuarios;
 GtkButton			*btn_actualiza_emp;
 GtkWidget			*child_menu;
@@ -470,6 +471,8 @@ GtkTreeViewColumn 	*column_aud_fac19;
 GtkTreeViewColumn 	*column_aud_fac20;
 GtkTreeViewColumn 	*column_aud_fac21;
 GtkTreeSelection 	*select1;
+GtkTreeSelection 	*select2;
+GtkTreeSelection 	*select3;
 
 gboolean 			timer_handler();
 	
@@ -2151,7 +2154,7 @@ void on_Window_BD_destroy()
 {
 	const char 		*total = gtk_label_get_text(lbl_totalpos);
 	if((strcmp(total,"0.00") == 0) | (strcmp(total,"") == 0)){
-    //_quit();
+    gtk_main_quit();
 }else{
 	gtk_label_set_text(lbl_error,"La venta no se a concluido");
 	gtk_widget_show(dialog_error_datos);
@@ -2181,8 +2184,6 @@ void cierra_act(){
 	}
 void busca_producto_pos(){
 	gtk_stack_set_visible_child(GTK_STACK(stack_pop_producto),lbl_nodatos);
-		user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 	char busqueda_fac[300];
 	const char 	*consulta = gtk_entry_get_text(GTK_ENTRY(ety_producto_pos));
 
@@ -2190,6 +2191,7 @@ void busca_producto_pos(){
 
 	conn = mysql_init(NULL);
 	if (strcmp(consulta,"") == 0){
+		gtk_tree_selection_unselect_all (select3);
 		gtk_widget_hide(pop_busqueda_pos);
 	}else{
 		gtk_widget_set_visible (pop_busqueda_pos,1);
@@ -2208,8 +2210,7 @@ void busca_producto_pos(){
 	}
 	res = mysql_use_result(conn);
 		refresca_busquedapos();
-	while ((row = mysql_fetch_row(res)) != NULL) 
-		if (gtk_tree_model_get_iter_first(model_busc, &iter_busqueda) == FALSE) titulo_bus();
+	while ((row = mysql_fetch_row(res)) != NULL) titulo_bus();
 	gtk_stack_set_visible_child(GTK_STACK(stack_pop_producto),cont_view_bus);
 	  
 	mysql_free_result(res);
@@ -2424,24 +2425,15 @@ void consulta_producto(){
 	mysql_free_result(res);
 	mysql_close(conn);
 }
-void on_exportar_pdf_clicked(){
-	const char *tabla = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT(tabla_items));
-	char exporta [40];
-	sprintf(exporta,"select * from %s",tabla);
+void genera_pdfproveedor(){
 	
-	const char cabeceras []="\\documentclass[a4paper,6pt]{report}\n\\usepackage[T1]{fontenc}\n \\usepackage[utf8]{inputenc}\n\\usepackage{lmodern}\n\\usepackage[spanish]{babel}\n\\usepackage{pdflscape}\n";
+	const char cabeceras []="\\documentclass[a4paper,6pt]{report}\n\\usepackage[T1]{fontenc}\n \\usepackage[utf8]{inputenc}\n\\usepackage{lmodern}\n\\usepackage[spanish]{babel}\n\\usepackage{pdflscape}\n\\usepackage{fancyhdr}\n";
 	char init_document [] = "\\begin{document}\n\\begin{landscape}\n \\setlength{\\textwidth}{10mm}\n\\setlength{\\textheight}{10mm}\n \\setlength{\\oddsidemargin}{-70mm} \n\\setlength{\\evensidemargin}{100mm}\n\\setlength{\\topmargin}{35mm}\n";
-	char campos [] = "ID & ID Pro. Ant. & Nombre Ant. & Direccion Ant. & Tel. Ant. & Region Ant. & Pais Ant. & RFC Ant. & Correo Ant. & ID Pro. New & Nombre New & Direcc. New & Telefono New & Region New & Pais New & RFC New & Correo New & User & Modificado & Accion & Id Empresa\\\\ \\hline \\hline\n";
-	char campos2 [] = "ID & ID Pro. Ant. & ID Emp. Ant. & Fecha Ven. Ant. & Can. Ant. & Precio Ant. & M.Pago Ant. & Desc. Ant. & Total Ant. & ID Pro. New & ID Emp New & F. Ven. New & Cant. New & Precio New & MPago New & Desc. New & Total New & User & Modificado & Accion & Id Fac.\\\\ \\hline \\hline\n";
-	char campos3 [] = "ID & Nombre Ant. & Marca Ant. & FCaducidad Ant. & FProduccion Ant. & Num. Lote Ant. & Desc. Ant. & CBarra Ant. & Con. Neto Ant. & Nombre New & Marca New & FCaducidad New & FProd. New & Num. Lote New & Desc. New & CBarra New & Con. Neto & User & Modificado & Accion & Id Pro.\\\\ \\hline \\hline\n";
-
+	char campos [] = "Empresa & Nombre & Direccion & Telefono & RFC & Estado & Correo\\\\ \\hline \\hline\n";
 	char inicia_tabla [] = "\\begin{table}\n\\label{tab:}\n\\begin{center}\n \\resizebox{27cm}{!} { \n\\begin{tabular}{| c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | }\n";
 	char fin_tabla [] = "\\end{tabular}\n }\\end{center}\n\\end{table}\n";
 	char fin_documento [] = "\n\\end{landscape}\n\\end{document}";
 	char hline[]= "\\hline\n";
-
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 	
 	conn = mysql_init(NULL);
 
@@ -2449,7 +2441,7 @@ void on_exportar_pdf_clicked(){
 	{	 
 	}
 
-	if (mysql_query(conn, exporta))
+	if (mysql_query(conn, "select * from Proveedor"))
 	{
 		char tempErr[60];
 		sprintf(tempErr,"%s", mysql_error(conn));
@@ -2459,7 +2451,7 @@ void on_exportar_pdf_clicked(){
 	res = mysql_use_result(conn);
 	
 //==========================================================================================================================================================		
-	if(tabla[10]== 'e'){
+
 		fichero = fopen("Empresa.tex", "wt");
 	fputs(cabeceras, fichero);
 	fputs(init_document, fichero);
@@ -2467,7 +2459,7 @@ void on_exportar_pdf_clicked(){
 	fputs(hline,fichero);
 	fputs(campos, fichero);
 	while ((row = mysql_fetch_row(res)) != NULL) {
-		fprintf(fichero,"%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s \\\\ \\hline\n",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19],row[20]);
+		fprintf(fichero,"%s & %s & %s & %s & %s & %s & %s  \\\\ \\hline\n",row[0],row[1],row[2],row[3],row[6],row[7],row[8]);
 	}
 	fputs(hline,fichero);
 	fputs(fin_tabla,fichero);
@@ -2476,43 +2468,6 @@ void on_exportar_pdf_clicked(){
 	system("latexmk -pdf -synctex=1 Empresa.tex ");
     system("evince Empresa.pdf &");
     //return ;
-//==========================================================================================================================================================    
-	}else if(tabla[10]== 'f'){
-	fichero2 = fopen("Factura.tex", "wt");
-	fputs(cabeceras, fichero2);
-	fputs(init_document, fichero2);
-	fputs(inicia_tabla, fichero2);
-	fputs(hline,fichero2);
-	fputs(campos2, fichero2);
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		fprintf(fichero2,"%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s \\\\ \\hline\n",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19],row[20]);
-	}
-	fputs(hline,fichero2);
-	fputs(fin_tabla,fichero2);
-	fputs(fin_documento, fichero2);
-	fclose(fichero2); 
-	system("latexmk -pdf -synctex=1 Factura.tex ");
-    system("evince Factura.pdf &");
-   // return ;
-//==========================================================================================================================================================   
-		}else if(tabla[10]== 'p'){
-	fichero3 = fopen("Producto.tex", "wt");
-	fputs(cabeceras, fichero3);
-	fputs(init_document, fichero3);
-	fputs(inicia_tabla, fichero3);
-	fputs(hline,fichero3);
-	fputs(campos3, fichero3);
-	while ((row = mysql_fetch_row(res)) != NULL) {
-		fprintf(fichero3,"%s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s & %s \\\\ \\hline\n",row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19],row[20]);
-	}
-	fputs(hline,fichero3);
-	fputs(fin_tabla,fichero3);
-	fputs(fin_documento, fichero3);
-	fclose(fichero3); 
-	system("latexmk -pdf -synctex=1 Producto.tex ");
-    system("evince Producto.pdf &");
-    //return ;
-}
 //==========================================================================================================================================================
 	mysql_free_result(res);
 	mysql_close(conn);
@@ -3491,8 +3446,6 @@ void ver_total(){
 		
 void anadir_productocarrito(){
 	char anadir_pro[200];
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 
 	const char 		*sku = gtk_entry_get_text(ety_pos_producto);
 
@@ -3593,13 +3546,42 @@ void anadir_productocarrito(){
 		gtk_widget_set_sensitive(btn_venta,TRUE);
 	}
 }
-
+void selection_buscar(gpointer data){
+	  char consu[200];
+	  gchar  *holi;
+	  if (gtk_tree_selection_get_selected (select3, &model_busc, &iter_busqueda))
+        {
+                gtk_tree_model_get (model_busc, &iter_busqueda, COLproducto_pos, &holi, -1);
+                sprintf(consu,"insert into Carrito_compra(Producto,P_unitario) select  Nombre,Venta from Producto where Nombre = '%s'",holi);
+                
+					conn = mysql_init(NULL);
+					if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+					{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);	 
+					}
+					if (mysql_query(conn, consu ))
+					{
+		char tempErr[60];
+		sprintf(tempErr,"%s", mysql_error(conn));
+		gtk_label_set_text(lbl_error,tempErr);
+		return gtk_widget_show(dialog_error_datos);
+					}
+					res = mysql_use_result(conn);
+					mysql_free_result(res);
+					mysql_close(conn);	
+					refresca_pos();
+					ver_carrito();
+					ver_total();
+        }
+gtk_tree_selection_unselect_all (select3);	
+}
 void tree_selection_changed_cb(GtkTreeSelection *selection, gpointer data){
 	refresca_venta();
 	char consu[200];
 	char consu2[200];
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
     gchar *id;
 
         if (gtk_tree_selection_get_selected (selection, &model2, &iter2))
@@ -3650,14 +3632,16 @@ void tree_selection_changed_cb(GtkTreeSelection *selection, gpointer data){
 					g_free(id);
         }	
 	}
-static gboolean key_event(GtkWidget *widget,GdkEventKey *event){
-	g_printerr("%s\n",gdk_keyval_name (event->keyval));
-	const char *produc;
+void key_event(GtkWidget *widget,GdkEventKey *event, gpointer data){
+	//g_printerr("%s\n\n",gdk_keyval_name (event->keyval));
+	gchar *produc;
 	char consu[200];
-	if(strcmp(gdk_keyval_name (event->keyval),"minus") == 0 ){
-		    gtk_tree_model_get (model_pos, &iter_pos, producto_pos, &produc, -1);
-            sprintf(consu,"delete from Carrito_compra where Producto = '%s' limit 1",produc);
-		conn = mysql_init(NULL);
+	if((strcmp(gdk_keyval_name (event->keyval),"minus") == 0 )|(strcmp(gdk_keyval_name (event->keyval),"KP_Subtract") == 0 )){
+		if (gtk_tree_selection_get_selected (select2, &model_pos, &iter_pos)){
+                gtk_tree_model_get (model_pos, &iter_pos,producto_pos, &produc, -1);
+                sprintf(consu,"delete from Carrito_compra where Producto ='%s' limit 1",produc);
+                
+					conn = mysql_init(NULL);
 					if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
 					{
 		char tempErr[60];
@@ -3673,18 +3657,14 @@ static gboolean key_event(GtkWidget *widget,GdkEventKey *event){
 		gtk_widget_show(dialog_error_datos);
 					}
 					res = mysql_use_result(conn);
-					//while row = mysql_fetch_row(res)
-					
 					mysql_free_result(res);
-					mysql_close(conn);
-					
-	refresca_pos();
-	ver_carrito();
-	ver_total();
-					g_print("%s",produc);
-					
+					mysql_close(conn);					
+					refresca_pos();
+					ver_carrito();
+					ver_total();
+					g_free(produc);    
+					}		
 	}
-	return FALSE;
 }
 int main(int argc, char *argv[])
 	{
@@ -3955,6 +3935,8 @@ int main(int argc, char *argv[])
 		btn_consulta_emp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_consulta_emp"));
 		cb_usuarios = GTK_WIDGET(gtk_builder_get_object(builder,"cb_usuarios"));
 		view_venta = GTK_WIDGET(gtk_builder_get_object(builder,"view_venta"));
+		btn_proveedorpdf = GTK_BUTTON(gtk_builder_get_object(builder,"btn_proveedorpdf"));
+		
 		btn_cancelar_adver8 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver8"));
 		btn_cancelar_adver2 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver2"));
 		btn_cancelar_adver9 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver9"));
@@ -3971,6 +3953,12 @@ int main(int argc, char *argv[])
 		}
 		select1 = gtk_tree_view_get_selection (GTK_TREE_VIEW (view2));
 		gtk_tree_selection_set_mode (select1, GTK_SELECTION_SINGLE);
+		
+		select2 = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview_pos));
+		gtk_tree_selection_set_mode (select2, GTK_SELECTION_SINGLE);
+		
+		select3 = gtk_tree_view_get_selection (GTK_TREE_VIEW (view_busqueda));
+		gtk_tree_selection_set_mode (select3, GTK_SELECTION_SINGLE);
 		
 		g_signal_connect(G_OBJECT(btn_cancelar_adver9),"clicked",G_CALLBACK(on_btn_cancelar_adver9_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_cancelar_adver8),"clicked",G_CALLBACK(on_btn_cancelar_adver8_clicked),NULL);
@@ -4017,6 +4005,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_edit_productos),"toggled",G_CALLBACK(modifica_productos),NULL);
 		g_signal_connect(G_OBJECT(acerca_de),"clicked",G_CALLBACK(on_acercade_clicked),NULL);		
 		g_signal_connect(G_OBJECT(btn_menu_pref),"clicked",G_CALLBACK(abre_preferencias),NULL);
+		g_signal_connect(G_OBJECT(btn_proveedorpdf),"clicked",G_CALLBACK(genera_pdfproveedor),NULL);
 		g_signal_connect(G_OBJECT(btn_menu_pref_devol),"clicked",G_CALLBACK(regresa_menu),NULL);		
 		g_signal_connect(G_OBJECT(ety_produ_emp),"activate",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
 		g_signal_connect(G_OBJECT(ety_cbarra),"focus-in-event",G_CALLBACK(show_gensku),NULL);
@@ -4056,6 +4045,7 @@ int main(int argc, char *argv[])
 		g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
 		g_signal_connect(G_OBJECT(btn_venta),"clicked",G_CALLBACK(ingresa_venta),NULL);
 		g_signal_connect(G_OBJECT(select1),"changed",G_CALLBACK(tree_selection_changed_cb),NULL);
+		g_signal_connect(G_OBJECT(select3),"changed",G_CALLBACK(selection_buscar),NULL);
 		g_signal_connect(treeview_pos, "key-release-event", G_CALLBACK(key_event), NULL);
 		
 		GdkColor color = {0, 255<<8, 255<<8 ,255<<8};

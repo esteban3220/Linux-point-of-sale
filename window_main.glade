@@ -2775,6 +2775,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               <object class="GtkTreeView" id="treeview_pos">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
+                                <property name="enable-search">False</property>
                                 <property name="search-column">1</property>
                                 <property name="enable-grid-lines">horizontal</property>
                                 <child internal-child="selection">
@@ -3218,7 +3219,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton">
+                              <object class="GtkButton" id="btn_proveedorpdf">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -5811,65 +5812,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="position">1</property>
                                       </packing>
                                     </child>
-                                    <child>
-                                      <object class="GtkButton">
-                                        <property name="visible">True</property>
-                                        <property name="can-focus">True</property>
-                                        <property name="receives-default">True</property>
-                                        <property name="relief">none</property>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="can-focus">False</property>
-                                            <property name="spacing">10</property>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="label" translatable="yes">Actividad de la cuenta</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
-                                                <property name="hexpand">True</property>
-                                                <property name="label" translatable="yes">Sesion iniciada</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkImage">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
-                                                <property name="icon-name">go-next</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">2</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                        </child>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">2</property>
-                                      </packing>
-                                    </child>
                                   </object>
                                 </child>
                                 <child type="label">
@@ -5892,16 +5834,13 @@ Author: Esteban Noe Sarmiento Mtz.
                             <child>
                               <object class="GtkButton">
                                 <property name="label" translatable="yes">Eliminar</property>
-                                <property name="use-action-appearance">True</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
-                                <property name="focus-on-click">False</property>
                                 <property name="receives-default">True</property>
                                 <property name="halign">end</property>
                                 <property name="margin-right">5</property>
                                 <property name="margin-end">5</property>
                                 <property name="margin-bottom">5</property>
-                                <property name="action-name">delete</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>

@@ -1,0 +1,39 @@
+\documentclass[border=5pt]{standalone}
+\usepackage{hyphenat}
+\usepackage{xstring}
+\usepackage{forloop}
+
+\newsavebox\MyBreakChar%
+\sbox\MyBreakChar{\hyp}% char to display the break after non char
+\newsavebox\MySpaceBreakChar%
+\sbox\MySpaceBreakChar{}% char to display the break after space
+\makeatletter%
+\newcommand*{\BreakableChar}[1][\MyBreakChar]{%
+  \leavevmode%
+  \prw@zbreak%
+  \discretionary{\usebox#1}{}{}%
+  \prw@zbreak%
+}%
+
+\newcounter{index}%
+\newcommand{\AddBreakableChars}[1]{%
+  \StrLen{#1 }[\stringLength]%
+  \forloop[1]{index}{1}{\value{index}<\stringLength}{%
+    \StrChar{#1}{\value{index}}[\currentLetter]%
+    \IfStrEq{\currentLetter}{ }
+        {\currentLetter\BreakableChar[\MySpaceBreakChar]}%
+        {\currentLetter\BreakableChar[\MyBreakChar]}%
+  }%
+}%
+
+\newcommand*{\MyLongString}{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa baaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa caaaaaaaaaaaaaaaaaa}%
+
+\begin{document}
+\parbox{4cm}{\AddBreakableChars{\MyLongString}}
+
+\bigskip
+\parbox{7cm}{\AddBreakableChars{\MyLongString}}
+
+\bigskip
+\parbox{9.1cm}{\AddBreakableChars{\MyLongString}}
+\end{document}
