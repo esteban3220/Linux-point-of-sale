@@ -217,7 +217,6 @@ static GtkTreeModel *venta_ticket (void)
 	
 	model_venta = venta_ticket();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view_venta), model_venta);
-	//g_object_unref (model_busc);
 	return view_venta;
 }
 
@@ -227,7 +226,8 @@ static GtkTreeModel * create_empresa (void)
 	G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
 	
 	gtk_list_store_append (store, &iter);
-	gtk_list_store_set (store, &iter,COLid, row[0],
+	gtk_list_store_set (store, &iter,
+	COLid, row[0],
 	COLidproc, row[1],
 	COLnombre, row[2],
 	COLdireccion, row[3],
@@ -578,9 +578,9 @@ static GtkTreeModel *create_factura_auditoria (void)
 	new_cambio,row[11],
 	new_pago,row[12],
 	new_hora,row[13],
-	accion_fac,row[14],
-	user_fac,row[15],
-	mod_fac,row[16],-1);
+	user_fac,row[14],
+	mod_fac,row[15],
+	accion_fac,row[16],-1);
 	while ((row = mysql_fetch_row(res)) != NULL){
 	gtk_list_store_append (store5, &iter5);
 	gtk_list_store_set (store5, &iter5,
@@ -598,9 +598,9 @@ static GtkTreeModel *create_factura_auditoria (void)
 	new_cambio,row[11],
 	new_pago,row[12],
 	new_hora,row[13],
-	user_fac,row[15],
-	mod_fac,row[16],
-	accion_fac,row[14],-1);
+	user_fac,row[14],
+	mod_fac,row[15],
+	accion_fac,row[16],-1);
 }
 	return GTK_TREE_MODEL (store5);
 }

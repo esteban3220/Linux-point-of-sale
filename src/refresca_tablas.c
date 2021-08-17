@@ -38,6 +38,25 @@ void refresca_datos_fac(){
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac5);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac6);
 		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac7);
+	}if (gtk_tree_model_get_iter_first(model5, &iter5) == TRUE) {
+		gtk_list_store_clear(store5);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac2);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac3);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac4);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac5);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac6);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac7);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac8);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac9);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac10);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac11);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac12);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac13);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac14);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac15);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac16);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view5), column_aud_fac17);	
 	}
 }	
 

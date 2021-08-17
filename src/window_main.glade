@@ -2971,7 +2971,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="max-length">30</property>
                                         <property name="shadow-type">none</property>
                                         <property name="overwrite-mode">True</property>
-                                        <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
+                                        <property name="primary-icon-pixbuf">..\img\currency_dollar_icon_172528.svg</property>
                                         <property name="input-purpose">number</property>
                                         <property name="adjustment">adjustment1</property>
                                         <property name="climb-rate">0.10</property>
@@ -3344,7 +3344,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Empresa</property>
                                                     <property name="justify">fill</property>
                                                   </object>
@@ -3359,7 +3359,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Nombre</property>
                                                   </object>
                                                   <packing>
@@ -3373,7 +3373,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Direccion</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
@@ -3388,7 +3388,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Telefono</property>
                                                   </object>
                                                   <packing>
@@ -3402,7 +3402,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Region</property>
                                                     <property name="ellipsize">end</property>
                                                   </object>
@@ -3417,7 +3417,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Pais</property>
                                                   </object>
                                                   <packing>
@@ -3431,7 +3431,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">RFC</property>
                                                   </object>
                                                   <packing>
@@ -3445,7 +3445,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Estado</property>
                                                   </object>
                                                   <packing>
@@ -3458,7 +3458,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="halign">start</property>
+                                                    <property name="halign">end</property>
                                                     <property name="label" translatable="yes">Correo</property>
                                                   </object>
                                                   <packing>
@@ -3473,6 +3473,18 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="expand">False</property>
                                                 <property name="fill">True</property>
                                                 <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkSeparator">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">False</property>
+                                                <property name="orientation">vertical</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">True</property>
+                                                <property name="position">1</property>
                                               </packing>
                                             </child>
                                             <child>
@@ -3495,6 +3507,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                                         <property name="primary-icon-name">address-book-new-symbolic</property>
                                                         <property name="input-purpose">name</property>
                                                         <property name="input-hints">GTK_INPUT_HINT_UPPERCASE_SENTENCES | GTK_INPUT_HINT_NONE</property>
+                                                        <property name="show-emoji-icon">True</property>
+                                                        <property name="enable-emoji-completion">True</property>
                                                       </object>
                                                       <packing>
                                                         <property name="expand">False</property>
@@ -3516,8 +3530,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="max-length">45</property>
                                                     <property name="primary-icon-name">auth-fingerprint-symbolic</property>
                                                     <property name="input-purpose">name</property>
-                                                    <property name="show-emoji-icon">True</property>
-                                                    <property name="enable-emoji-completion">True</property>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
@@ -3659,7 +3671,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <packing>
                                                 <property name="expand">True</property>
                                                 <property name="fill">True</property>
-                                                <property name="position">1</property>
+                                                <property name="position">2</property>
                                               </packing>
                                             </child>
                                           </object>
@@ -3929,7 +3941,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">../img/pdf-icon.png</property>
+                                    <property name="pixbuf">..\img\pdf-icon.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -4075,7 +4087,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">start</property>
+                                                <property name="halign">end</property>
                                                 <property name="label" translatable="yes">Codigo de Barras</property>
                                               </object>
                                               <packing>
@@ -4089,7 +4101,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">start</property>
+                                                <property name="halign">end</property>
                                                 <property name="label" translatable="yes">Nombre y Descripcion</property>
                                                 <property name="justify">fill</property>
                                               </object>
@@ -4104,7 +4116,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">start</property>
+                                                <property name="halign">end</property>
                                                 <property name="label" translatable="yes">Marca</property>
                                               </object>
                                               <packing>
@@ -4118,7 +4130,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">start</property>
+                                                <property name="halign">end</property>
                                                 <property name="label" translatable="yes">Fecha Produccion</property>
                                               </object>
                                               <packing>
@@ -4285,6 +4297,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
                                                 <property name="has-entry">True</property>
+                                                <child internal-child="entry">
+                                                  <object class="GtkEntry" id="ety_marcapro">
+                                                    <property name="can-focus">False</property>
+                                                  </object>
+                                                </child>
                                               </object>
                                               <packing>
                                                 <property name="expand">True</property>
@@ -4599,6 +4616,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <item translatable="yes">Bebidas</item>
                                                   <item translatable="yes">Otros productos</item>
                                                 </items>
+                                                <child internal-child="entry">
+                                                  <object class="GtkEntry" id="ety_cat">
+                                                    <property name="can-focus">False</property>
+                                                  </object>
+                                                </child>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4612,6 +4634,11 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="can-focus">False</property>
                                                 <property name="has-entry">True</property>
                                                 <property name="popup-fixed-width">False</property>
+                                                <child internal-child="entry">
+                                                  <object class="GtkEntry" id="entry_subcat">
+                                                    <property name="can-focus">False</property>
+                                                  </object>
+                                                </child>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4779,7 +4806,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="valign">center</property>
                                         <property name="has-entry">True</property>
                                         <child internal-child="entry">
-                                          <object class="GtkEntry">
+                                          <object class="GtkEntry" id="ety_busquedatick">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="placeholder-text" translatable="yes">Busqueda por Id</property>
@@ -4793,16 +4820,18 @@ Author: Esteban Noe Sarmiento Mtz.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkSpinButton">
+                                      <object class="GtkSpinButton" id="ety_cantidadtick2">
                                         <property name="width-request">200</property>
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="valign">center</property>
+                                        <property name="width-chars">9</property>
                                         <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
                                         <property name="placeholder-text" translatable="yes">Buscar por Monto</property>
                                         <property name="adjustment">adjustment8</property>
                                         <property name="digits">2</property>
                                         <property name="numeric">True</property>
+                                        <property name="update-policy">if-valid</property>
                                       </object>
                                       <packing>
                                         <property name="expand">True</property>
@@ -4814,6 +4843,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="valign">center</property>
                                         <property name="orientation">vertical</property>
                                         <child>
                                           <object class="GtkLabel">
@@ -5396,7 +5426,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="spacing">5</property>
                                     <child>
-                                      <object class="GtkSearchEntry">
+                                      <object class="GtkSearchEntry" id="ety_filtraprov">
                                         <property name="width-request">270</property>
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
@@ -5589,7 +5619,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBoxText">
+                                      <object class="GtkComboBoxText" id="cb_filtraprov">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="valign">center</property>
@@ -5617,6 +5647,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">True</property>
                                             <property name="tooltip-text" translatable="yes">Exporta a PDF la Tabla Seleccionada</property>
+                                            <property name="valign">center</property>
                                             <property name="use-underline">True</property>
                                             <property name="image-position">top</property>
                                             <property name="always-show-image">True</property>
@@ -5718,7 +5749,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="spacing">5</property>
                                     <child>
-                                      <object class="GtkSearchEntry">
+                                      <object class="GtkSearchEntry" id="ety_filtroprod">
                                         <property name="width-request">270</property>
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
@@ -5912,7 +5943,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBoxText">
+                                      <object class="GtkComboBoxText" id="cb_filtroprod">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="valign">center</property>
@@ -6037,33 +6068,14 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="spacing">5</property>
                                     <child>
-                                      <object class="GtkSearchEntry">
-                                        <property name="width-request">200</property>
+                                      <object class="GtkSearchEntry" id="ety_cantidadtick">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="valign">center</property>
                                         <property name="primary-icon-name">edit-find-symbolic</property>
                                         <property name="primary-icon-activatable">False</property>
                                         <property name="primary-icon-sensitive">False</property>
-                                        <property name="placeholder-text" translatable="yes">Buscar por Id de Ticket</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">False</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSpinButton">
-                                        <property name="width-request">200</property>
-                                        <property name="visible">True</property>
-                                        <property name="can-focus">True</property>
-                                        <property name="valign">center</property>
-                                        <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
-                                        <property name="placeholder-text" translatable="yes">Buscar por Monto</property>
-                                        <property name="adjustment">adjustment7</property>
-                                        <property name="digits">2</property>
-                                        <property name="numeric">True</property>
+                                        <property name="placeholder-text" translatable="yes">Buscar por Monto total</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -6248,7 +6260,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkComboBoxText">
+                                      <object class="GtkComboBoxText" id="cb_filtraudticket">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
                                         <property name="halign">center</property>
@@ -6460,7 +6472,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">../img/usuario.png</property>
+                                    <property name="pixbuf">..\img\usuario.png</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7000,7 +7012,7 @@ Mediante las bibliotecas en tiempo de ejecución GTK+ v3.24.23 y GLib v2.66.1</p
     <property name="translator-credits" translatable="yes">Esteban Noé Sarmiento Martinez</property>
     <property name="artists">Esteban Noé Sarmiento Martinez
 Manuel Morales Nanco</property>
-    <property name="logo">../img/ico.png</property>
+    <property name="logo">..\img\ico.png</property>
     <property name="license-type">gpl-2-0-only</property>
     <child internal-child="vbox">
       <object class="GtkBox">
@@ -7024,15 +7036,6 @@ Manuel Morales Nanco</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="baseline-position">bottom</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
           </object>
           <packing>
             <property name="expand">True</property>
