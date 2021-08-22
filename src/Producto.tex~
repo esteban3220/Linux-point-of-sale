@@ -1,0 +1,21 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{longtable}
+\usepackage{pdflscape}
+\usepackage{graphicx,booktabs,tabularx}
+\usepackage[spanish]{babel}
+\begin{document}
+\footnotesize  
+\setlength\LTleft{-50pt} 
+\setlength\LTright{-100pt}  
+\begin{landscape} 
+\thispagestyle{empty}
+\begin{longtable}{|p{4cm}|p{2.5cm}|p{2.5cm}|p{1.8cm}|p{1.8cm}|p{1cm}|p{1cm}|p{3cm}|p{3cm}||}
+\hline 
+\hline
+\textbf{SKU} & \textbf{Nombre} & \textbf{Empresa} & \textbf{Fecha de Produccion} & \textbf{Fecha de Caducidad} & \textbf{Piezas} & \textbf{Venta} & \textbf{Categoria} & \textbf{Subcategoria}\\ \hline \hline1 & Salchipulpos & Ricolino & 2047-07-09 & 2048-05-05 & 17 & 5.00 & Alimentos preparados & Carnes y Embutidos \\ \hline 
+737 & Chocolate Chocomilk mmm rico ñom ñom & ChocoMilk & 2049-02-03 & 2048-05-04 & 103 & 10.00 & Confitería/dulceria & Chocolate en polvo \\ \hline 
+5644564554646 & Coca Cola de 500 Ml. Vidrio & Coca Cola S.A de C.V & 2049-03-05 & 2049-06-04 & 50 & 12.00 & Bebidas & Refrescos \\ \hline 
+\end{longtable}
+\thispagestyle{empty}
+\end{landscape}
+\end{document}

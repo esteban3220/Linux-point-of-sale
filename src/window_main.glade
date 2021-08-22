@@ -47,30 +47,17 @@ Author: Esteban Noe Sarmiento Mtz.
             <property name="layout-style">end</property>
             <child>
               <object class="GtkButton" id="btn_cancelar_adver3">
-                <property name="label">gtk-cancel</property>
+                <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <property name="use-stock">True</property>
+                <property name="always-show-image">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_Rein_Dial">
-                <property name="label">gtk-edit</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="use-stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
               </packing>
             </child>
           </object>
@@ -162,6 +149,11 @@ Author: Esteban Noe Sarmiento Mtz.
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment8">
+    <property name="upper">9999999</property>
+    <property name="step-increment">5</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment9">
     <property name="upper">100</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
@@ -1971,7 +1963,7 @@ Author: Esteban Noe Sarmiento Mtz.
                   <object class="GtkImage">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="pixbuf">../img/wallpaper_162070056595623a083bab267f63254261f1f938e4(1).png</property>
+                    <property name="pixbuf">img/wallpaper_162070056595623a083bab267f63254261f1f938e4(1).png</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -2133,7 +2125,7 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="height-request">80</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../img/usuario.png</property>
+                <property name="pixbuf">img/usuario.png</property>
                 <property name="icon_size">6</property>
               </object>
               <packing>
@@ -2670,8 +2662,6 @@ Author: Esteban Noe Sarmiento Mtz.
   <object class="GtkWindow" id="Window_BD">
     <property name="can-focus">False</property>
     <property name="window-position">center</property>
-    <property name="default-width">1280</property>
-    <property name="default-height">720</property>
     <property name="destroy-with-parent">True</property>
     <child>
       <object class="GtkBox">
@@ -2847,7 +2837,8 @@ Author: Esteban Noe Sarmiento Mtz.
                                     <property name="can-focus">False</property>
                                     <property name="ellipsize">end</property>
                                     <attributes>
-                                      <attribute name="foreground" value="#5e5e5c5c6464"/>
+                                      <attribute name="weight" value="bold"/>
+                                      <attribute name="scale" value="1.5"/>
                                     </attributes>
                                   </object>
                                   <packing>
@@ -2971,7 +2962,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="max-length">30</property>
                                         <property name="shadow-type">none</property>
                                         <property name="overwrite-mode">True</property>
-                                        <property name="primary-icon-pixbuf">..\img\currency_dollar_icon_172528.svg</property>
+                                        <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                         <property name="input-purpose">number</property>
                                         <property name="adjustment">adjustment1</property>
                                         <property name="climb-rate">0.10</property>
@@ -3106,10 +3097,10 @@ Author: Esteban Noe Sarmiento Mtz.
                             <child>
                               <object class="GtkButton" id="btn_venta">
                                 <property name="use-action-appearance">True</property>
-                                <property name="height-request">50</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
+                                <property name="valign">center</property>
                                 <child>
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
@@ -3246,7 +3237,27 @@ Author: Esteban Noe Sarmiento Mtz.
                               </packing>
                             </child>
                             <child>
-                              <placeholder/>
+                              <object class="GtkButton" id="btn_proveedorpdf">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="tooltip-text" translatable="yes">Exporta toda la informacion a PDF</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="pixbuf">img/pdf-icon.png</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">1</property>
+                                <property name="non-homogeneous">True</property>
+                              </packing>
                             </child>
                             <child>
                               <placeholder/>
@@ -3309,473 +3320,487 @@ Author: Esteban Noe Sarmiento Mtz.
                             <property name="can-focus">False</property>
                             <property name="transition-type">slide-left</property>
                             <child>
-                              <object class="GtkFrame">
+                              <object class="GtkScrolledWindow">
                                 <property name="visible">True</property>
-                                <property name="can-focus">False</property>
-                                <property name="label-xalign">0</property>
-                                <property name="label-yalign">0</property>
+                                <property name="can-focus">True</property>
+                                <property name="shadow-type">in</property>
+                                <property name="min-content-width">350</property>
                                 <child>
-                                  <object class="GtkAlignment">
+                                  <object class="GtkViewport">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="xalign">0</property>
-                                    <property name="yalign">0</property>
-                                    <property name="left-padding">12</property>
-                                    <property name="right-padding">12</property>
+                                    <property name="hadjustment">adjustment9</property>
+                                    <property name="hscroll-policy">natural</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkFrame">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
-                                        <property name="orientation">vertical</property>
+                                        <property name="label-xalign">0</property>
+                                        <property name="label-yalign">0</property>
                                         <child>
-                                          <object class="GtkBox">
+                                          <object class="GtkAlignment">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="spacing">10</property>
-                                            <child>
-                                              <object class="GtkBox">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="margin-left">5</property>
-                                                <property name="margin-start">5</property>
-                                                <property name="orientation">vertical</property>
-                                                <property name="homogeneous">True</property>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Empresa</property>
-                                                    <property name="justify">fill</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">0</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Nombre</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">1</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Direccion</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">2</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Telefono</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">3</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Region</property>
-                                                    <property name="ellipsize">end</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">4</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Pais</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">5</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">RFC</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">6</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Estado</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">7</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkLabel">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="halign">end</property>
-                                                    <property name="label" translatable="yes">Correo</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="padding">10</property>
-                                                    <property name="position">8</property>
-                                                  </packing>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkSeparator">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="orientation">vertical</property>
-                                              </object>
-                                              <packing>
-                                                <property name="expand">False</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
+                                            <property name="xalign">0</property>
+                                            <property name="yalign">0</property>
+                                            <property name="left-padding">12</property>
+                                            <property name="right-padding">12</property>
                                             <child>
                                               <object class="GtkBox">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
                                                 <property name="orientation">vertical</property>
-                                                <property name="homogeneous">True</property>
                                                 <child>
                                                   <object class="GtkBox">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="spacing">5</property>
+                                                    <property name="spacing">10</property>
                                                     <child>
-                                                      <object class="GtkEntry" id="ety_produ_emp">
-                                                        <property name="name">ety_emp_form</property>
-                                                        <property name="width-request">250</property>
+                                                      <object class="GtkBox">
                                                         <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <property name="primary-icon-name">address-book-new-symbolic</property>
-                                                        <property name="input-purpose">name</property>
-                                                        <property name="input-hints">GTK_INPUT_HINT_UPPERCASE_SENTENCES | GTK_INPUT_HINT_NONE</property>
-                                                        <property name="show-emoji-icon">True</property>
-                                                        <property name="enable-emoji-completion">True</property>
+                                                        <property name="can-focus">False</property>
+                                                        <property name="margin-left">5</property>
+                                                        <property name="margin-start">5</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="homogeneous">True</property>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Empresa</property>
+                                                            <property name="justify">fill</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">0</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Nombre</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Direccion</property>
+                                                            <property name="ellipsize">end</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">2</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Telefono</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">3</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Region</property>
+                                                            <property name="ellipsize">end</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">True</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">4</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Pais</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">5</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">RFC</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">6</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Estado</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">True</property>
+                                                            <property name="position">7</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkLabel">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="halign">start</property>
+                                                            <property name="label" translatable="yes">Correo</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="padding">10</property>
+                                                            <property name="position">8</property>
+                                                          </packing>
+                                                        </child>
                                                       </object>
                                                       <packing>
                                                         <property name="expand">False</property>
-                                                        <property name="fill">False</property>
-                                                        <property name="position">-1</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="position">0</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkSeparator">
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">False</property>
+                                                        <property name="orientation">vertical</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">False</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="position">1</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkBox">
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">False</property>
+                                                        <property name="orientation">vertical</property>
+                                                        <property name="homogeneous">True</property>
+                                                        <child>
+                                                          <object class="GtkBox">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="spacing">5</property>
+                                                            <child>
+                                                            <object class="GtkEntry" id="ety_produ_emp">
+                                                            <property name="name">ety_emp_form</property>
+                                                            <property name="width-request">250</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="primary-icon-name">address-book-new-symbolic</property>
+                                                            <property name="input-purpose">name</property>
+                                                            <property name="input-hints">GTK_INPUT_HINT_UPPERCASE_SENTENCES | GTK_INPUT_HINT_NONE</property>
+                                                            <property name="show-emoji-icon">True</property>
+                                                            <property name="enable-emoji-completion">True</property>
+                                                            </object>
+                                                            <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">-1</property>
+                                                            </packing>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">0</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_nombreemp">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="max-length">45</property>
+                                                            <property name="primary-icon-name">auth-fingerprint-symbolic</property>
+                                                            <property name="input-purpose">name</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_direccion">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="primary-icon-name">accessories-dictionary-symbolic</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">2</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_telefono">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="max-length">10</property>
+                                                            <property name="primary-icon-name">call-incoming</property>
+                                                            <property name="input-purpose">number</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">3</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_region">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="max-length">45</property>
+                                                            <property name="primary-icon-name">emoji-flags-symbolic</property>
+                                                            <property name="enable-emoji-completion">True</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">4</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkComboBoxText" id="cb_pais_emp">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="has-entry">True</property>
+                                                            <items>
+                                                            <item translatable="yes">Argentina</item>
+                                                            <item translatable="yes">Bahamas</item>
+                                                            <item translatable="yes">Barbados</item>
+                                                            <item translatable="yes">Belice</item>
+                                                            <item translatable="yes">Bolivia</item>
+                                                            <item translatable="yes">Brasil</item>
+                                                            <item translatable="yes">Canadá</item>
+                                                            <item translatable="yes">Chile</item>
+                                                            <item translatable="yes">Colombia</item>
+                                                            <item translatable="yes">Costa Rica</item>
+                                                            <item translatable="yes">Cuba</item>
+                                                            <item translatable="yes">Dominica</item>
+                                                            <item translatable="yes">Ecuador</item>
+                                                            <item translatable="yes">El Salvador</item>
+                                                            <item translatable="yes">Estados Unidos</item>
+                                                            <item translatable="yes">Jamaica</item>
+                                                            <item translatable="yes">México</item>
+                                                            <item translatable="yes">Nicaragua</item>
+                                                            <item translatable="yes">Panama</item>
+                                                            <item translatable="yes">Paraguay</item>
+                                                            <item translatable="yes">Perú</item>
+                                                            <item translatable="yes">Uruguay</item>
+                                                            </items>
+                                                            <child internal-child="entry">
+                                                            <object class="GtkEntry">
+                                                            <property name="can-focus">False</property>
+                                                            </object>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">True</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">5</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_rfc">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="max-length">45</property>
+                                                            <property name="primary-icon-name">avatar-default-symbolic</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">6</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkComboBoxText" id="cb_estado_emp">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">False</property>
+                                                            <property name="has-entry">True</property>
+                                                            <items>
+                                                            <item translatable="yes">Activo</item>
+                                                            <item translatable="yes">Inactivo</item>
+                                                            </items>
+                                                            <child internal-child="entry">
+                                                            <object class="GtkEntry">
+                                                            <property name="can-focus">False</property>
+                                                            </object>
+                                                            </child>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">True</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">7</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkEntry" id="ety_correoemp">
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="max-length">45</property>
+                                                            <property name="primary-icon-name">mail-message-new-symbolic</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">False</property>
+                                                            <property name="position">8</property>
+                                                          </packing>
+                                                        </child>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">True</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="position">2</property>
+                                                      </packing>
+                                                    </child>
+                                                  </object>
+                                                  <packing>
+                                                    <property name="expand">True</property>
+                                                    <property name="fill">True</property>
+                                                    <property name="position">0</property>
+                                                  </packing>
+                                                </child>
+                                                <child>
+                                                  <object class="GtkStack" id="stack_actualiza">
+                                                    <property name="visible">True</property>
+                                                    <property name="can-focus">False</property>
+                                                    <property name="transition-type">crossfade</property>
+                                                    <property name="interpolate-size">True</property>
+                                                    <child>
+                                                      <object class="GtkButton" id="inserta_datos_empresa">
+                                                        <property name="label">gtk-add</property>
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="receives-default">True</property>
+                                                        <property name="relief">none</property>
+                                                        <property name="use-stock">True</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="name">page0</property>
+                                                        <property name="title" translatable="yes">page0</property>
+                                                      </packing>
+                                                    </child>
+                                                    <child>
+                                                      <object class="GtkBox" id="box_act_emp">
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">False</property>
+                                                        <property name="homogeneous">True</property>
+                                                        <child>
+                                                          <object class="GtkButton" id="cancela_and_factura3">
+                                                            <property name="label">gtk-go-back</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="receives-default">True</property>
+                                                            <property name="relief">none</property>
+                                                            <property name="use-stock">True</property>
+                                                            <property name="always-show-image">True</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">True</property>
+                                                            <property name="position">0</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkButton" id="actualiza_datos_empresa">
+                                                            <property name="label">gtk-refresh</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="receives-default">True</property>
+                                                            <property name="relief">none</property>
+                                                            <property name="use-stock">True</property>
+                                                            <property name="always-show-image">True</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">True</property>
+                                                            <property name="position">1</property>
+                                                          </packing>
+                                                        </child>
+                                                        <child>
+                                                          <object class="GtkButton" id="btn_borrar_emp">
+                                                            <property name="label">gtk-delete</property>
+                                                            <property name="visible">True</property>
+                                                            <property name="can-focus">True</property>
+                                                            <property name="receives-default">True</property>
+                                                            <property name="relief">none</property>
+                                                            <property name="use-stock">True</property>
+                                                            <property name="always-show-image">True</property>
+                                                          </object>
+                                                          <packing>
+                                                            <property name="expand">False</property>
+                                                            <property name="fill">True</property>
+                                                            <property name="position">2</property>
+                                                          </packing>
+                                                        </child>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="name">page1</property>
+                                                        <property name="title" translatable="yes">page1</property>
+                                                        <property name="position">1</property>
                                                       </packing>
                                                     </child>
                                                   </object>
                                                   <packing>
                                                     <property name="expand">False</property>
                                                     <property name="fill">False</property>
-                                                    <property name="position">0</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_nombreemp">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="max-length">45</property>
-                                                    <property name="primary-icon-name">auth-fingerprint-symbolic</property>
-                                                    <property name="input-purpose">name</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
                                                     <property name="position">1</property>
                                                   </packing>
                                                 </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_direccion">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="primary-icon-name">accessories-dictionary-symbolic</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">2</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_telefono">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="max-length">10</property>
-                                                    <property name="primary-icon-name">call-incoming</property>
-                                                    <property name="input-purpose">number</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">3</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_region">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="max-length">45</property>
-                                                    <property name="primary-icon-name">emoji-flags-symbolic</property>
-                                                    <property name="enable-emoji-completion">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">4</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkComboBoxText" id="cb_pais_emp">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="has-entry">True</property>
-                                                    <items>
-                                                      <item translatable="yes">Argentina</item>
-                                                      <item translatable="yes">Bahamas</item>
-                                                      <item translatable="yes">Barbados</item>
-                                                      <item translatable="yes">Belice</item>
-                                                      <item translatable="yes">Bolivia</item>
-                                                      <item translatable="yes">Brasil</item>
-                                                      <item translatable="yes">Canadá</item>
-                                                      <item translatable="yes">Chile</item>
-                                                      <item translatable="yes">Colombia</item>
-                                                      <item translatable="yes">Costa Rica</item>
-                                                      <item translatable="yes">Cuba</item>
-                                                      <item translatable="yes">Dominica</item>
-                                                      <item translatable="yes">Ecuador</item>
-                                                      <item translatable="yes">El Salvador</item>
-                                                      <item translatable="yes">Estados Unidos</item>
-                                                      <item translatable="yes">Jamaica</item>
-                                                      <item translatable="yes">México</item>
-                                                      <item translatable="yes">Nicaragua</item>
-                                                      <item translatable="yes">Panama</item>
-                                                      <item translatable="yes">Paraguay</item>
-                                                      <item translatable="yes">Perú</item>
-                                                      <item translatable="yes">Uruguay</item>
-                                                    </items>
-                                                    <child internal-child="entry">
-                                                      <object class="GtkEntry" id="ety_pais_emp">
-                                                        <property name="can-focus">False</property>
-                                                        <property name="primary-icon-name">browser-symbolic</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">5</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_rfc">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="max-length">45</property>
-                                                    <property name="primary-icon-name">avatar-default-symbolic</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">6</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkComboBoxText" id="cb_estado_emp">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">False</property>
-                                                    <property name="has-entry">True</property>
-                                                    <items>
-                                                      <item translatable="yes">Activo</item>
-                                                      <item translatable="yes">Inactivo</item>
-                                                    </items>
-                                                    <child internal-child="entry">
-                                                      <object class="GtkEntry" id="ety_estado_emp">
-                                                        <property name="can-focus">False</property>
-                                                        <property name="primary-icon-name">preferences-desktop-accessibility</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">True</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">7</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkEntry" id="ety_correoemp">
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="max-length">45</property>
-                                                    <property name="primary-icon-name">mail-message-new-symbolic</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">False</property>
-                                                    <property name="position">8</property>
-                                                  </packing>
-                                                </child>
                                               </object>
-                                              <packing>
-                                                <property name="expand">True</property>
-                                                <property name="fill">True</property>
-                                                <property name="position">2</property>
-                                              </packing>
                                             </child>
                                           </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
                                         </child>
-                                        <child>
-                                          <object class="GtkStack" id="stack_actualiza">
+                                        <child type="label">
+                                          <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="transition-type">crossfade</property>
-                                            <property name="interpolate-size">True</property>
-                                            <child>
-                                              <object class="GtkButton" id="inserta_datos_empresa">
-                                                <property name="label">gtk-add</property>
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">True</property>
-                                                <property name="receives-default">True</property>
-                                                <property name="relief">none</property>
-                                                <property name="use-stock">True</property>
-                                              </object>
-                                              <packing>
-                                                <property name="name">page0</property>
-                                                <property name="title" translatable="yes">page0</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkBox" id="box_act_emp">
-                                                <property name="visible">True</property>
-                                                <property name="can-focus">False</property>
-                                                <property name="homogeneous">True</property>
-                                                <child>
-                                                  <object class="GtkButton" id="cancela_and_factura3">
-                                                    <property name="label">gtk-go-back</property>
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="receives-default">True</property>
-                                                    <property name="relief">none</property>
-                                                    <property name="use-stock">True</property>
-                                                    <property name="always-show-image">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">0</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkButton" id="actualiza_datos_empresa">
-                                                    <property name="label">gtk-refresh</property>
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="receives-default">True</property>
-                                                    <property name="relief">none</property>
-                                                    <property name="use-stock">True</property>
-                                                    <property name="always-show-image">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">1</property>
-                                                  </packing>
-                                                </child>
-                                                <child>
-                                                  <object class="GtkButton" id="btn_borrar_emp">
-                                                    <property name="label">gtk-delete</property>
-                                                    <property name="visible">True</property>
-                                                    <property name="can-focus">True</property>
-                                                    <property name="receives-default">True</property>
-                                                    <property name="relief">none</property>
-                                                    <property name="use-stock">True</property>
-                                                    <property name="always-show-image">True</property>
-                                                  </object>
-                                                  <packing>
-                                                    <property name="expand">False</property>
-                                                    <property name="fill">True</property>
-                                                    <property name="position">2</property>
-                                                  </packing>
-                                                </child>
-                                              </object>
-                                              <packing>
-                                                <property name="name">page1</property>
-                                                <property name="title" translatable="yes">page1</property>
-                                                <property name="position">1</property>
-                                              </packing>
-                                            </child>
                                           </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">False</property>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                       </object>
                                     </child>
-                                  </object>
-                                </child>
-                                <child type="label">
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">False</property>
                                   </object>
                                 </child>
                               </object>
@@ -3941,7 +3966,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">..\img\pdf-icon.png</property>
+                                    <property name="pixbuf">img/pdf-icon.png</property>
                                   </object>
                                 </child>
                               </object>
@@ -3984,7 +4009,7 @@ Author: Esteban Noe Sarmiento Mtz.
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkCheckButton">
+                          <object class="GtkCheckButton" id="mark_bajostck">
                             <property name="label" translatable="yes">Stock Bajo</property>
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
@@ -4087,7 +4112,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
+                                                <property name="halign">start</property>
                                                 <property name="label" translatable="yes">Codigo de Barras</property>
                                               </object>
                                               <packing>
@@ -4101,7 +4126,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
+                                                <property name="halign">start</property>
                                                 <property name="label" translatable="yes">Nombre y Descripcion</property>
                                                 <property name="justify">fill</property>
                                               </object>
@@ -4116,7 +4141,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
+                                                <property name="halign">start</property>
                                                 <property name="label" translatable="yes">Marca</property>
                                               </object>
                                               <packing>
@@ -4130,7 +4155,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                               <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
-                                                <property name="halign">end</property>
+                                                <property name="halign">start</property>
                                                 <property name="label" translatable="yes">Fecha Produccion</property>
                                               </object>
                                               <packing>
@@ -4252,6 +4277,19 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="expand">False</property>
                                             <property name="fill">False</property>
                                             <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkSeparator">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="orientation">vertical</property>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="padding">7</property>
+                                            <property name="position">1</property>
                                           </packing>
                                         </child>
                                         <child>
@@ -4566,7 +4604,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
                                                 <property name="text" translatable="yes">0.00</property>
-                                                <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
+                                                <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                                 <property name="adjustment">adjustment3</property>
                                                 <property name="digits">2</property>
                                                 <property name="numeric">True</property>
@@ -4582,7 +4620,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
                                                 <property name="text" translatable="yes">0.00</property>
-                                                <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
+                                                <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                                 <property name="adjustment">adjustment4</property>
                                                 <property name="digits">2</property>
                                                 <property name="numeric">True</property>
@@ -4617,7 +4655,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <item translatable="yes">Otros productos</item>
                                                 </items>
                                                 <child internal-child="entry">
-                                                  <object class="GtkEntry" id="ety_cat">
+                                                  <object class="GtkEntry">
                                                     <property name="can-focus">False</property>
                                                   </object>
                                                 </child>
@@ -4635,7 +4673,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="has-entry">True</property>
                                                 <property name="popup-fixed-width">False</property>
                                                 <child internal-child="entry">
-                                                  <object class="GtkEntry" id="entry_subcat">
+                                                  <object class="GtkEntry">
                                                     <property name="can-focus">False</property>
                                                   </object>
                                                 </child>
@@ -4650,7 +4688,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <packing>
                                             <property name="expand">True</property>
                                             <property name="fill">False</property>
-                                            <property name="position">1</property>
+                                            <property name="position">2</property>
                                           </packing>
                                         </child>
                                       </object>
@@ -4826,7 +4864,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="can-focus">True</property>
                                         <property name="valign">center</property>
                                         <property name="width-chars">9</property>
-                                        <property name="primary-icon-pixbuf">../img/currency_dollar_icon_172528.svg</property>
+                                        <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                         <property name="placeholder-text" translatable="yes">Buscar por Monto</property>
                                         <property name="adjustment">adjustment8</property>
                                         <property name="digits">2</property>
@@ -4846,14 +4884,42 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="valign">center</property>
                                         <property name="orientation">vertical</property>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">Fecha</property>
+                                            <property name="homogeneous">True</property>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">False</property>
+                                                <property name="label" translatable="yes">Fecha</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">True</property>
+                                                <property name="fill">False</property>
+                                                <property name="position">0</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkButton" id="btn_resetfrcha">
+                                                <property name="label" translatable="yes">Reset</property>
+                                                <property name="visible">True</property>
+                                                <property name="can-focus">True</property>
+                                                <property name="receives-default">True</property>
+                                                <property name="halign">center</property>
+                                                <property name="valign">center</property>
+                                              </object>
+                                              <packing>
+                                                <property name="expand">False</property>
+                                                <property name="fill">True</property>
+                                                <property name="pack-type">end</property>
+                                                <property name="position">1</property>
+                                              </packing>
+                                            </child>
                                           </object>
                                           <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">False</property>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
                                             <property name="position">0</property>
                                           </packing>
                                         </child>
@@ -4872,9 +4938,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkComboBoxText" id="cb_dia_propro4">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="active-id">1</property>
+                                                    <property name="active-id">0</property>
                                                     <items>
-                                                      <item id="1" translatable="yes">Dia</item>
+                                                      <item id="0" translatable="yes">Dia</item>
                                                       <item translatable="yes">1</item>
                                                       <item translatable="yes">2</item>
                                                       <item translatable="yes">3</item>
@@ -4931,9 +4997,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
                                                     <property name="popup-fixed-width">False</property>
-                                                    <property name="active-id">1</property>
+                                                    <property name="active-id">0</property>
                                                     <items>
-                                                      <item id="1" translatable="yes">Mes</item>
+                                                      <item id="0" translatable="yes">Mes</item>
                                                       <item translatable="yes">1</item>
                                                       <item translatable="yes">2</item>
                                                       <item translatable="yes">3</item>
@@ -4970,9 +5036,9 @@ Author: Esteban Noe Sarmiento Mtz.
                                                   <object class="GtkComboBoxText" id="cb_anio_propro4">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="active-id">1</property>
+                                                    <property name="active-id">0</property>
                                                     <items>
-                                                      <item id="1" translatable="yes">Año</item>
+                                                      <item id="0" translatable="yes">Año</item>
                                                     </items>
                                                   </object>
                                                   <packing>
@@ -6472,7 +6538,7 @@ Author: Esteban Noe Sarmiento Mtz.
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
-                                    <property name="pixbuf">..\img\usuario.png</property>
+                                    <property name="pixbuf">img/usuario.png</property>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
@@ -7012,7 +7078,7 @@ Mediante las bibliotecas en tiempo de ejecución GTK+ v3.24.23 y GLib v2.66.1</p
     <property name="translator-credits" translatable="yes">Esteban Noé Sarmiento Martinez</property>
     <property name="artists">Esteban Noé Sarmiento Martinez
 Manuel Morales Nanco</property>
-    <property name="logo">..\img\ico.png</property>
+    <property name="logo">img/ico.png</property>
     <property name="license-type">gpl-2-0-only</property>
     <child internal-child="vbox">
       <object class="GtkBox">

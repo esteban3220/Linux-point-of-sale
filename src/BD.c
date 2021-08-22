@@ -56,9 +56,6 @@ void on_acercade_clicked(){
 void on_acercade_response(){
         gtk_widget_hide_on_delete(win_acercade);
         }
-void on_web_response(){
-        gtk_widget_hide_on_delete(widget_web);
-        }
 void on_btn_Sesion_clicked ( )
 {
         conectar();
@@ -103,6 +100,11 @@ void on_btn_Rein_Dial_clicked()
 void on_cancela_and_factura4_clicked(){
                 gtk_widget_hide(inserta_producto);
         }
+void reset(){
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_dia_propro4),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_mes_propro4),0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (cb_anio_propro4),0);	
+	}
 void on_cancela_and_factura2_clicked(){
         gtk_stack_set_visible_child (GTK_STACK(stack_actualiza2),inserta_datos_productos);
         gtk_entry_set_text(ety_cbarra,"");
@@ -536,13 +538,12 @@ void busca_producto_pos(){
         char busqueda_fac[300];
         const char      *consulta = gtk_entry_get_text(GTK_ENTRY(ety_producto_pos));
 
-        sprintf(busqueda_fac,"select Nombre , Venta from Producto where Nombre LIKE '%%%s%%' or SKU ='%s'",consulta,consulta);
-
         conn = mysql_init(NULL);
+        
+        sprintf(busqueda_fac,"select Nombre , Venta from Producto where Nombre LIKE '%%%s%%' or SKU ='%s'",consulta,consulta);
+        
         if (strcmp(consulta,"") == 0){
-                gtk_widget_set_visible (pop_busqueda_pos,0);
-                gtk_stack_set_visible_child(GTK_STACK(stack_header),swchitcher);
-                gtk_toggle_button_set_active(btn_buscar_pos,FALSE);
+                gtk_stack_set_visible_child(GTK_STACK(stack_pop_producto),lbl_nodatos);
         }else{
                 gtk_widget_set_visible (pop_busqueda_pos,1);
 
@@ -580,7 +581,6 @@ void busca_proveedor(){
         const char      *consulta2 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_busca_estado));
 
         if (consulta2[0]=='E'){
-
         sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%%%s%%'",consulta);
 		}else{
         sprintf(busqueda_fac,"select * from Proveedor where Empresa LIKE '%%%s%%' and Estado ='%s'",consulta,consulta2);
@@ -614,8 +614,20 @@ void busca_producto(){
         const char      *consulta3 = gtk_entry_get_text(ety_busca_categoria);
         const char      *consulta4 = gtk_entry_get_text(ety_busca_subcategoria);
 
-        sprintf(busqueda_fac,"select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'",consulta,consulta2,consulta3,consulta4);
-
+		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(mark_bajostck))) {
+			gtk_widget_set_sensitive (GTK_WIDGET(ety_busca_producto) ,FALSE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_productos_proveedor) ,FALSE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_bs_cat) ,FALSE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_bs_subcat) ,FALSE);
+			sprintf(busqueda_fac,"select * from Producto where Piezas <=10");
+		}
+		else {
+			gtk_widget_set_sensitive (GTK_WIDGET(ety_busca_producto) ,TRUE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_productos_proveedor) ,TRUE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_bs_cat) ,TRUE);
+			gtk_widget_set_sensitive (GTK_WIDGET(cb_bs_subcat) ,TRUE);
+			sprintf(busqueda_fac,"select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'",consulta,consulta2,consulta3,consulta4);
+		}
         if(strcmp(consulta2,"")!=0){
                 gtk_entry_set_icon_from_icon_name (ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,"edit-clear-symbolic");
                 gtk_entry_set_icon_sensitive(ety_busca_proveedor_producto,GTK_ENTRY_ICON_SECONDARY,1);
@@ -702,43 +714,7 @@ void on_btn_consulta_emp_clicked(){
 
         gtk_entry_set_progress_fraction (ety_produ_emp, 0.0);
 }
-void on_btn_consulta_fac_clicked(){
-        user = gtk_entry_get_text(g_Entry_Usuario);
-        password = gtk_entry_get_text(g_Entry_Contrasena);
-        char busqueda_fac[50];
-        const char      *consulta = gtk_entry_get_text(id_fac_act);
 
-        sprintf(busqueda_fac,"select * from Factura where Idfactura = %s",consulta);
-
-        conn = mysql_init(NULL);
-
- if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
-
-        if (mysql_query(conn, busqueda_fac))
-        {
-                char tempErr[60];
-                sprintf(tempErr,"%s", mysql_error(conn));
-                gtk_label_set_text(lbl_error,tempErr);
-                return gtk_widget_show(dialog_error_datos);
-        }
-        res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL) {
-
-                        gtk_entry_set_text(ety_profac_act,row[1]);
-                        gtk_entry_set_text(ety_empfact_act,row[2]);
-                        gtk_entry_set_text(ety_cantidafac_act,row[4]);
-                        gtk_entry_set_text(ety_preci_act,row[5]);
-                        gtk_entry_set_text(ety_mpago_act,row[6]);
-                        gtk_entry_set_text(ety_descfac_act1,row[7]);
-                        gtk_entry_set_text(ety_totalfac_act,row[8]);
-                }
-
-        mysql_free_result(res);
-        mysql_close(conn);
-
-}
 void consulta_producto(){
         user = gtk_entry_get_text(g_Entry_Usuario);
         password = gtk_entry_get_text(g_Entry_Contrasena);
@@ -1477,15 +1453,22 @@ void filtrar_ticketR(){
 }
 
 void filtrar_ticket(){
-	char busqueda_fac[300];
+		char busqueda_fac[500];
         const char		*consulta = gtk_entry_get_text(ety_busquedatick);
         const char		*consulta2 = gtk_entry_get_text(ety_cantidadtick2);
-		if(strcmp(consulta2,"0.00") == 0) {
-			gtk_entry_set_text(ety_cantidadtick2,"");
-}			 
-
-        sprintf(busqueda_fac,"select * from Ticket where Id_ticket LIKE '%s%%' and Total LIKE '%s%%' ",consulta,consulta2);
-		
+        
+        const char		*dia = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_dia_propro4));
+        const char		*mes = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_mes_propro4));
+        const char		*anio = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(cb_anio_propro4));
+        
+        if(strcmp(consulta2,"0.00") == 0) gtk_entry_set_text(ety_cantidadtick2,"");
+        if(dia[0]=='D' && mes[0]=='M' && anio[0]=='A')  {
+				sprintf(busqueda_fac,"select * from Ticket where Id_ticket LIKE '%s%%' and Total LIKE '%s%%' ",consulta,consulta2);
+		  }
+		else {
+			
+        sprintf(busqueda_fac,"select * from Ticket where Id_ticket LIKE '%s%%' and Total LIKE '%s%%' and year(Fecha_hora) = '%s' and month(Fecha_hora) = '%s' and day(Fecha_hora) = '%s'",consulta,consulta2,anio,mes,dia);
+		}
         conn = mysql_init(NULL);
 
  if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
@@ -1494,30 +1477,38 @@ void filtrar_ticket(){
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
-                sprintf(tempErr,"%s", mysql_error(conn));
-                gtk_label_set_text(lbl_error,tempErr);
-                return gtk_widget_show(dialog_error_datos);
+			char tempErr[60];
+			sprintf(tempErr,"%s", mysql_error(conn));
+			gtk_label_set_text(lbl_error,tempErr);
+			return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
-        refresca_datos_fac();
-        refresca_venta();
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_factura();
+        while ((row = mysql_fetch_row(res)) != NULL){   		
+			gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac2);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac3);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac4);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac5);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac6);
+		gtk_tree_view_remove_column (GTK_TREE_VIEW(view2), column_fac7);
+			refresca_venta();
+			titulo_factura();
+		}
         mysql_free_result(res);
         mysql_close(conn);
         contenido_aud_ticket();
-        gtk_tree_selection_unselect_all(select1);
 	}
 
 	
-void tree_selection_changed_cb( gpointer data){    
-        if (gtk_tree_selection_get_selected (select1, &model2, &iter2))
+void tree_selection_changed_cb(){  
+	
+	gchar *id;
+        if (gtk_tree_selection_get_selected (select1, &model2, &iter2) == TRUE)
         {
-		refresca_venta();
         char consu[200];
         char consu2[200];
         char consu3[200];
-		gchar *id;
+		
                 gtk_tree_model_get (model2, &iter2, COLidfac, &id, -1);
                 sprintf(consu,"select Query from Ticket where Id_ticket = %s",id);
                 sprintf(consu3,"select Total,Recibido,Cambio from Ticket where Id_ticket = %s",id);
@@ -1529,7 +1520,7 @@ void tree_selection_changed_cb( gpointer data){
                                                 gtk_label_set_text(lbl_error,tempErr);
                                                 return gtk_widget_show(dialog_error_datos);
                                         }
-                                        if (mysql_query(conn, consu ))
+                                        if (mysql_query(conn, consu))
                                         {
 											char tempErr[60];
 											sprintf(tempErr,"%s", mysql_error(conn));
@@ -1557,9 +1548,13 @@ void tree_selection_changed_cb( gpointer data){
 											return gtk_widget_show(dialog_error_datos);
                                         }
                                         res = mysql_use_result(conn);
-                                        while ((row = mysql_fetch_row(res)) != NULL)titulo_venta();
+                                        refresca_venta();
+                                        while ((row = mysql_fetch_row(res)) != NULL){
+											refresca_venta();
+											titulo_venta();
+											}
 
-                                        if (mysql_query(conn, consu3 ))
+                                        if (mysql_query(conn, consu3))
                                         {
 											char tempErr[60];
 											sprintf(tempErr,"%s", mysql_error(conn));
@@ -1567,11 +1562,12 @@ void tree_selection_changed_cb( gpointer data){
 											return gtk_widget_show(dialog_error_datos);
                                         }
                                         res = mysql_use_result(conn);
-                                        while ((row = mysql_fetch_row(res)) != NULL){
+                                        while ((row = mysql_fetch_row(res)) != NULL)
+											{
                                                 gtk_label_set_text(lbl_tickettotal,row[0]);
                                                 gtk_label_set_text(lbl_ticketrecibido,row[1]);
                                                 gtk_label_set_text(lbl_ticketcambio,row[2]);
-                                                }
+											}
 
                                         mysql_close(conn);
                                         g_free(id);
@@ -1664,7 +1660,6 @@ int main(int argc, char *argv[])
                 ety_busca_categoria = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_categoria"));
                 ety_busca_subcategoria = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busca_subcategoria"));
 
-                La_lbl_Titulo_BD = GTK_LABEL(gtk_builder_get_object(builder,"lbl_Titulo_BD"));
                 La_Label_Error_ingreso = GTK_LABEL(gtk_builder_get_object(builder,"Label_Error_ingreso"));
                 cb_anio_fac = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_fac"));
                 cb_estado_emp = GTK_WIDGET(gtk_builder_get_object(builder,"cb_estado_emp"));
@@ -1688,12 +1683,9 @@ int main(int argc, char *argv[])
                 contenedor_view6 = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_view6"));
                 contenedor_busqueda = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_busqueda"));
                 contenedor_sql = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_sql"));
-                stackgtk = GTK_WIDGET(gtk_builder_get_object(builder,"stack"));
                 ety_cat = GTK_WIDGET(gtk_builder_get_object(builder,"ety_cat"));
                 stack_actualiza2 = GTK_STACK(gtk_builder_get_object(builder,"stack_actualiza2"));
-                stack_busqueda = GTK_WIDGET(gtk_builder_get_object(builder,"stack_busqueda"));
                 stack_actualiza = GTK_WIDGET(gtk_builder_get_object(builder,"stack_actualiza"));
-                exportar_pdf = GTK_WIDGET(gtk_builder_get_object(builder,"exportar_pdf"));
                 muestra_func = GTK_WIDGET(gtk_builder_get_object(builder,"muestra_func"));
                 reveal_consulta = GTK_WIDGET(gtk_builder_get_object(builder,"reveal_consulta"));
                 btn_sql_aceptar = GTK_WIDGET(gtk_builder_get_object(builder,"btn_sql_aceptar"));
@@ -1702,7 +1694,6 @@ int main(int argc, char *argv[])
                 box_act_pro = GTK_WIDGET(gtk_builder_get_object(builder,"box_act_pro"));
                 win_acercade = GTK_WIDGET(gtk_builder_get_object(builder,"acercade"));
                 switchgtk = GTK_WIDGET(gtk_builder_get_object(builder,"activador_sql"));
-                source_code = GTK_WIDGET(gtk_builder_get_object(builder,"Codigo_sql"));
                 lbl_anadir_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_anadir_advertencia"));
                 lbl_eliminar_advertencia = GTK_LABEL(gtk_builder_get_object(builder,"lbl_eliminar_advertencia"));
                 lbl_info = GTK_LABEL(gtk_builder_get_object(builder,"lbl_info"));
@@ -1719,7 +1710,6 @@ int main(int argc, char *argv[])
                 swchitcher = GTK_WIDGET(gtk_builder_get_object(builder,"swchitcher"));
                 entry_buscar = GTK_ENTRY(gtk_builder_get_object(builder,"entry_buscar"));
                 historial_busqueda = GTK_WIDGET(gtk_builder_get_object(builder,"historial_busqueda"));
-                stack_historial = GTK_WIDGET(gtk_builder_get_object(builder,"stack_historial"));
                 contenedor_historial = GTK_WIDGET(gtk_builder_get_object(builder,"contenedor_historial"));
                 box_act_emp = GTK_WIDGET(gtk_builder_get_object(builder,"box_act_emp"));
                 bar = GTK_WIDGET(gtk_builder_get_object(builder,"bar"));
@@ -1803,7 +1793,6 @@ int main(int argc, char *argv[])
                 ety_correo_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_correo_act"));
                 ety_pos_producto = GTK_ENTRY(gtk_builder_get_object(builder,"ety_pos_producto"));
 
-                id_fac_act = GTK_ENTRY(gtk_builder_get_object(builder,"id_fac_act"));
                 ety_profac_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_profac_act"));
                 ety_empfact_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_empfact_act"));
                 ety_cantidafac_act = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cantidafac_act"));
@@ -1871,7 +1860,6 @@ int main(int argc, char *argv[])
 
                 stack_pop_producto = GTK_WIDGET(gtk_builder_get_object(builder,"stack_pop_producto"));
                 lbl_nodatos = GTK_WIDGET(gtk_builder_get_object(builder,"lbl_nodatos"));
-                revel_bucar = GTK_WIDGET(gtk_builder_get_object(builder,"revel_bucar"));
                 treeview_pos = GTK_WIDGET(gtk_builder_get_object(builder,"treeview_pos"));
                 inserta_datos_empresa = GTK_WIDGET(gtk_builder_get_object(builder,"inserta_datos_empresa"));
                 btn_cancelar_stp = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_stp"));
@@ -1901,6 +1889,8 @@ int main(int argc, char *argv[])
                 cb_filtraudticket = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(builder,"cb_filtraudticket"));
                 ety_busquedatick = GTK_ENTRY(gtk_builder_get_object(builder,"ety_busquedatick"));
                 ety_cantidadtick2 = GTK_ENTRY(gtk_builder_get_object(builder,"ety_cantidadtick2"));
+                mark_bajostck = GTK_WIDGET(gtk_builder_get_object(builder,"mark_bajostck"));
+                btn_resetfrcha = GTK_BUTTON(gtk_builder_get_object(builder,"btn_resetfrcha"));
 
                 btn_cancelar_adver8 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver8"));
                 btn_cancelar_adver2 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver2"));
@@ -1911,8 +1901,10 @@ int main(int argc, char *argv[])
                 btn_cancelar_adver4 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver4"));
                 btn_cancelar_adver6 = GTK_WIDGET(gtk_builder_get_object(builder,"btn_cancelar_adver6"));
                 cb_anio_propro4 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_anio_propro4")); 
+                cb_dia_propro4 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_dia_propro4"));
+                cb_mes_propro4 = GTK_WIDGET(gtk_builder_get_object(builder,"cb_mes_propro4"));
 
-                for(i=2051;i>=1950;i--){
+                for(i=2030;i>=2020;i--){
                         sprintf(anio,"%d",i);
                         gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_pro),anio);
                         gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (cb_anio_propro),anio);
@@ -1945,8 +1937,6 @@ int main(int argc, char *argv[])
                 g_signal_connect(G_OBJECT(window_BD),"delete-event",G_CALLBACK(on_Window_BD_destroy),NULL);
                 g_signal_connect(G_OBJECT(widget_inventario),"delete-event",G_CALLBACK(cierra_inventario),NULL);
                 g_signal_connect(G_OBJECT(btn_Rein_Dial),"clicked",G_CALLBACK(on_btn_Rein_Dial_clicked),NULL);
-                g_signal_connect(G_OBJECT(btn_cancelar_adver3),"clicked",G_CALLBACK(on_btn_cancelar_adver3_clicked),NULL);
-                g_signal_connect(G_OBJECT(btn_cancelar_adver6),"clicked",G_CALLBACK(on_btn_cancelar_adver6_clicked),NULL);
                 g_signal_connect(G_OBJECT(inserta_datos_empresa),"clicked",G_CALLBACK(on_inserta_datos_empresa_clicked),NULL);
                 g_signal_connect(G_OBJECT(btn_consulta_emp),"clicked",G_CALLBACK(on_btn_consulta_emp_clicked),NULL);
                 g_signal_connect(G_OBJECT(emp_aceptar_anadir),"clicked",G_CALLBACK(on_emp_aceptar_anadir_clicked),NULL);
@@ -1997,6 +1987,11 @@ int main(int argc, char *argv[])
                 g_signal_connect(G_OBJECT(cb_cat),"changed",G_CALLBACK(cambia_categoria),NULL);
                 g_signal_connect(G_OBJECT(cb_filtraprov),"changed",G_CALLBACK(filtra_proveedor),NULL);
                 g_signal_connect(G_OBJECT(cb_bs_cat),"changed",G_CALLBACK(cambia_bs_categoria),NULL);
+                
+                g_signal_connect(G_OBJECT(cb_mes_propro4),"changed",G_CALLBACK(filtrar_ticket),NULL);
+                g_signal_connect(G_OBJECT(cb_dia_propro4),"changed",G_CALLBACK(filtrar_ticket),NULL);
+                g_signal_connect(G_OBJECT(cb_anio_propro4),"changed",G_CALLBACK(filtrar_ticket),NULL);
+                
                 g_signal_connect(G_OBJECT(ety_busca_proveedor),"changed",G_CALLBACK(busca_proveedor),NULL);
                 g_signal_connect(G_OBJECT(ety_producto_pos),"changed",G_CALLBACK(busca_producto_pos),NULL);
                 g_signal_connect(G_OBJECT(ety_filtraprov),"changed",G_CALLBACK(filtra_proveedor),NULL);
@@ -2007,6 +2002,8 @@ int main(int argc, char *argv[])
                 g_signal_connect(G_OBJECT(pro_aceptar_anadir),"clicked",G_CALLBACK(on_pro_aceptar_anadir_clicked),NULL);
                 g_signal_connect(G_OBJECT(ety_busca_producto),"changed",G_CALLBACK(busca_producto),NULL);
                 g_signal_connect(G_OBJECT(btn_aceptar_a2),"clicked",G_CALLBACK(on_btn_aceptar_a2_clicked),NULL);
+                g_signal_connect(G_OBJECT(btn_cancelar_adver3),"clicked",G_CALLBACK(on_btn_cancelar_adver3_clicked),NULL);
+                
 
                 g_signal_connect(G_OBJECT(ety_busca_proveedor_producto),"changed",G_CALLBACK(busca_producto),NULL);
                 g_signal_connect(G_OBJECT(ety_busca_categoria),"changed",G_CALLBACK(busca_producto),NULL);
@@ -2021,16 +2018,13 @@ int main(int argc, char *argv[])
                 g_signal_connect(G_OBJECT(btn_13cb),"clicked",G_CALLBACK(trecb),NULL);
                 g_signal_connect(G_OBJECT(btn_act),"clicked",G_CALLBACK(on_inserta_datos_empres_clicked),NULL);
                 g_signal_connect(G_OBJECT(btn_venta),"clicked",G_CALLBACK(ingresa_venta),NULL);
+                g_signal_connect(G_OBJECT(btn_resetfrcha),"clicked",G_CALLBACK(reset),NULL);
                 g_signal_connect(G_OBJECT(btn_exportaproductopdf),"clicked",G_CALLBACK(pdf_producto),NULL);
-                g_signal_connect(G_OBJECT(btn_inventario),"clicked",G_CALLBACK(abre_inventario),NULL);
+                //g_signal_connect(G_OBJECT(btn_inventario),"clicked",G_CALLBACK(abre_inventario),NULL);
                 g_signal_connect(G_OBJECT(select1),"changed",G_CALLBACK(tree_selection_changed_cb),NULL);
                 g_signal_connect(G_OBJECT(select3),"changed",G_CALLBACK(selection_buscar),NULL);
                 g_signal_connect(treeview_pos, "key-release-event", G_CALLBACK(key_event), NULL);
-
-
-                GdkColor color = {0, 255<<8, 255<<8 ,255<<8};
-                gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Usuario), GTK_STATE_NORMAL, &color);
-                gtk_widget_modify_bg (GTK_WIDGET(g_Entry_Contrasena), GTK_STATE_NORMAL, &color);
+				g_signal_connect(G_OBJECT(mark_bajostck), "toggled", G_CALLBACK(busca_producto), NULL);
 
                 gtk_builder_connect_signals(builder, NULL);
                 g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);

@@ -139,7 +139,7 @@ static GtkTreeModel * POS (void)
 
 static GtkTreeModel *bus (void)
 {
-	file_pixbuf = gdk_pixbuf_new_from_file  ("cesta-de-la-compra.png", NULL);
+	file_pixbuf = gdk_pixbuf_new_from_file  ("img/shopping-cart-insert256_24820.png", NULL);
 	
 	store_busqueda = gtk_list_store_new (N_COLUMNS_BUS, G_TYPE_STRING,G_TYPE_STRING,GDK_TYPE_PIXBUF);
 	
