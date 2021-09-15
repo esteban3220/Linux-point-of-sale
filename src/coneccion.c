@@ -35,7 +35,7 @@ FILE* 			fichero2;
 FILE* 			fichero3;
 const char 		*user;
 const char 		*password;
-char 			*server = "localhost";
+char 			*server = "192.168.0.45";
 char 			*database = "Tienda";
 
 

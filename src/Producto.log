@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  26 AUG 2021 15:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.8.29)  12 SEP 2021 22:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -145,7 +145,10 @@ File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count266
 \l__pdf_internal_box=\box53
 )
-(./Producto.aux)
+(./Producto.aux
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
+)
 \openout1 = `Producto.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -247,33 +250,40 @@ Overfull \hbox (0.68597pt too wide) in paragraph at lines 15--15
  []
 
 
-! Package inputenc Error: Unicode character 😄 (U+1F604)
-(inputenc)                not set up for use with LaTeX.
+Underfull \hbox (badness 5288) in paragraph at lines 16--16
+[]|\OT1/cmr/m/n/10 Coca Co-la de
+ []
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.16 2 & Tamales de Aroos😄
-                             ️ & Coca Cola S.A de C.V & 2048-05-07 & 2049-...
 
-? 
-! Emergency stop.
- ...                                              
-                                                  
-l.16 2 & Tamales de Aroos😄
-                             ️ & Coca Cola S.A de C.V & 2048-05-07 & 2049-...
+Underfull \hbox (badness 10000) in alignment at lines 12--17
+ [] [] [] [] [] [] [] [] [] 
+ []
 
-You may provide a definition with
-\DeclareUnicodeCharacter 
 
- 
+Underfull \vbox (badness 10000) detected at line 17
+ []
+
+[1
+
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Producto.aux
+LaTeX Info: Redefining \. on input line 18.
+LaTeX Info: Redefining \% on input line 18.
+) ) 
 Here is how much of TeX's memory you used:
- 3090 strings out of 478994
- 45167 string characters out of 5864751
- 352743 words of memory out of 5000000
+ 3093 strings out of 478994
+ 45010 string characters out of 5864751
+ 358883 words of memory out of 5000000
  20555 multiletter control sequences out of 15000+600000
  404036 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 83i,6n,88p,334b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 83i,6n,88p,398b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on Producto.pdf (1 page, 33350 bytes).
+PDF statistics:
+ 16 PDF objects out of 1000 (max. 8388607)
+ 10 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -30,20 +30,27 @@
 #include "columnas.h"
 
 
-void celdas_editables(GtkCellRendererText *cell,
+void celdas_editables(
              const gchar         *path_string,
              const gchar         *new_text,
              gpointer             data){
-				 
-        gchar *old_text;
 
-        gtk_tree_model_get (model_inventario, &iter_inventario, COLinveingreso, &old_text, -1);
+		GtkTreePath *path = gtk_tree_path_new_from_string (path_string);		 
+        gchar *old_text;
+		gint i;
+
+        gtk_tree_model_get (model_inventario, &iter_inventario, COLinveajuste, &old_text, -1);
         g_free (old_text);
 
-        gtk_list_store_set (GTK_LIST_STORE (model_inventario), &iter_inventario, COLinveingreso, COLinveingreso, -1);
+		i = gtk_tree_path_get_indices (path)[0];
+
+        gtk_list_store_set (GTK_LIST_STORE (model_inventario), &iter_inventario
+		,COLinveingreso,"h"
+		,COLinveajuste,"h",-1);
+		
         gtk_widget_show(g_Dialog_Error);		 
 	 }
-	 
+	 	 
 static GtkTreeModel * inve (void)
 {
 	store_inve = gtk_list_store_new (N_COLUMNS_inve ,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING,G_TYPE_STRING);
@@ -65,6 +72,7 @@ static GtkTreeModel * inve (void)
 	 COLinveajuste  , "0",-1);
 }
 	return GTK_TREE_MODEL (store_inve);
+	g_signal_connect (renderer_inventario, "edited", G_CALLBACK (celdas_editables), model_inventario);
 }
 
  static GtkWidget *titulo_inventario(void)
@@ -89,7 +97,7 @@ static GtkTreeModel * inve (void)
 	model_inventario = inve ();
 	gtk_tree_view_set_model (GTK_TREE_VIEW (view_inventario), model_inventario);
 	g_object_unref (model_inventario);
-	g_signal_connect (renderer_inventario, "edited", G_CALLBACK (celdas_editables), inve);
+	
 	return view_inventario;
 }
 
@@ -212,7 +220,7 @@ static GtkTreeModel *venta_ticket (void)
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_venta),column_venta3);
 	
 	renderer_venta = gtk_cell_renderer_text_new ();
-	column_venta4 = gtk_tree_view_column_new_with_attributes ("Precio Unitario",renderer_venta,"text", subtotal_venta,NULL);
+	column_venta4 = gtk_tree_view_column_new_with_attributes ("Subtotal",renderer_venta,"text", subtotal_venta,NULL);
 	gtk_tree_view_append_column ( GTK_TREE_VIEW (view_venta),column_venta4);
 	
 	model_venta = venta_ticket();

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  21 AUG 2021 18:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.8.29)  12 SEP 2021 22:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -239,60 +239,27 @@ Underfull \hbox (badness 5077) in paragraph at lines 15--15
  []
 
 
-! Package inputenc Error: Unicode character 😄 (U+1F604)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.16 Prueba de emojis 😄
-                          ️ & lala & lalal & 5464565646 & dfgdfgdf & Activ...
-
-? q
-OK, entering \batchmode...
-
-! Interruption.
-\GenericError  ...                                
-                                                  \endgroup 
-l.16 Prueba de emojis 😄
-                          ️ & lala & lalal & 5464565646 & dfgdfgdf & Activ...
-
-? 
-
-! Package inputenc Error: Unicode character ️ (U+FE0F)
-(inputenc)                not set up for use with LaTeX.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.16 Prueba de emojis 😄️
-                              & lala & lalal & 5464565646 & dfgdfgdf & Activ...
-
-? 
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--17
+Underfull \hbox (badness 10000) in paragraph at lines 16--16
 []|\OT1/cmr/m/n/10 Juan Pa-tri-cio
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 17--17
+Underfull \hbox (badness 10000) in paragraph at lines 16--16
 []|\OT1/cmr/m/n/10 Juan Vaz-quez
  []
 
 
-Underfull \hbox (badness 5288) in paragraph at lines 17--17
+Underfull \hbox (badness 5288) in paragraph at lines 16--16
 \OT1/cmr/m/n/10 de Me-lla 525,
  []
 
 
-Underfull \hbox (badness 10000) in alignment at lines 12--18
+Underfull \hbox (badness 10000) in alignment at lines 12--17
  [] [] [] [] [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 18
+Underfull \vbox (badness 10000) detected at line 17
  []
 
 [1
@@ -303,16 +270,16 @@ LaTeX Info: Redefining \. on input line 16.
 LaTeX Info: Redefining \% on input line 16.
 ) ) 
 Here is how much of TeX's memory you used:
- 3094 strings out of 478994
- 45004 string characters out of 5864751
- 360849 words of memory out of 5000000
- 20556 multiletter control sequences out of 15000+600000
+ 3092 strings out of 478994
+ 44991 string characters out of 5864751
+ 358849 words of memory out of 5000000
+ 20554 multiletter control sequences out of 15000+600000
  404036 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  83i,6n,88p,326b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on Empresa.pdf (1 page, 34082 bytes).
+Output written on Empresa.pdf (1 page, 33321 bytes).
 PDF statistics:
  16 PDF objects out of 1000 (max. 8388607)
  10 compressed objects within 1 object stream

@@ -1,8 +1,10 @@
 # Fdb version 3
-["pdflatex"] 1630009838 "Producto.tex" "Producto.pdf" "Producto" 1630009838
+["pdflatex"] 1631502554 "Producto.tex" "Producto.pdf" "Producto" 1631502554
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1617738065 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1617738065 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1617738065 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb" 1617738065 34811 78b52f49e893bcba91bd7581cdc144c0 ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1617738065 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1617738065 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/babel-spanish/spanish.ldf" 1617738065 26223 0286ca123141cff8dd4956c4576d2ef4 ""
   "/usr/share/texmf-dist/tex/generic/babel/babel.def" 1617738065 118719 e672239d75d9419ba29850a1b391bd00 ""
@@ -34,10 +36,11 @@
   "/usr/share/texmf-dist/tex/latex/tools/longtable.sty" 1617738065 12133 b1e3e65b69714dbfcc5e6c0b19d66b50 ""
   "/usr/share/texmf-dist/tex/latex/tools/tabularx.sty" 1617738065 7148 4ba718200276533b3a293c311a9349e0 ""
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1617738065 39911 2da6c67557ec033436fe5418a70a8a61 ""
-  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1623382165 2812672 3169e2e6ccd59b1e9b99367dbed23b2f ""
-  "Producto.aux" 1630009838 8 a94a2480d3289e625eea47cd1b285758 "pdflatex"
-  "Producto.tex" 1630009838 999 37c717f5e2f069e3c8c74099f842c984 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1630533240 334353 c825108cbc13fa4a18a274c473196142 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1630280523 2812682 9691ec48e38802f6db6ecad4a1a863d9 ""
+  "Producto.aux" 1631502554 481 aba7bf1976d161fe732a6e0cde44f55a "pdflatex"
+  "Producto.tex" 1631502554 953 5235bc643c51d320ac2b82a032260d00 ""
   (generated)
-  "Producto.log"
   "Producto.pdf"
+  "Producto.log"
   "Producto.aux"
