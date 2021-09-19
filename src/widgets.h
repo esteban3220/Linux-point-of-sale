@@ -55,7 +55,11 @@ GtkEntry			*ety_filtroprod;
 GtkEntry			*ety_busquedatick;
 GtkEntry			*ety_cantidadtick;
 GtkEntry			*ety_cantidadtick2;
+GtkEntry            *ety_inve;
+GtkEntry            *ety_can_inve;
 GtkLabel			*ety_cambio;
+GtkLabel            *lbl_inventario;
+GtkSwitch           *switch_inve;
 GtkStack 			*stack_menu_pos;
 GtkStack			*stack_sku;
 GtkStack			*stack_bus_pos;
@@ -459,4 +463,5 @@ GtkTreeViewColumn 	*column_aud_fac17;
 GtkTreeSelection 	*select1;
 GtkTreeSelection 	*select2;
 GtkTreeSelection 	*select3;
+GtkTreeSelection 	*select4;
 

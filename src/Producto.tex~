@@ -12,9 +12,8 @@
 \begin{longtable}{|p{4cm}|p{2.5cm}|p{2.5cm}|p{1.8cm}|p{1.8cm}|p{1cm}|p{1cm}|p{3cm}|p{3cm}||}
 \hline 
 \hline
-\textbf{SKU} & \textbf{Nombre} & \textbf{Empresa} & \textbf{Fecha de Produccion} & \textbf{Fecha de Caducidad} & \textbf{Piezas} & \textbf{Venta} & \textbf{Categoria} & \textbf{Subcategoria}\\ \hline \hline1 & 1 & (null) & 2049-03-03 & 2049-03-03 & 1 & 0.00 & Bebidas & Isotónicos \\ \hline 
-2 & Tamales de Aroos😄️ & Coca Cola S.A de C.V & 2048-05-07 & 2049-04-06 & 1 & 20.00 & Bebidas & Energetizantes \\ \hline 
-3 & lelele 😛️ & Prueba de emojis 😄️ & 2048-05-04 & 2047-04-05 & 0 & 0.00 & Bebidas & Energetizantes \\ \hline 
+\textbf{SKU} & \textbf{Nombre} & \textbf{Empresa} & \textbf{Fecha de Produccion} & \textbf{Fecha de Caducidad} & \textbf{Piezas} & \textbf{Venta} & \textbf{Categoria} & \textbf{Subcategoria}\\ \hline \hline737 & Chocolate Chocomilk mmm rico ñom ñom & ChocoMilk & 2049-02-03 & 2048-05-04 & 92 & 10.00 & Confitería/dulceria & Chocolate en polvo \\ \hline 
+5644564554646 & Coca Cola de 500 Ml. Vidrio & Coca Cola S.A de C.V & 2049-03-05 & 2049-06-04 & 50 & 12.00 & Bebidas & Refrescos \\ \hline 
 \end{longtable}
 \thispagestyle{empty}
 \end{landscape}

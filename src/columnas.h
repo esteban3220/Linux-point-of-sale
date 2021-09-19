@@ -1,15 +1,18 @@
-enum {
-	COLproducto_pos ,
-	COLventa_pos ,
+enum
+{
+	COLproducto_pos,
+	COLventa_pos,
 	COL_PIXBUF,
 	N_COLUMNS_BUS
 };
 
-enum {
-	COLinvenombre ,
-	COLinvepiezas ,
-	COLinvevalor ,
-	COLinveingreso ,
+enum
+{
+	COLinvesku,
+	COLinvenombre,
+	COLinvepiezas,
+	COLinvevalor,
+	COLinveingreso,
 	COLinveajuste,
 	N_COLUMNS_inve
 };
@@ -25,7 +28,7 @@ enum
 	COLrfc,
 	COLcorreo,
 	NUM_COLS
-} ;
+};
 enum
 {
 	COLidfac,
@@ -36,23 +39,23 @@ enum
 	COLtipago,
 	COLfechahora,
 	NUM_COLS_fac
-} ;
+};
 enum
 {
 	COLidproducto,
-	COLnomprod, 
-	COLmarca, 
-	COLfechaproduccion, 
-	COLfechacaducidad, 
+	COLnomprod,
+	COLmarca,
+	COLfechaproduccion,
+	COLfechacaducidad,
 	COLnumlote,
-	COLneto, 
-	COLpiezas, 
-	COLcompra, 
-	COLventa, 
-	COLcategoria, 
-	COLsubcategoria, 
+	COLneto,
+	COLpiezas,
+	COLcompra,
+	COLventa,
+	COLcategoria,
+	COLsubcategoria,
 	NUM_COLS_pro
-} ;
+};
 enum
 {
 	id_aud_emp,
@@ -77,7 +80,7 @@ enum
 	modifi_emp_emp,
 	accion_emp_emp,
 	NUM_COLS_au_emp
-} ;
+};
 
 enum
 {
@@ -99,40 +102,39 @@ enum
 	mod_fac,
 	accion_fac,
 	NUM_COLS_au_fac
-} ;
+};
 
 enum
 {
-	Id ,             
-	Cod_barra ,
+	Id,
+	Cod_barra,
 	Nombre_ant,
 	Marca_ant,
-	Fecha_proc_ant ,
-	Fecha_cad_ant ,
+	Fecha_proc_ant,
+	Fecha_cad_ant,
 	Numero_lote_ant,
-	Nota_ant ,
+	Nota_ant,
 	Piezas_ant,
 	Compra_ant,
 	Venta_ant,
 	Categoria_ant,
 	Subcategoria_ant,
-	Nombre_new ,
-	Marca_new  ,
+	Nombre_new,
+	Marca_new,
 	Fecha_proc_new,
 	Fecha_cad_new,
-	Numero_lote_new ,
-	Nota_new ,
+	Numero_lote_new,
+	Nota_new,
 	Piezas_new,
-	Compra_new ,
-	Venta_new ,
-	Categoria_new ,
+	Compra_new,
+	Venta_new,
+	Categoria_new,
 	Subcategoria_new,
-	Usuario ,
+	Usuario,
 	Fecha_mod,
 	Accion,
 	NUM_COLS_au_pro
 };
-
 
 enum
 {
@@ -165,4 +167,3 @@ enum
 	conneto,
 	NUM_COLS_bus
 };
-

@@ -1,1 +1,1 @@
-view_inventario
+ety_can_inve
