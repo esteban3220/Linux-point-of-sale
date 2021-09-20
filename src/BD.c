@@ -21,7 +21,6 @@
  * gcc -Wall -o "%e" "%f" `pkg-config --cflags --libs gtk+-3.0` $(mariadb_config --cflags) $(mariadb_config --libs)  -rdynamic -lm
  */
 
-#include <stdlib.h>
 #include "coneccion.c"
 #include "combobox.c"
 #include "refresca_tablas.c"
