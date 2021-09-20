@@ -89,6 +89,7 @@ Author: Esteban Noe Sarmiento Mtz.
               <object class="GtkLabel" id="Label_Error_ingreso">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -134,7 +135,6 @@ Author: Esteban Noe Sarmiento Mtz.
                 <property name="height-request">80</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -239,27 +239,49 @@ Author: Esteban Noe Sarmiento Mtz.
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_Sesion">
-                    <property name="width-request">50</property>
+                  <object class="GtkStack" id="stack_login">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                    <property name="halign">center</property>
-                    <property name="image-position">right</property>
-                    <property name="always-show-image">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="transition-type">crossfade</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkButton" id="btn_Sesion">
+                        <property name="width-request">50</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">True</property>
+                        <property name="halign">center</property>
+                        <property name="image-position">right</property>
+                        <property name="always-show-image">True</property>
+                        <child>
+                          <object class="GtkImage" id="img_conect">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">network-transmit-receive-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="name">page0</property>
+                        <property name="title" translatable="yes">page0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkSpinner" id="spinner_login">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="icon-name">network-transmit-receive-symbolic</property>
+                        <property name="active">True</property>
                       </object>
+                      <packing>
+                        <property name="name">page1</property>
+                        <property name="title" translatable="yes">page1</property>
+                        <property name="position">1</property>
+                      </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">18</property>
-                    <property name="position">3</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -2248,7 +2270,6 @@ Author: Esteban Noe Sarmiento Mtz.
                         <property name="can-focus">True</property>
                         <property name="halign">center</property>
                         <property name="valign">center</property>
-                        <property name="has-frame">False</property>
                         <property name="primary-icon-name">edit-find-symbolic</property>
                         <property name="primary-icon-activatable">False</property>
                         <property name="primary-icon-sensitive">False</property>
@@ -2487,7 +2508,6 @@ Author: Esteban Noe Sarmiento Mtz.
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                             <property name="max-length">20</property>
-                            <property name="has-frame">False</property>
                             <property name="placeholder-text" translatable="yes">Existencia</property>
                             <property name="adjustment">adjustment10</property>
                             <property name="numeric">True</property>
@@ -3710,17 +3730,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkButton" id="btn_inventario">
-                                <property name="label" translatable="yes">button</property>
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="receives-default">True</property>
-                              </object>
-                              <packing>
-                                <property name="expand">True</property>
-                                <property name="fill">True</property>
-                                <property name="position">2</property>
-                              </packing>
+                              <placeholder/>
                             </child>
                             <child>
                               <placeholder/>
@@ -3961,7 +3971,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                                 <property name="width-request">250</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
-                                                <property name="has-frame">False</property>
                                                 <property name="primary-icon-name">address-book-new-symbolic</property>
                                                 <property name="secondary-icon-name">face-smile-symbolic</property>
                                                 <property name="secondary-icon-tooltip-text" translatable="yes">Insertar emoticono</property>
@@ -3989,7 +3998,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">auth-fingerprint-symbolic</property>
                                             <property name="input-purpose">name</property>
                                           </object>
@@ -4003,7 +4011,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkEntry" id="ety_direccion">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">accessories-dictionary-symbolic</property>
                                           </object>
                                           <packing>
@@ -4017,7 +4024,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">10</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">call-incoming</property>
                                             <property name="input-purpose">number</property>
                                           </object>
@@ -4032,7 +4038,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">emoji-flags-symbolic</property>
                                             <property name="enable-emoji-completion">True</property>
                                           </object>
@@ -4074,7 +4079,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <child internal-child="entry">
                                               <object class="GtkEntry" id="ety_pais_emp">
                                                 <property name="can-focus">False</property>
-                                                <property name="has-frame">False</property>
                                               </object>
                                             </child>
                                           </object>
@@ -4089,7 +4093,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">avatar-default-symbolic</property>
                                           </object>
                                           <packing>
@@ -4110,7 +4113,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <child internal-child="entry">
                                               <object class="GtkEntry" id="ety_estado_emp">
                                                 <property name="can-focus">False</property>
-                                                <property name="has-frame">False</property>
                                               </object>
                                             </child>
                                           </object>
@@ -4125,7 +4127,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">mail-message-new-symbolic</property>
                                           </object>
                                           <packing>
@@ -4405,7 +4406,7 @@ Author: Esteban Noe Sarmiento Mtz.
                               <packing>
                                 <property name="expand">True</property>
                                 <property name="fill">True</property>
-                                <property name="position">2</property>
+                                <property name="position">1</property>
                                 <property name="non-homogeneous">True</property>
                               </packing>
                             </child>
@@ -4428,8 +4429,30 @@ Author: Esteban Noe Sarmiento Mtz.
                               <packing>
                                 <property name="expand">True</property>
                                 <property name="fill">True</property>
-                                <property name="position">3</property>
+                                <property name="position">2</property>
                                 <property name="non-homogeneous">True</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkButton" id="btn_inventario">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="receives-default">True</property>
+                                <property name="halign">center</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="halign">center</property>
+                                    <property name="valign">center</property>
+                                    <property name="icon-name">address-book-new</property>
+                                  </object>
+                                </child>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">3</property>
                               </packing>
                             </child>
                           </object>
@@ -4726,7 +4749,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkEntry" id="ety_cbarra">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">scanner-symbolic</property>
                                             <property name="secondary-icon-tooltip-markup" translatable="yes">Genera un Codigo de Barras</property>
                                             <property name="input-purpose">number</property>
@@ -4742,7 +4764,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">edit-select-all-symbolic</property>
                                             <property name="input-purpose">name</property>
                                             <property name="input-hints">GTK_INPUT_HINT_UPPERCASE_SENTENCES | GTK_INPUT_HINT_NONE</property>
@@ -4763,7 +4784,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <child internal-child="entry">
                                               <object class="GtkEntry" id="ety_marcapro">
                                                 <property name="can-focus">False</property>
-                                                <property name="has-frame">False</property>
                                               </object>
                                             </child>
                                           </object>
@@ -4985,7 +5005,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkEntry" id="ety_nlote">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="shadow-type">none</property>
                                             <property name="primary-icon-name">format-justify-center</property>
                                             <property name="input-purpose">number</property>
@@ -5001,7 +5020,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="max-length">45</property>
-                                            <property name="has-frame">False</property>
                                             <property name="primary-icon-name">format-text-direction-ltr</property>
                                           </object>
                                           <packing>
@@ -5014,7 +5032,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkSpinButton" id="spin_piezas">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="text" translatable="yes">0</property>
                                             <property name="primary-icon-name">document-save</property>
                                             <property name="placeholder-text" translatable="yes">Piezas a Recibir</property>
@@ -5032,7 +5049,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkSpinButton" id="spin_compra">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="text" translatable="yes">0.00</property>
                                             <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                             <property name="adjustment">adjustment3</property>
@@ -5049,7 +5065,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkSpinButton" id="spin_venta">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="text" translatable="yes">0.00</property>
                                             <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                             <property name="adjustment">adjustment4</property>
@@ -5088,7 +5103,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <child internal-child="entry">
                                               <object class="GtkEntry" id="ety_cat">
                                                 <property name="can-focus">False</property>
-                                                <property name="has-frame">False</property>
                                               </object>
                                             </child>
                                           </object>
@@ -5107,7 +5121,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                             <child internal-child="entry">
                                               <object class="GtkEntry" id="entry_subcat">
                                                 <property name="can-focus">False</property>
-                                                <property name="editable">False</property>
                                               </object>
                                             </child>
                                           </object>
@@ -5279,7 +5292,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                           <object class="GtkEntry" id="ety_busquedatick">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
-                                            <property name="has-frame">False</property>
                                             <property name="placeholder-text" translatable="yes">Busqueda por Id</property>
                                           </object>
                                         </child>
@@ -5296,7 +5308,6 @@ Author: Esteban Noe Sarmiento Mtz.
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <property name="valign">center</property>
-                                        <property name="has-frame">False</property>
                                         <property name="width-chars">9</property>
                                         <property name="primary-icon-pixbuf">img/currency_dollar_icon_172528.svg</property>
                                         <property name="placeholder-text" translatable="yes">Buscar por Monto</property>

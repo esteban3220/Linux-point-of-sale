@@ -31,6 +31,7 @@ void on_acercade_response()
 }
 void on_btn_Sesion_clicked()
 {
+		gtk_stack_set_visible_child(GTK_STACK(stack_login), spinner_login);
         conectar();
         contenido_tablas();
         contenido_producto();
@@ -39,23 +40,18 @@ void on_btn_Sesion_clicked()
         contenido_ticket();
         contenido_aud_ticket();
         ver_carrito();
+        gtk_stack_set_visible_child(GTK_STACK(stack_login), img_conect);
 }
 
 void on_Entry_Contrasena_activate()
 {
-        conectar();
-        contenido_tablas();
-        contenido_producto();
-        contenido_aud_proveedor();
-        contenido_aud_producto();
-        contenido_aud_ticket();
-        contenido_ticket();
-        ver_carrito();
+	on_btn_Sesion_clicked();
 }
 
 void on_btn_cancelar_adver3_clicked()
 {
         gtk_widget_hide(g_Dialog_Error);
+        gtk_stack_set_visible_child(GTK_STACK(stack_login), img_conect);
 }
 void cierra_error()
 {
@@ -907,6 +903,7 @@ void regresa_menu()
 }
 void consulta_usuarios()
 {
+	gtk_stack_set_visible_child(GTK_STACK(stack_login), spinner_login);
         char *user = "esteban";
         password = "junomava3842";
         conn = mysql_init(NULL);
@@ -921,7 +918,7 @@ void consulta_usuarios()
         {
         }
 
-        if (mysql_query(conn, "select user,host,select_priv from mysql.db where db='Tienda'"))
+        if (mysql_query(conn, "select user from mysql.db where db='Tienda'"))
         {
                 char tempErr[60];
                 sprintf(tempErr, "%s", mysql_error(conn));
@@ -1249,9 +1246,27 @@ void anadir_productocarrito()
         ver_total();
         gtk_entry_set_text(ety_pos_producto, "");
 }
+void contenido_inventario(){
+	conn = mysql_init(NULL);
+	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+        {
+        }
+        if (mysql_query(conn, "select * from Inventario_temp"))
+        {
+                gtk_label_set_text(lbl_error, "Producto no Encontrado");
+                return gtk_widget_show(dialog_error_datos);
+        }
+        res = mysql_use_result(conn);
+        while ((row = mysql_fetch_row(res)) != NULL)
+        titulo_inventario();
+
+        mysql_free_result(res);
+        mysql_close(conn);
+	}
 
 void yoshiiiiii()
 {
+	refresca_inve();
         char anadir_pro[200];
 
         const char *sku = gtk_entry_get_text(ety_inve);
@@ -1269,23 +1284,9 @@ void yoshiiiiii()
                 gtk_label_set_text(lbl_error, "El Producto ya fue añadido");
                 return gtk_widget_show(dialog_error_datos);
         }
-        refresca_inve();
-        res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL)
-                titulo_inventario();
-
-        if (mysql_query(conn, "select * from Inventario_temp"))
-        {
-                gtk_label_set_text(lbl_error, "Producto no Encontrado");
-                return gtk_widget_show(dialog_error_datos);
-        }
-        res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL)
-                titulo_inventario();
-
-        mysql_free_result(res);
-        mysql_close(conn);
+		contenido_inventario();
         gtk_entry_set_text(ety_inve, "");
+        gtk_tree_selection_unselect_all(select4);
 }
 void elimina_ticket()
 {
@@ -1777,15 +1778,18 @@ void select_inve()
                 g_free(sku);
         }
 }
-
+void comp_inve(){
+	const char *cantidad = gtk_entry_get_text(ety_can_inve);
+	if (strcmp(cantidad, "0") == 0)
+        {
+                gtk_entry_set_text(ety_can_inve, "");
+        }
+	}
 void inserta_datosinve()
 {
         const char *cantidad = gtk_entry_get_text(ety_can_inve);
         const char *sku = gtk_label_get_text(lbl_inventario);
-        if (strcmp(cantidad, "0") == 0)
-        {
-                gtk_entry_set_text(ety_can_inve, "");
-        }
+        
         char consu[200];
         sprintf(consu,"update Inventario_temp set Ingreso=%s where SKU=%s",cantidad,sku);
         conn = mysql_init(NULL);
@@ -1797,6 +1801,8 @@ void inserta_datosinve()
         mysql_free_result(res);
         mysql_close(conn);
         refresca_inve();
-        yoshiiiiii();
+        contenido_inventario();
         gtk_entry_set_text(ety_can_inve,"");
+        gtk_tree_selection_unselect_all(select4);
+        gtk_label_set_text(lbl_inventario,"");
 }

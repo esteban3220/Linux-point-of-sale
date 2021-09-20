@@ -139,6 +139,7 @@ int main(int argc, char *argv[])
         btn_aceptar_1 = GTK_WIDGET(gtk_builder_get_object(builder, "btn_aceptar_1"));
         emp_aceptar_anadir = GTK_WIDGET(gtk_builder_get_object(builder, "emp_aceptar_anadir"));
         reveal_productos = GTK_WIDGET(gtk_builder_get_object(builder, "reveal_productos"));
+        spinner_login = GTK_WIDGET(gtk_builder_get_object(builder, "spinner_login"));
         stack_header = GTK_STACK(gtk_builder_get_object(builder, "stack_header"));
         stack_sku = GTK_STACK(gtk_builder_get_object(builder, "stack_sku"));
         ety_emp_bien = GTK_ENTRY(gtk_builder_get_object(builder, "ety_emp_bien"));
@@ -150,6 +151,7 @@ int main(int argc, char *argv[])
         child_oculta_bus_pos = GTK_WIDGET(gtk_builder_get_object(builder, "child_oculta_bus_pos"));
         stack_pos = GTK_STACK(gtk_builder_get_object(builder, "stack_pos"));
         stack_bus_pos = GTK_STACK(gtk_builder_get_object(builder, "stack_bus_pos"));
+        stack_login = GTK_STACK(gtk_builder_get_object(builder, "stack_login"));
         pag_pos = GTK_WIDGET(gtk_builder_get_object(builder, "pag_pos"));
         cont_view_bus = GTK_WIDGET(gtk_builder_get_object(builder, "cont_view_bus"));
         pag_proveedor = GTK_WIDGET(gtk_builder_get_object(builder, "pag_proveedor"));
@@ -311,6 +313,8 @@ int main(int argc, char *argv[])
         ety_cantidadtick2 = GTK_ENTRY(gtk_builder_get_object(builder, "ety_cantidadtick2"));
         mark_bajostck = GTK_WIDGET(gtk_builder_get_object(builder, "mark_bajostck"));
         btn_resetfrcha = GTK_BUTTON(gtk_builder_get_object(builder, "btn_resetfrcha"));
+        btn_refresca_inve = GTK_BUTTON(gtk_builder_get_object(builder, "btn_refresca_inve"));
+        img_conect = GTK_WIDGET(gtk_builder_get_object(builder, "img_conect"));
 
         btn_cancelar_adver8 = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cancelar_adver8"));
         btn_cancelar_adver2 = GTK_WIDGET(gtk_builder_get_object(builder, "btn_cancelar_adver2"));
@@ -425,11 +429,14 @@ int main(int argc, char *argv[])
         g_signal_connect(G_OBJECT(ety_busca_producto), "changed", G_CALLBACK(busca_producto), NULL);
         g_signal_connect(G_OBJECT(btn_aceptar_a2), "clicked", G_CALLBACK(on_btn_aceptar_a2_clicked), NULL);
         g_signal_connect(G_OBJECT(btn_cancelar_adver3), "clicked", G_CALLBACK(on_btn_cancelar_adver3_clicked), NULL);
+        g_signal_connect(G_OBJECT(btn_refresca_inve), "clicked", G_CALLBACK(contenido_inventario), NULL);
+        
 
         g_signal_connect(G_OBJECT(ety_busca_proveedor_producto), "changed", G_CALLBACK(busca_producto), NULL);
         g_signal_connect(G_OBJECT(ety_busca_categoria), "changed", G_CALLBACK(busca_producto), NULL);
         g_signal_connect(G_OBJECT(ety_busca_subcategoria), "changed", G_CALLBACK(busca_producto), NULL);
         g_signal_connect(G_OBJECT(ety_can_inve), "activate", G_CALLBACK(inserta_datosinve), NULL);
+        g_signal_connect(G_OBJECT(ety_can_inve), "changed", G_CALLBACK(comp_inve), NULL);
 
         g_signal_connect(G_OBJECT(ety_busca_proveedor_producto), "icon-press", G_CALLBACK(borra_busqueda1), NULL);
         g_signal_connect(G_OBJECT(ety_busca_categoria), "icon-press", G_CALLBACK(borra_busqueda2), NULL);
@@ -456,8 +463,8 @@ int main(int argc, char *argv[])
         gtk_builder_connect_signals(builder, NULL);
         g_timeout_add_seconds(1, (GSourceFunc)timer_handler, NULL);
         gtk_button_set_image(GTK_BUTTON(btn_menu_pos), gtk_image_new_from_icon_name("open-menu-symbolic", GTK_ICON_SIZE_BUTTON));
-        consulta_usuarios();
         gtk_widget_show(window_login);
+        consulta_usuarios();
         gtk_main();
 }
 

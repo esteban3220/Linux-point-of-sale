@@ -73,6 +73,7 @@ void contenido_producto()
 }
 void conectar()
 {
+	
 	user = gtk_entry_get_text(g_Entry_Usuario);
 	password = gtk_entry_get_text(g_Entry_Contrasena);
 	conn = mysql_init(NULL);
@@ -83,11 +84,10 @@ void conectar()
 		gtk_label_set_text(La_Label_Error_ingreso, tempErr);
 		return gtk_widget_show(g_Dialog_Error);
 	}
-	else
-	{
+
+		gtk_stack_set_visible_child(GTK_STACK(stack_login), spinner_login);
 		gtk_widget_hide_on_delete(window_login);
 		gtk_widget_show(window_BD);
-	}
 	if (mysql_query(conn, "select Empresa from Proveedor"))
 	{
 		char tempErr[60];
@@ -105,6 +105,7 @@ void conectar()
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
+	
 }
 
 void consulta_proveedor()
