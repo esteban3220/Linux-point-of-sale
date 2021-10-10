@@ -946,7 +946,7 @@ void abre_busca()
         {
                 // button is inactive
                 gtk_tree_selection_unselect_all(select3);
-                gtk_stack_set_visible_child(GTK_STACK(stack_header), swchitcher);
+                gtk_stack_set_visible_child(GTK_STACK(stack_header), ety_pos_producto);
                 gtk_entry_set_text(GTK_ENTRY(ety_producto_pos), "");
         }
 }
