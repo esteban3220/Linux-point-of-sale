@@ -22,32 +22,25 @@
  */
 
 #include "tablas.c"
+#include "config.c"
 
 gboolean timer_handler();
 FILE *fichero;
 FILE *fichero2;
 FILE *fichero3;
 FILE *ticket;
-const char *user;
-const char *password;
-char *server = "192.168.0.45";
-char *database = "Tienda";
 
 void contenido_ticket()
 {
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 
 	conn = mysql_init(NULL);
-
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 	if (mysql_query(conn, "select * from Ticket ORDER BY Id_ticket DESC"))
 	{
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL)titulo_factura();
+	while ((row = mysql_fetch_row(res)) != NULL)
+		titulo_factura();
 	mysql_free_result(res);
 	mysql_close(conn);
 }
@@ -56,67 +49,32 @@ void contenido_producto()
 {
 	conn = mysql_init(NULL);
 
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 	if (mysql_query(conn, "select * from Producto"))
 	{
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL)titulo_producto();
+	while ((row = mysql_fetch_row(res)) != NULL)
+		titulo_producto();
 	if (mysql_query(conn, "select count(SKU) from Producto"))
 	{
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL)gtk_label_set_text(lbl_elementos_pro,row[0]);
+	while ((row = mysql_fetch_row(res)) != NULL)
+		gtk_label_set_text(lbl_elementos_pro, row[0]);
 	mysql_free_result(res);
 	mysql_close(conn);
 }
 void conectar()
 {
-	
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
-	conn = mysql_init(NULL);
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-		char tempErr[126];
-		sprintf(tempErr, "%s", mysql_error(conn));
-		gtk_label_set_text(La_Label_Error_ingreso, tempErr);
-		return gtk_widget_show(g_Dialog_Error);
-	}
-
-		gtk_stack_set_visible_child(GTK_STACK(stack_login), spinner_login);
-		gtk_widget_hide_on_delete(window_login);
-		gtk_widget_show(window_BD);
-	if (mysql_query(conn, "select Empresa from Proveedor"))
-	{
-		char tempErr[60];
-		sprintf(tempErr, "%s", mysql_error(conn));
-		gtk_label_set_text(La_Label_Error_ingreso, tempErr);
-		return gtk_widget_show(g_Dialog_Error);
-	}
-	res = mysql_use_result(conn);
-
-	while ((row = mysql_fetch_row(res)) != NULL)
-	{
-		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_marcapro), row[0]);
-		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(cb_productos_proveedor), row[0]);
-		gtk_label_set_text(lbl_usuario, user);
-	}
-	mysql_free_result(res);
-	mysql_close(conn);
-	
+	conectar_ini();
 }
 
 void consulta_proveedor()
 {
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
+
 	conn = mysql_init(NULL);
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 
 	if (mysql_query(conn, "select Empresa from Proveedor;"))
 	{
@@ -134,25 +92,23 @@ void consulta_proveedor()
 
 void contenido_tablas()
 {
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 
 	conn = mysql_init(NULL);
 
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 
 	if (mysql_query(conn, "select * from Proveedor"))
 	{
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL)titulo_empresa();
+	while ((row = mysql_fetch_row(res)) != NULL)
+		titulo_empresa();
 	if (mysql_query(conn, "select count(Empresa) from Proveedor"))
 	{
 	}
 	res = mysql_use_result(conn);
-	while ((row = mysql_fetch_row(res)) != NULL)gtk_label_set_text(lbl_elepro,row[0]);
+	while ((row = mysql_fetch_row(res)) != NULL)
+		gtk_label_set_text(lbl_elepro, row[0]);
 	mysql_free_result(res);
 	mysql_close(conn);
 }
@@ -162,9 +118,7 @@ void contenido_aud_proveedor()
 
 	conn = mysql_init(NULL);
 
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 
 	if (mysql_query(conn, "select * from Aud_proveedor ORDER BY Id DESC"))
 	{
@@ -181,9 +135,7 @@ void contenido_aud_ticket()
 
 	conn = mysql_init(NULL);
 
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 
 	if (mysql_query(conn, "select * from Aud_ticket ORDER BY Id DESC"))
 	{
@@ -197,39 +149,34 @@ void contenido_aud_ticket()
 
 void contenido_aud_producto()
 {
-	user = gtk_entry_get_text(g_Entry_Usuario);
-	password = gtk_entry_get_text(g_Entry_Contrasena);
 
 	conn = mysql_init(NULL);
 
-	if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-	{
-	}
+	servidor();
 
 	if (mysql_query(conn, "select * from Aud_producto ORDER BY Id DESC"))
 	{
 	}
 	res = mysql_use_result(conn);
 	//==================================================================================================================
-	while ((row = mysql_fetch_row(res)) != NULL)titulo_producto_auditoria();
+	while ((row = mysql_fetch_row(res)) != NULL)
+		titulo_producto_auditoria();
 	mysql_free_result(res);
 	mysql_close(conn);
 }
 
 void contenido_inventario_alt()
 {
-        conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
-        if (mysql_query(conn, "select * from Inventario ORDER BY Fecha DESC"))
-        {
-                gtk_label_set_text(lbl_error, "Producto no Encontrado");
-                return gtk_widget_show(dialog_error_datos);
-        }
-        res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_inventario_alt();
 
-        mysql_free_result(res);
-        mysql_close(conn);
+	conn = mysql_init(NULL);
+	servidor();
+	if (mysql_query(conn, "select * from Inventario ORDER BY Fecha DESC"))
+	{
+	}
+	res = mysql_use_result(conn);
+	while ((row = mysql_fetch_row(res)) != NULL)
+		titulo_inventario_alt();
+
+	mysql_free_result(res);
+	mysql_close(conn);
 }

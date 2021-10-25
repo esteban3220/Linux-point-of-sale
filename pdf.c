@@ -5,9 +5,7 @@ void genera_pdfproveedor()
         char fin_documento[] = "\\end{longtable}\n\\thispagestyle{empty}\n\\end{landscape}\n\\end{document}";
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, "select * from Proveedor"))
         {
@@ -44,9 +42,7 @@ void pdf_producto()
         char fin_documento[] = "\\end{longtable}\n\\thispagestyle{empty}\n\\end{landscape}\n\\end{document}";
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, "select * from Producto"))
         {
@@ -114,9 +110,7 @@ void imprime_ticket()
         fputs(cabecera, fichero3);
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, "select nombre from Tienda"))
         {
@@ -143,9 +137,7 @@ void imprime_ticket()
         ///(////////////////////////////////////////////////////////////////////////////////////////)
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
         if (mysql_query(conn, "select Query from Ticket order by Id_ticket desc limit 1"))
         {
         }

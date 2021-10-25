@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include <mysql.h>
-#include <stdlib.h>
 #include "widgets.h"
 #include "columnas.h"
 /*
@@ -48,6 +47,7 @@ void celdas_editables(
 	gtk_widget_show(g_Dialog_Error);
 }
 */
+
 static GtkTreeModel *inve(void)
 {
 	store_inve = gtk_list_store_new(N_COLUMNS_inve, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
@@ -223,17 +223,17 @@ static GtkTreeModel *POS(void)
 
 	gtk_list_store_append(store_pos, &iter_pos);
 	gtk_list_store_set(store_pos, &iter_pos,
-					   cantidad_pos, row[2],
-					   producto_pos, row[0],
-					   punitario_pos, row[1],
+					   cantidad_pos, row[0],
+					   producto_pos, row[1],
+					   punitario_pos, row[2],
 					   precio_pos, row[3], -1);
 	while ((row = mysql_fetch_row(res)) != NULL)
 	{
 		gtk_list_store_append(store_pos, &iter_pos);
 		gtk_list_store_set(store_pos, &iter_pos,
-						   cantidad_pos, row[2],
-						   producto_pos, row[0],
-						   punitario_pos, row[1],
+						   cantidad_pos, row[0],
+						   producto_pos, row[1],
+						   punitario_pos, row[2],
 						   precio_pos, row[3], -1);
 	}
 	return GTK_TREE_MODEL(store_pos);
@@ -306,18 +306,18 @@ static GtkTreeModel *venta_ticket(void)
 
 	gtk_list_store_append(store_venta, &iter_venta);
 	gtk_list_store_set(store_venta, &iter_venta,
-					   producto_venta, row[0],
+					   producto_venta, row[2],
 					   punitario_venta, row[1],
-					   nop_venta, row[2],
+					   nop_venta, row[0],
 					   subtotal_venta, row[3], -1);
 	while ((row = mysql_fetch_row(res)) != NULL)
 	{
 		gtk_list_store_append(store_venta, &iter_venta);
 		gtk_list_store_set(store_venta, &iter_venta,
-						   producto_venta, row[0],
-						   punitario_venta, row[1],
-						   nop_venta, row[2],
-						   subtotal_venta, row[3], -1);
+					   producto_venta, row[2],
+					   punitario_venta, row[1],
+					   nop_venta, row[0],
+					subtotal_venta, row[3], -1);
 	}
 	return GTK_TREE_MODEL(store_venta);
 }

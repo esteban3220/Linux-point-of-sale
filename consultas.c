@@ -1,15 +1,10 @@
-#include <stdio.h>
 #include "pdf.c"
 
 void ver_carrito()
 {
-
         conn = mysql_init(NULL);
-
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
-        if (mysql_query(conn, "select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto"))
+        servidor();
+        if (mysql_query(conn, "select * from Carrito_compra"))
         {
         }
         res = mysql_use_result(conn);
@@ -148,16 +143,14 @@ void on_emp_aceptar_anadir_clicked()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, anadir_emp))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
-                gtk_widget_hide(advertencia_anadir_fac);
+                gtk_widget_hide(advertencia_anadir_emp);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
@@ -232,16 +225,14 @@ void on_pro_aceptar_anadir_clicked()
         sprintf(anadir_fac, "insert into Producto values('%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s') ON DUPLICATE KEY UPDATE Nombre='%s',Marca='%s',Fecha_proc='%s', Fecha_cad='%s', Numero_lote='%s', Nota='%s', Piezas=Piezas+%s , Compra='%s', Venta='%s', Categoria='%s', Subcategoria='%s'", cbarra, nombre, marca, date, date2, nlote, cneto, piezas, compra, venta, categoria, subcat, nombre, marca, date, date2, nlote, cneto, piezas, compra, venta, categoria, subcat);
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, anadir_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
-                gtk_widget_hide(advertencia_anadir_fac);
+                gtk_widget_hide(advertencia_anadir_pro);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
@@ -322,13 +313,11 @@ void on_btn_actualiza_emp_clicked()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, anadir_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 gtk_widget_hide(advertencia_anadir_emp);
@@ -393,13 +382,11 @@ void on_btn_aceptar_a1_clicked()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, elimina_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 gtk_widget_hide(advertencia_eliminar_emp);
@@ -408,7 +395,7 @@ void on_btn_aceptar_a1_clicked()
         res = mysql_use_result(conn);
         while ((row = mysql_fetch_row(res)) != NULL)
         {
-                //printf("%s",row[0]);
+                // printf("%s",row[0]);
         }
         gtk_entry_set_text(ety_produ_emp, "");
         gtk_entry_set_text(ety_nombreemp, "");
@@ -452,13 +439,11 @@ void on_btn_aceptar_a2_clicked()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, elimina_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 gtk_widget_hide(advertencia_eliminar_pro);
@@ -467,7 +452,7 @@ void on_btn_aceptar_a2_clicked()
         res = mysql_use_result(conn);
         while ((row = mysql_fetch_row(res)) != NULL)
         {
-                //printf("%s",row[0]);
+                // printf("%s",row[0]);
         }
 
         gtk_entry_set_text(ety_cbarra, "");
@@ -513,11 +498,11 @@ void on_Window_BD_destroy()
                 gtk_widget_show(dialog_error_datos);
         }
 }
+
 void on_btn_cerrar_acd_clicked()
 {
         gtk_widget_hide(win_acercade);
 }
-
 void cierra_emp()
 {
         gtk_widget_hide_on_delete(advertencia_anadir_emp);
@@ -544,8 +529,10 @@ void cierra_act()
 }
 void busca_producto_pos()
 {
+        user = gtk_entry_get_text(g_Entry_Usuario);
+        password = gtk_entry_get_text(g_Entry_Contrasena);
 
-        //gtk_tree_selection_unselect_all(select3);
+        // gtk_tree_selection_unselect_all(select3);
         char busqueda_fac[300];
         const char *consulta = gtk_entry_get_text(GTK_ENTRY(ety_producto_pos));
         conn = mysql_init(NULL);
@@ -558,12 +545,10 @@ void busca_producto_pos()
         {
                 gtk_widget_set_visible(pop_busqueda_pos, 1);
 
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                }
+                servidor();
                 if (mysql_query(conn, busqueda_fac))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -591,9 +576,9 @@ void busca_producto_pos()
 
 void busca_proveedor()
 {
-
         user = gtk_entry_get_text(g_Entry_Usuario);
         password = gtk_entry_get_text(g_Entry_Contrasena);
+
         char busqueda_fac[300];
         char busqueda_fac2[300];
         const char *consulta = gtk_entry_get_text(ety_busca_proveedor);
@@ -611,35 +596,37 @@ void busca_proveedor()
         }
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
         refresca_datos_emp();
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_empresa();
+        while ((row = mysql_fetch_row(res)) != NULL)
+                titulo_empresa();
         if (mysql_query(conn, busqueda_fac2))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL)gtk_label_set_text(lbl_elepro,row[0]);
+        while ((row = mysql_fetch_row(res)) != NULL)
+                gtk_label_set_text(lbl_elepro, row[0]);
         mysql_free_result(res);
         mysql_close(conn);
 }
 
 void busca_producto()
 {
+        user = gtk_entry_get_text(g_Entry_Usuario);
+        password = gtk_entry_get_text(g_Entry_Contrasena);
         char busqueda_fac[600];
         char busqueda_fac2[600];
         const char *consulta = gtk_entry_get_text(ety_busca_producto);
@@ -664,7 +651,6 @@ void busca_producto()
                 gtk_widget_set_sensitive(GTK_WIDGET(cb_bs_subcat), TRUE);
                 sprintf(busqueda_fac, "select * from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'", consulta, consulta2, consulta3, consulta4);
                 sprintf(busqueda_fac2, "select count(SKU) from Producto where Nombre LIKE '%s%%' and Marca LIKE '%s%%' and Categoria LIKE '%s%%' and Subcategoria LIKE '%s%%'", consulta, consulta2, consulta3, consulta4);
-
         }
         if (strcmp(consulta2, "") != 0)
         {
@@ -700,29 +686,29 @@ void busca_producto()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
         refresca_datos_pro();
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_producto();
+        while ((row = mysql_fetch_row(res)) != NULL)
+                titulo_producto();
         if (mysql_query(conn, busqueda_fac2))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
-        while ((row = mysql_fetch_row(res)) != NULL)gtk_label_set_text(lbl_elementos_pro,row[0]);
+        while ((row = mysql_fetch_row(res)) != NULL)
+                gtk_label_set_text(lbl_elementos_pro, row[0]);
         mysql_free_result(res);
         mysql_close(conn);
 
@@ -731,6 +717,8 @@ void busca_producto()
 
 void on_btn_consulta_emp_clicked()
 {
+        user = gtk_entry_get_text(g_Entry_Usuario);
+        password = gtk_entry_get_text(g_Entry_Contrasena);
         char busqueda_fac[50];
         const char *consulta = gtk_entry_get_text(ety_produ_emp);
 
@@ -738,13 +726,11 @@ void on_btn_consulta_emp_clicked()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -780,13 +766,11 @@ void consulta_producto()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -809,6 +793,20 @@ void consulta_producto()
 
         mysql_free_result(res);
         mysql_close(conn);
+}
+
+void cancela_vp()
+{
+        gdouble x = 0.00;
+        gtk_entry_set_text(ety_sku_vp, "");
+        gtk_entry_set_text(ety_costovp, "");
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_canvp), x);
+        gtk_label_set_text(lbl_articulo_vp, "Articulo");
+        gtk_entry_set_text(ety_costovp1, "");
+        gtk_label_set_text(lbl_preciovp, "");
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_canvp1), x);
+        gtk_label_set_text(lbl_articulo_vp1, "Articulo");
+        gtk_widget_set_sensitive(GTK_WIDGET(ety_sku_vp), TRUE);
 }
 
 void on_acercade_close()
@@ -844,24 +842,15 @@ void regresa_menu()
 }
 void consulta_usuarios()
 {
+        user = gtk_entry_get_text(g_Entry_Usuario);
+        password = gtk_entry_get_text(g_Entry_Contrasena);
         gtk_stack_set_visible_child(GTK_STACK(stack_login), spinner_login);
-        char *user = "esteban";
-        password = "junomava3842";
         conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-                char tempErr[60];
-                sprintf(tempErr, "%s", mysql_error(conn));
-                gtk_label_set_text(lbl_error, tempErr);
-                return gtk_widget_show(dialog_error_datos);
-        }
-        else
-        {
-        }
+        conf();
 
         if (mysql_query(conn, "select user from mysql.db where db='Tienda'"))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -883,7 +872,7 @@ void consulta_usuarios()
 void cerrar_setup()
 {
         gtk_widget_hide(bienvenido);
-        //agregar funcion para refrescar usuarios
+        // agregar funcion para refrescar usuarios
         gtk_widget_show(window_login);
 }
 void consulta_pos()
@@ -941,13 +930,15 @@ void abre_busca()
         {
                 // button is active
                 gtk_stack_set_visible_child(GTK_STACK(stack_header), ety_producto_pos);
+                gtk_widget_grab_focus(GTK_WIDGET(ety_producto_pos));
         }
         else
         {
                 // button is inactive
                 gtk_tree_selection_unselect_all(select3);
-                gtk_stack_set_visible_child(GTK_STACK(stack_header), ety_pos_producto);
+                gtk_stack_set_visible_child(GTK_STACK(stack_header), GTK_WIDGET(ety_pos_producto));
                 gtk_entry_set_text(GTK_ENTRY(ety_producto_pos), "");
+                gtk_widget_grab_focus(GTK_WIDGET(ety_pos_producto));
         }
 }
 
@@ -1114,7 +1105,7 @@ void calcula_cambio()
 void cucb()
 {
         char ra[4];
-        srand(time(NULL)); //El mayordomo pone a girar la diana
+        srand(time(NULL)); // El mayordomo pone a girar la diana
         int test = rand() % 9999;
         sprintf(ra, "%d", test);
         gtk_entry_set_text(ety_cbarra, ra);
@@ -1122,7 +1113,7 @@ void cucb()
 void occb()
 {
         char ra[9];
-        srand(time(NULL)); //El mayordomo pone a girar la diana
+        srand(time(NULL)); // El mayordomo pone a girar la diana
         int test = rand() % 100000000;
         sprintf(ra, "%d", test);
         gtk_entry_set_text(ety_cbarra, ra);
@@ -1130,7 +1121,7 @@ void occb()
 void trecb()
 {
         char ra[19];
-        srand(time(NULL)); //El mayordomo pone a girar la diana
+        srand(time(NULL)); // El mayordomo pone a girar la diana
         long int test = rand() % 99999999999999999;
         sprintf(ra, "%ld", test);
         gtk_entry_set_text(ety_cbarra, ra);
@@ -1139,17 +1130,17 @@ void cierra_inventario()
 {
         gtk_widget_hide_on_delete(widget_inventario);
 }
+void x_vp()
+{
+        cancela_vp();
+        gtk_widget_hide_on_delete(window_vp);
+        
+}
 void ver_total()
 {
-        user = gtk_entry_get_text(g_Entry_Usuario);
-        password = gtk_entry_get_text(g_Entry_Contrasena);
-
         conn = mysql_init(NULL);
-
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
-        if (mysql_query(conn, "select SUM(P_unitario) as Total from Carrito_compra"))
+        servidor();
+        if (mysql_query(conn, "select SUM(Subtotal) as Total from Carrito_compra"))
         {
         }
         res = mysql_use_result(conn);
@@ -1168,36 +1159,33 @@ void abre_inventario()
 void anadir_productocarrito()
 {
         char anadir_pro[200];
-
         const char *sku = gtk_entry_get_text(ety_pos_producto);
-
-        sprintf(anadir_pro, "insert into Carrito_compra(Producto,P_unitario) select  Nombre,Venta from Producto where SKU = '%s'", sku);
-
-        conn = mysql_init(NULL);
-
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
+        if (strcmp(sku, "") == 0)
         {
+                gtk_widget_grab_focus(GTK_WIDGET(ety_recibido));
         }
-
-        if (mysql_query(conn, anadir_pro))
+        else
         {
-                gtk_label_set_text(lbl_error, "Producto no Encontrado");
-                return gtk_widget_show(dialog_error_datos);
+                sprintf(anadir_pro, "insert into Carrito_compra(No,Producto,P_unitario,Subtotal) select  1,Nombre,Venta,(Venta*1) from Producto where SKU = %s ON DUPLICATE KEY UPDATE No=No+1, Subtotal=Venta*No", sku);
+                conn = mysql_init(NULL);
+                servidor();
+                if (mysql_query(conn, anadir_pro))
+                {
+                        gtk_label_set_text(lbl_error, "Producto no Encontrado");
+                        return gtk_widget_show(dialog_error_datos);
+                }
+                mysql_close(conn);
+                refresca_pos();
+                ver_carrito();
+                ver_total();
+                gtk_entry_set_text(ety_pos_producto, "");
         }
-
-        mysql_close(conn);
-        refresca_pos();
-        ver_carrito();
-        ver_total();
-        gtk_entry_set_text(ety_pos_producto, "");
 }
 void contenido_inventario()
 {
         refresca_inve();
         conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
         if (mysql_query(conn, "select * from Inventario_temp"))
         {
                 gtk_label_set_text(lbl_error, "Producto no Encontrado");
@@ -1222,9 +1210,7 @@ void yoshiiiiii()
 
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, anadir_pro))
         {
@@ -1235,6 +1221,7 @@ void yoshiiiiii()
         gtk_entry_set_text(ety_inve, "");
         gtk_tree_selection_unselect_all(select4);
 }
+
 void elimina_ticket()
 {
         char consu[200];
@@ -1243,74 +1230,68 @@ void elimina_ticket()
         char consu4[200];
         gchar *id;
 
+        gtk_tree_model_get(model2, &iter2, COLidfac, &id, -1);
+        sprintf(consu, "select Query from Ticket where Id_ticket = %s", id);
+        sprintf(consu3, "delete from Ticket where Id_ticket = %s", id);
+        conn = mysql_init(NULL);
+        servidor();
+        if (mysql_query(conn, consu))
+        {
+        }
+        res = mysql_use_result(conn);
+        while ((row = mysql_fetch_row(res)) != NULL)
+        {
+                sprintf(consu2, "update Producto inner join `%s` on Producto.Nombre = `%s`.Producto set Producto.Piezas=Producto.Piezas+`%s`.No", row[0], row[0], row[0]);
+                sprintf(consu4, "drop table %s", row[0]);
+        }
+        mysql_free_result(res);
+        mysql_close(conn);
+        //===============================================================================================================================
+        conn = mysql_init(NULL);
+        servidor();
+        if (mysql_query(conn, consu2))
+        {
+                char tempErr[128];
+                sprintf(tempErr, "%s", mysql_error(conn));
+                gtk_label_set_text(lbl_error, tempErr);
+                return gtk_widget_show(dialog_error_datos);
+        }
+
+        if (mysql_query(conn, consu3))
+        {
+                char tempErr[128];
+                sprintf(tempErr, "%s", mysql_error(conn));
+                gtk_label_set_text(lbl_error, tempErr);
+                return gtk_widget_show(dialog_error_datos);
+        }
+        if (mysql_query(conn, consu4))
+        {
+                char tempErr[128];
+                sprintf(tempErr, "%s", mysql_error(conn));
+                gtk_label_set_text(lbl_error, tempErr);
+                return gtk_widget_show(dialog_error_datos);
+        }
+        gtk_label_set_text(lbl_ticketcambio, "0.00");
+        gtk_label_set_text(lbl_ticketrecibido, "0.00");
+        gtk_label_set_text(lbl_tickettotal, "0.00");
+        res = mysql_use_result(conn);
+        refresca_datos_fac();
+        refresca_datos_pro();
+        contenido_ticket();
+        contenido_producto();
+        contenido_aud_producto();
+        contenido_aud_ticket();
+        gtk_widget_hide_on_delete(eliminar_ticket);
+}
+void melimina_tick()
+{
         if (gtk_tree_selection_get_selected(select1, &model2, &iter2))
         {
-                gtk_tree_model_get(model2, &iter2, COLidfac, &id, -1);
-                sprintf(consu, "select Query from Ticket where Id_ticket = %s", id);
-                sprintf(consu3, "delete from Ticket where Id_ticket = %s", id);
-                conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-                if (mysql_query(conn, consu))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-                res = mysql_use_result(conn);
-                while ((row = mysql_fetch_row(res)) != NULL)
-                {
-                        sprintf(consu2, "update Producto inner join `%s` on Producto.Nombre = `%s`.Producto set Producto.Piezas=Producto.Piezas+`%s`.No", row[0], row[0], row[0]);
-                        sprintf(consu4, "drop table %s", row[0]);
-                }
-                mysql_free_result(res);
-                mysql_close(conn);
-                //===============================================================================================================================
-                conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-                if (mysql_query(conn, consu2))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-
-                if (mysql_query(conn, consu3))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-                if (mysql_query(conn, consu4))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
-                gtk_label_set_text(lbl_ticketcambio, "0.00");
-                gtk_label_set_text(lbl_ticketrecibido, "0.00");
-                gtk_label_set_text(lbl_tickettotal, "0.00");
-                res = mysql_use_result(conn);
-                refresca_datos_fac();
-                refresca_datos_pro();
-                contenido_ticket();
-                contenido_producto();
+                gtk_widget_show(eliminar_ticket);
         }
+}
+void oemini_ticket(){
+        gtk_widget_hide_on_delete(eliminar_ticket);
 }
 void ingresa_venta()
 {
@@ -1336,30 +1317,28 @@ void ingresa_venta()
         {
                 conn = mysql_init(NULL);
 
-                sprintf(anadir_pro, "CREATE TABLE `%s` AS  (select Producto , P_unitario , count(Producto) as 'No', (P_unitario * count(Producto)) as SubTotal from Carrito_compra group by Producto)", dt_format);
+                sprintf(anadir_pro, "CREATE TABLE `%s` select * from Carrito_compra", dt_format);
                 sprintf(anadir_pro2, "insert into Ticket (Usuario,Total,Recibido,Cambio,Query,Fecha_hora) values (USER(),'%s','%s','%s','%s',NOW())", total, recibido, cambio, dt_format);
                 sprintf(anadir_pro3, "update Producto inner join `%s` on Producto.Nombre = `%s`.Producto set Producto.Piezas=Producto.Piezas-`%s`.No;", dt_format, dt_format, dt_format);
 
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                }
+                servidor();
                 if (mysql_query(conn, anadir_pro2))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
                 }
                 if (mysql_query(conn, anadir_pro))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
                 }
                 if (mysql_query(conn, anadir_pro3))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -1380,8 +1359,12 @@ void ingresa_venta()
                 GdkColor color = {0, 255 << 4, 255 << 4, 255 << 4};
                 gtk_widget_modify_fg(GTK_WIDGET(ety_cambio), GTK_STATE_NORMAL, &color);
                 gtk_widget_set_sensitive(btn_venta, TRUE);
-                imprime_ticket();
+                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(mark_impresion)))
+                {
+                        imprime_ticket();
+                }
         }
+        gtk_widget_grab_focus(GTK_WIDGET(ety_pos_producto));
 }
 void selection_buscar(gpointer data)
 {
@@ -1392,22 +1375,16 @@ void selection_buscar(gpointer data)
                 gtk_tree_model_get(model_busc, &iter_busqueda, COLproducto_pos, &holi, -1);
                 sprintf(consu, "insert into Carrito_compra(Producto,P_unitario) select  Nombre,Venta from Producto where Nombre = '%s'", holi);
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
+                servidor();
                 if (mysql_query(conn, consu))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
                 }
-                //mysql_free_result(res);
-                //res = mysql_use_result(conn);
+                // mysql_free_result(res);
+                // res = mysql_use_result(conn);
                 refresca_pos();
                 ver_carrito();
                 ver_total();
@@ -1431,20 +1408,19 @@ void filtra_proveedor()
         }
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
         refresca_datos_emp();
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_empresa_auditoria();
+        while ((row = mysql_fetch_row(res)) != NULL)
+                titulo_empresa_auditoria();
         mysql_free_result(res);
         mysql_close(conn);
         contenido_tablas();
@@ -1466,13 +1442,11 @@ void filtrar_productos()
         }
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -1503,20 +1477,19 @@ void filtrar_ticketR()
         }
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         res = mysql_use_result(conn);
         refresca_datos_fac();
-        while ((row = mysql_fetch_row(res)) != NULL)titulo_factura_auditoria();
+        while ((row = mysql_fetch_row(res)) != NULL)
+                titulo_factura_auditoria();
         mysql_free_result(res);
         mysql_close(conn);
         contenido_ticket();
@@ -1545,13 +1518,11 @@ void filtrar_ticket()
         }
         conn = mysql_init(NULL);
 
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
 
         if (mysql_query(conn, busqueda_fac))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -1576,7 +1547,6 @@ void filtrar_ticket()
 
 void tree_selection_changed_cb()
 {
-
         gchar *id;
         if (gtk_tree_selection_get_selected(select1, &model2, &iter2) == TRUE)
         {
@@ -1588,16 +1558,10 @@ void tree_selection_changed_cb()
                 sprintf(consu, "select Query from Ticket where Id_ticket = %s", id);
                 sprintf(consu3, "select Total,Recibido,Cambio from Ticket where Id_ticket = %s", id);
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
+                servidor();
                 if (mysql_query(conn, consu))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -1609,16 +1573,10 @@ void tree_selection_changed_cb()
                 mysql_close(conn);
                 //===============================================================================================================================
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
+                servidor();
                 if (mysql_query(conn, consu2))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -1633,7 +1591,7 @@ void tree_selection_changed_cb()
 
                 if (mysql_query(conn, consu3))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -1645,77 +1603,85 @@ void tree_selection_changed_cb()
                         gtk_label_set_text(lbl_ticketrecibido, row[1]);
                         gtk_label_set_text(lbl_ticketcambio, row[2]);
                 }
-
                 mysql_close(conn);
                 g_free(id);
         }
 }
+void borra_elemento()
+{
 
+        gchar *produc;
+        char consu[200];
+        gtk_tree_model_get(model_pos, &iter_pos, producto_pos, &produc, -1);
+        sprintf(consu, "delete from Carrito_compra where Producto ='%s' limit 1", produc);
+
+        conn = mysql_init(NULL);
+        servidor();
+        if (mysql_query(conn, consu))
+        {
+                char tempErr[128];
+                sprintf(tempErr, "%s", mysql_error(conn));
+                gtk_label_set_text(lbl_error, tempErr);
+                gtk_widget_show(dialog_error_datos);
+        }
+        res = mysql_use_result(conn);
+        mysql_free_result(res);
+        mysql_close(conn);
+        refresca_pos();
+        ver_carrito();
+        ver_total();
+        g_free(produc);
+        gtk_widget_hide_on_delete(cancelar_elemento);
+}
+void borra_carrito()
+{
+        conn = mysql_init(NULL);
+        servidor();
+        if (mysql_query(conn, "delete from Carrito_compra"))
+        {
+                char tempErr[128];
+                sprintf(tempErr, "%s", mysql_error(conn));
+                gtk_label_set_text(lbl_error, tempErr);
+                gtk_widget_show(dialog_error_datos);
+        }
+        res = mysql_use_result(conn);
+        mysql_free_result(res);
+        mysql_close(conn);
+        refresca_pos();
+        ver_carrito();
+        ver_total();
+        gtk_widget_hide_on_delete(cancelar_venta);
+}
+void cierra_dialogventa()
+{
+        gtk_widget_hide_on_delete(cancelar_elemento);
+}
+void cierra_dialogcarrito()
+{
+        gtk_widget_hide_on_delete(cancelar_venta);
+}
 void key_event(GtkWidget *widget, GdkEventKey *event, gpointer data)
 {
         g_printerr("%s\n\n", gdk_keyval_name(event->keyval));
-        gchar *produc;
-        char consu[200];
         if ((strcmp(gdk_keyval_name(event->keyval), "minus") == 0) | (strcmp(gdk_keyval_name(event->keyval), "KP_Subtract") == 0))
         {
                 if (gtk_tree_selection_get_selected(select2, &model_pos, &iter_pos))
                 {
-                        gtk_tree_model_get(model_pos, &iter_pos, producto_pos, &produc, -1);
-                        sprintf(consu, "delete from Carrito_compra where Producto ='%s' limit 1", produc);
-
-                        conn = mysql_init(NULL);
-                        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                        {
-                                char tempErr[60];
-                                sprintf(tempErr, "%s", mysql_error(conn));
-                                gtk_label_set_text(lbl_error, tempErr);
-                                gtk_widget_show(dialog_error_datos);
-                        }
-                        if (mysql_query(conn, consu))
-                        {
-                                char tempErr[60];
-                                sprintf(tempErr, "%s", mysql_error(conn));
-                                gtk_label_set_text(lbl_error, tempErr);
-                                gtk_widget_show(dialog_error_datos);
-                        }
-                        res = mysql_use_result(conn);
-                        mysql_free_result(res);
-                        mysql_close(conn);
-                        refresca_pos();
-                        ver_carrito();
-                        ver_total();
-                        g_free(produc);
+                        gtk_widget_show(cancelar_elemento);
                 }
         }
         if (strcmp(gdk_keyval_name(event->keyval), "Escape") == 0)
         {
                 if (gtk_tree_selection_get_selected(select2, &model_pos, &iter_pos))
                 {
-                        conn = mysql_init(NULL);
-                        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                        {
-                                char tempErr[60];
-                                sprintf(tempErr, "%s", mysql_error(conn));
-                                gtk_label_set_text(lbl_error, tempErr);
-                                gtk_widget_show(dialog_error_datos);
-                        }
-                        if (mysql_query(conn, "delete from Carrito_compra"))
-                        {
-                                char tempErr[60];
-                                sprintf(tempErr, "%s", mysql_error(conn));
-                                gtk_label_set_text(lbl_error, tempErr);
-                                gtk_widget_show(dialog_error_datos);
-                        }
-                        res = mysql_use_result(conn);
-                        mysql_free_result(res);
-                        mysql_close(conn);
-                        refresca_pos();
-                        ver_carrito();
-                        ver_total();
+                        gtk_widget_show(cancelar_venta);
                 }
         }
 }
 
+void abre_vp(){
+        gtk_widget_show(window_vp);
+}
 void select_inve()
 {
         gchar *sku;
@@ -1725,16 +1691,11 @@ void select_inve()
                 gtk_tree_model_get(model_inventario, &iter_inventario, COLinvesku, &sku, -1);
                 sprintf(consu, "select SKU from Inventario_temp where SKU = %s", sku);
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
+                servidor();
+                ;
                 if (mysql_query(conn, consu))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
@@ -1750,16 +1711,13 @@ void select_inve()
 
 void inserta_datosinve()
 {
-
         const char *cantidad = gtk_entry_get_text(ety_can_inve);
         const char *sku = gtk_label_get_text(lbl_inventario);
 
         char consu[256];
         sprintf(consu, "update Inventario_temp set Ingreso=%s , Balance=((Piezas-%s)*Valor)*-1 ,Fisico=%s-Piezas  where Inventario_temp.SKU=%s ", cantidad, cantidad, cantidad, sku);
         conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
         if (mysql_query(conn, consu))
         {
                 gtk_label_set_text(lbl_error, "No se ah seleccionado ningun articulo");
@@ -1769,7 +1727,7 @@ void inserta_datosinve()
         mysql_free_result(res);
         mysql_close(conn);
         refresca_inve();
-        contenido_inventario();        
+        contenido_inventario();
         gtk_entry_set_text(ety_can_inve, "");
         gtk_label_set_text(lbl_inventario, "");
         gtk_tree_selection_unselect_all(select4);
@@ -1781,9 +1739,7 @@ void elimina_inventario()
         char consu[200];
         sprintf(consu, "delete from  Inventario_temp where SKU=%s", sku);
         conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
         if (mysql_query(conn, consu))
         {
         }
@@ -1802,9 +1758,7 @@ void todo_nada_inve()
         {
                 refresca_inve();
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                }
+                servidor();
                 if (mysql_query(conn, "delete from Inventario_temp"))
                 {
                 }
@@ -1820,9 +1774,7 @@ void todo_nada_inve()
         {
                 refresca_inve();
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                }
+                servidor();
                 if (mysql_query(conn, "delete from Inventario_temp"))
                 {
                 }
@@ -1840,19 +1792,17 @@ void exporta_inventario()
         sprintf(anadir_inve, "CREATE TABLE `Inve_%s` AS  (select * from Inventario_temp)", fecha);
         sprintf(anadir_inve2, "insert into Inventario select count(SKU) , sum(Fisico), sum(Balance),USER(),now(),'Inve_%s' from Inventario_temp", fecha);
         conn = mysql_init(NULL);
-        if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-        {
-        }
+        servidor();
         if (mysql_query(conn, anadir_inve))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
         }
         if (mysql_query(conn, anadir_inve2))
         {
-                char tempErr[60];
+                char tempErr[128];
                 sprintf(tempErr, "%s", mysql_error(conn));
                 gtk_label_set_text(lbl_error, tempErr);
                 return gtk_widget_show(dialog_error_datos);
@@ -1861,7 +1811,6 @@ void exporta_inventario()
         {
         }
         res = mysql_use_result(conn);
-
         while ((row = mysql_fetch_row(res)) != NULL);
         mysql_free_result(res);
         mysql_close(conn);
@@ -1881,24 +1830,121 @@ void select_query()
                 gtk_tree_model_get(model_inventario_alt, &iter_inventario_alt, colquery, &query, -1);
                 sprintf(consu, "select * from `%s` ", query);
                 conn = mysql_init(NULL);
-                if (!mysql_real_connect(conn, server, user, password, database, 0, NULL, 0))
-                {
-                        char tempErr[60];
-                        sprintf(tempErr, "%s", mysql_error(conn));
-                        gtk_label_set_text(lbl_error, tempErr);
-                        return gtk_widget_show(dialog_error_datos);
-                }
+                servidor();
                 if (mysql_query(conn, consu))
                 {
-                        char tempErr[60];
+                        char tempErr[128];
                         sprintf(tempErr, "%s", mysql_error(conn));
                         gtk_label_set_text(lbl_error, tempErr);
                         return gtk_widget_show(dialog_error_datos);
                 }
                 res = mysql_use_result(conn);
-                while ((row = mysql_fetch_row(res)) != NULL)titulo_inventario_desc();
+                while ((row = mysql_fetch_row(res)) != NULL)
+                        titulo_inventario_desc();
                 mysql_free_result(res);
                 mysql_close(conn);
                 g_free(query);
+        }
+}
+
+void vp_ini()
+{
+        const char *sku = gtk_entry_get_text(ety_sku_vp);
+        conn = mysql_init(NULL);
+        char consu[120];
+        sprintf(consu, "select Nombre,Venta from Producto where SKU=%s", sku);
+        servidor();
+        if (mysql_query(conn, consu))
+        {
+                gtk_label_set_text(lbl_error, "Codigo de barra mal formado");
+                return gtk_widget_show(dialog_error_datos);
+        }
+        gtk_widget_grab_focus(GTK_WIDGET(spin_canvp));
+        res = mysql_use_result(conn);
+        while ((row = mysql_fetch_row(res)) != NULL)
+        {
+                gtk_label_set_text(lbl_articulo_vp, row[0]);
+                gtk_label_set_text(lbl_articulo_vp1, row[0]);
+                gtk_label_set_text(lbl_preciovp, row[1]);
+                gtk_widget_set_sensitive(GTK_WIDGET(ety_sku_vp), FALSE);
+        }
+        mysql_free_result(res);
+        mysql_close(conn);
+}
+
+void can_vp()
+{
+        const char *sku = gtk_entry_get_text(ety_sku_vp);
+        if (!strcmp(sku, "") == 0)
+        {
+                long double x, y, z;
+                x = atof(gtk_label_get_text(lbl_preciovp));
+                y = atof(gtk_entry_get_text(spin_canvp));
+                z = y * x;
+                gtk_spin_button_set_value(GTK_SPIN_BUTTON(ety_costovp), z);
+        }
+}
+
+void prec_vp()
+{
+        const char *sku = gtk_entry_get_text(ety_sku_vp);
+        if (!strcmp(sku, "") == 0)
+        {
+                long double x, y, z;
+                x = atof(gtk_label_get_text(lbl_preciovp));
+                y = atof(gtk_entry_get_text(ety_costovp1));
+                z = y / x;
+                gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin_canvp1), z);
+        }
+}
+void anade_vp()
+{
+        const char *sku = gtk_entry_get_text(ety_sku_vp);
+        if (!strcmp(sku, "") == 0)
+        {
+                const char *Articulo = gtk_label_get_text(lbl_articulo_vp);
+                const char *Cantidad = gtk_entry_get_text(spin_canvp);
+                const char *Precio = gtk_entry_get_text(ety_costovp);
+                const char *P_articulo = gtk_label_get_text(lbl_preciovp);
+                char consu[200];
+                sprintf(consu, "insert into Carrito_compra values(%s,'%s',%s,%s) ON DUPLICATE KEY UPDATE No=No+%s, Subtotal=%s*No", Cantidad, Articulo, P_articulo, Precio, Cantidad, P_articulo);
+                conn = mysql_init(NULL);
+                servidor();
+                if (mysql_query(conn, consu))
+                {
+                }
+                res = mysql_use_result(conn);
+                mysql_free_result(res);
+                mysql_close(conn);
+                refresca_pos();
+                ver_carrito();
+                ver_total();
+                cancela_vp();
+        }
+}
+
+void anade_vp1()
+{
+        const char *sku = gtk_entry_get_text(ety_sku_vp);
+        if (!strcmp(sku, "") == 0)
+        {
+                const char *Articulo = gtk_label_get_text(lbl_articulo_vp1);
+                const char *Cantidad = gtk_entry_get_text(spin_canvp1);
+                const char *Precio = gtk_entry_get_text(ety_costovp1);
+                const char *P_articulo = gtk_label_get_text(lbl_preciovp);
+                char consu[200];
+                sprintf(consu, "insert into Carrito_compra values(%s,'%s',%s,%s) ON DUPLICATE KEY UPDATE No=No+%s, Subtotal=%s*No", Cantidad, Articulo, P_articulo, Precio, Cantidad, P_articulo);
+                conn = mysql_init(NULL);
+                servidor();
+                if (mysql_query(conn, consu))
+                {
+                }
+                res = mysql_use_result(conn);
+                mysql_free_result(res);
+                mysql_close(conn);
+                refresca_pos();
+                ver_carrito();
+                ver_total();
+                cancela_vp();
         }
 }

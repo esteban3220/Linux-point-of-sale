@@ -1,0 +1,1927 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.10.25)  25 OCT 2021 00:00
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Producto.tex
+(./Producto.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-02-18>
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count179
+\c@section=\count180
+\c@subsection=\count181
+\c@subsubsection=\count182
+\c@paragraph=\count183
+\c@subparagraph=\count184
+\c@figure=\count185
+\c@table=\count186
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(/usr/share/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip49
+\LTright=\skip50
+\LTpre=\skip51
+\LTpost=\skip52
+\LTchunksize=\count187
+\LTcapwidth=\dimen139
+\LT@head=\box47
+\LT@firsthead=\box48
+\LT@foot=\box49
+\LT@lastfoot=\box50
+\LT@cols=\count188
+\LT@rows=\count189
+\c@LT@tables=\count190
+\c@LT@chunks=\count191
+\LT@p@ftn=\toks15
+)
+(/usr/share/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(/usr/share/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)
+(/usr/share/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)))
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+\Gin@req@height=\dimen140
+\Gin@req@width=\dimen141
+)
+(/usr/share/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen142
+\lightrulewidth=\dimen143
+\cmidrulewidth=\dimen144
+\belowrulesep=\dimen145
+\belowbottomsep=\dimen146
+\aboverulesep=\dimen147
+\abovetopsep=\dimen148
+\cmidrulesep=\dimen149
+\cmidrulekern=\dimen150
+\defaultaddspace=\dimen151
+\@cmidla=\count192
+\@cmidlb=\count193
+\@aboverulesep=\dimen152
+\@belowrulesep=\dimen153
+\@thisruleclass=\count194
+\@lastruleclass=\count195
+\@thisrulewidth=\dimen154
+)
+(/usr/share/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+
+(/usr/share/texmf-dist/tex/latex/tools/array.sty
+Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
+\col@sep=\dimen155
+\ar@mcellbox=\box51
+\extrarowheight=\dimen156
+\NC@list=\toks17
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box52
+)
+\TX@col@width=\dimen157
+\TX@old@table=\dimen158
+\TX@old@col=\dimen159
+\TX@target=\dimen160
+\TX@delta=\dimen161
+\TX@cols=\count196
+\TX@ftn=\toks18
+)
+(/usr/share/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2021/03/24 3.56 The Babel package
+
+(/usr/share/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2021/03/24 3.56 Babel common definitions
+\babel@savecnt=\count197
+\U@D=\dimen162
+\l@babelnohyphens=\language87
+
+(/usr/share/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@readstream=\read2
+)
+\bbl@dirlevel=\count198
+
+(/usr/share/texmf-dist/tex/generic/babel-spanish/spanish.ldf
+Language: spanish.ldf 2016/03/03 v5.0p Spanish support from the babel system
+\es@quottoks=\toks19
+\es@quotdepth=\count199
+Package babel Info: Making " an active character on input line 561.
+Package babel Info: Making . an active character on input line 662.
+Package babel Info: Making < an active character on input line 707.
+Package babel Info: Making > an active character on input line 707.
+))
+(/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-03-18 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count266
+\l__pdf_internal_box=\box53
+)
+(./Producto.aux
+LaTeX Info: Redefining \. on input line 8.
+LaTeX Info: Redefining \% on input line 8.
+)
+\openout1 = `Producto.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+ (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count267
+\scratchdimen=\dimen163
+\scratchbox=\box54
+\nofMPsegments=\count268
+\nofMParguments=\count269
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count270
+\MPscratchDim=\dimen164
+\MPnumerator=\count271
+\makeMPintoPDFobject=\count272
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+(/usr/share/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texmf-dist/tex/latex/grfext/grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+
+(/usr/share/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+))
+(/usr/share/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+
+(/usr/share/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(/usr/share/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 504.
+
+(/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Info: Redefining \. on input line 6.
+LaTeX Info: Redefining \% on input line 6.
+
+Underfull \hbox (badness 5756) in paragraph at lines 15--15
+[]|\OT1/cmr/bx/n/10 Fecha de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+\OT1/cmr/bx/n/10 Pro-duc-
+ []
+
+
+Underfull \hbox (badness 5756) in paragraph at lines 15--15
+[]|\OT1/cmr/bx/n/10 Fecha de
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 15--15
+\OT1/cmr/bx/n/10 Ca-du-ci-
+ []
+
+
+Overfull \hbox (3.11095pt too wide) in paragraph at lines 15--15
+[]|\OT1/cmr/bx/n/10 Piezas| 
+ []
+
+
+Overfull \hbox (0.68597pt too wide) in paragraph at lines 15--15
+[]|\OT1/cmr/bx/n/10 Venta| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--16
+[]|\OT1/cmr/m/n/10 NIVEA
+ []
+
+
+Overfull \hbox (5.25723pt too wide) in paragraph at lines 16--16
+\OT1/cmr/m/n/10 JABx3x90.ALOE
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 16--16
+[]|\OT1/cmr/m/n/10 413.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+[]|\OT1/cmr/m/n/10 TREGAR
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+\OT1/cmr/m/n/10 QUE-SO HO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 17--17
+[]|\OT1/cmr/m/n/10 484.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/10 LLAVERO
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+\OT1/cmr/m/n/10 CAR-PIN-CHO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 18--18
+[]|\OT1/cmr/m/n/10 492.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--19
+[]|\OT1/cmr/m/n/10 PALETA PA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 19--19
+[]|\OT1/cmr/m/n/10 491.000| 
+ []
+
+
+Underfull \hbox (badness 1924) in paragraph at lines 20--20
+[]|\OT1/cmr/m/n/10 PALETA DON
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 20--20
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 21--21
+[]|\OT1/cmr/m/n/10 BRASSO BRI-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--21
+\OT1/cmr/m/n/10 LLA ME-TAL
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 21--21
+[]|\OT1/cmr/m/n/10 492.000| 
+ []
+
+
+Underfull \hbox (badness 2735) in paragraph at lines 22--22
+[]|\OT1/cmr/m/n/10 QUESO MAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 22--22
+[]|\OT1/cmr/m/n/10 499.636| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+[]|\OT1/cmr/m/n/10 DULCE DE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--23
+\OT1/cmr/m/n/10 MEM-BRI-LLO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 23--23
+[]|\OT1/cmr/m/n/10 491.000| 
+ []
+
+
+Underfull \hbox (badness 7759) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10 SOPA QUICK
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 24--24
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 25--25
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 26--26
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 5331) in paragraph at lines 27--27
+[]|\OT1/cmr/m/n/10 QUESO MUZ-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--27
+\OT1/cmr/m/n/10 ZA-RE-LLA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 27--27
+[]|\OT1/cmr/m/n/10 493.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+[]|\OT1/cmr/m/n/10 PROMO 20
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+\OT1/cmr/m/n/10 HAM-BUR-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+\OT1/cmr/m/n/10 GUE-SA PAN
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--28
+\OT1/cmr/m/n/10 Y ADE-RE-ZO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 28--28
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+[]|\OT1/cmr/m/n/10 PROMO 4
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+\OT1/cmr/m/n/10 TORPE-DOS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+\OT1/cmr/m/n/10 4 HAM-BUR-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 29--29
+\OT1/cmr/m/n/10 GUE-SAS 200
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 29--29
+[]|\OT1/cmr/m/n/10 493.000| 
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 30--30
+[]|\OT1/cmr/m/n/10 LARIO SA-LA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 30--30
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 31--31
+[]|\OT1/cmr/m/n/10 LARIO SA-LA-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--31
+\OT1/cmr/m/n/10 ME MI-LAN
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 31--31
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 32--32
+[]|\OT1/cmr/m/n/10 LARIO SA-LA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 32--32
+[]|\OT1/cmr/m/n/10 495.000| 
+ []
+
+
+Underfull \hbox (badness 1033) in paragraph at lines 33--33
+[]|\OT1/cmr/m/n/10 ECOSAN ARI-
+ []
+
+
+Overfull \hbox (41.85448pt too wide) in paragraph at lines 33--33
+\OT1/cmr/m/n/10 TOSc/SALV.yMIELxKG.| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 33--33
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 12--33
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 33
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--34
+[]|\OT1/cmr/m/n/10 LICOR PE-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 34--34
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
+[]|\OT1/cmr/m/n/10 LA CA-SIA-NA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--35
+\OT1/cmr/m/n/10 MUZ-ZA-RE-LLA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 35--35
+[]|\OT1/cmr/m/n/10 496.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 36--36
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 37--37
+[]|\OT1/cmr/m/n/10 BANANITA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 37--37
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+[]|\OT1/cmr/m/n/10 PROMO 42
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/cmr/m/n/10 DIS-COS EM-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/cmr/m/n/10 PA-NA-DAS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--38
+\OT1/cmr/m/n/10 600GR CRE-
+ []
+
+
+Underfull \hbox (badness 3260) in paragraph at lines 38--38
+\OT1/cmr/m/n/10 MAC 600 GR
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 38--38
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
+[]|\OT1/cmr/m/n/10 LEYENDA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--39
+\OT1/cmr/m/n/10 QUE-SO BA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 39--39
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 40--40
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 41--41
+\OT1/cmr/m/n/10 DE QUE-SO 1
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 41--41
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 4660) in paragraph at lines 42--42
+[]|\OT1/cmr/m/n/10 PROMO FAC-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 42--42
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 43--43
+\OT1/cmr/m/n/10 NOFF + 5
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 43--43
+[]|\OT1/cmr/m/n/10 444.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 44--44
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 4036) in paragraph at lines 45--45
+[]|\OT1/cmr/m/n/10 SALAME ME-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 45--45
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--46
+[]|\OT1/cmr/m/n/10 MUSLOS DE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--46
+\OT1/cmr/m/n/10 PO-LLO RE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 46--46
+\OT1/cmr/m/n/10 LLENO X
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 46--46
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 47--47
+[]|\OT1/cmr/m/n/10 493.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--48
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--48
+\OT1/cmr/m/n/10 QUE-SO CRE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--48
+\OT1/cmr/m/n/10 MO-SOal-VA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 48--48
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--49
+[]|\OT1/cmr/m/n/10 CAFE MA-TE
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 49--49
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
+[]|\OT1/cmr/m/n/10 LA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
+\OT1/cmr/m/n/10 SER.QUESO
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
+\OT1/cmr/m/n/10 SAR-
+ []
+
+
+Overfull \hbox (13.79886pt too wide) in paragraph at lines 50--50
+\OT1/cmr/m/n/10 DOxKG.FRAC.629| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 50--50
+[]|\OT1/cmr/m/n/10 496.000| 
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 51--51
+[]|\OT1/cmr/m/n/10 JAMON CRU-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 51--51
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 3219) in paragraph at lines 52--52
+[]|\OT1/cmr/m/n/10 ROSCA MAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 52--52
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--53
+[]|\OT1/cmr/m/n/10 LARIO JA-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 53--53
+\OT1/cmr/m/n/10 MON CO-CI-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 53--53
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 33--53
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+[1
+
+
+
+
+pdfTeX warning: pdflatex (file pdftex.map): cannot open font map file
+]
+Underfull \hbox (badness 2970) in paragraph at lines 54--54
+[]|\OT1/cmr/m/n/10 LARIO FIAM-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 54--54
+[]|\OT1/cmr/m/n/10 492.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+[]|\OT1/cmr/m/n/10 LARIO SAL-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+\OT1/cmr/m/n/10 CHI-CHON
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 55--55
+\OT1/cmr/m/n/10 PRI-MA-VE-RA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 55--55
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 56--56
+[]|\OT1/cmr/m/n/10 BIZC. SA-BO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 56--56
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
+[]|\OT1/cmr/m/n/10 LEYENDA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
+\OT1/cmr/m/n/10 QUE-SO SAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 57--57
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--58
+[]|\OT1/cmr/m/n/10 POR SA-LUT
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 58--58
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 59--59
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
+[]|\OT1/cmr/m/n/10 TREGAR
+ []
+
+
+Underfull \hbox (badness 7522) in paragraph at lines 60--60
+\OT1/cmr/m/n/10 QUE-SO REG-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 60--60
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
+[]|\OT1/cmr/m/n/10 CARGA VIR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 61--61
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (2.47939pt too wide) in paragraph at lines 62--62
+[]|\OT1/cmr/m/n/10 CREMOSISIMO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 62--62
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 63--63
+[]|\OT1/cmr/m/n/10 POR SA-LUT
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 63--63
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--64
+[]|\OT1/cmr/m/n/10 POR SA-LUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 64--64
+\OT1/cmr/m/n/10 LIGHT SAN-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 64--64
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+[]|\OT1/cmr/m/n/10 PALADINI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 65--65
+\OT1/cmr/m/n/10 SA-LA-ME
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 65--65
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 66--66
+[]|\OT1/cmr/m/n/10 JAP SA-LA-ME
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--66
+\OT1/cmr/m/n/10 CAM-TIM-PA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 66--66
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+[]|\OT1/cmr/m/n/10 CONITOS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 67--67
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--68
+[]|\OT1/cmr/m/n/10 RONDINE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 68--68
+\OT1/cmr/m/n/10 QUE-SO CRE-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 68--68
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--69
+[]|\OT1/cmr/m/n/10 CLEF QUE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--69
+\OT1/cmr/m/n/10 SO PRO-VO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 69--69
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--70
+[]|\OT1/cmr/m/n/10 LEYENDA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 70--70
+\OT1/cmr/m/n/10 QUE-SO RO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 70--70
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 71--71
+[]|\OT1/cmr/m/n/10 LA CA-SIA-NA
+ []
+
+
+Underfull \hbox (badness 1436) in paragraph at lines 71--71
+\OT1/cmr/m/n/10 QUE-SO PORT
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 71--71
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--72
+[]|\OT1/cmr/m/n/10 PASAS DE
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 72--72
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 73--73
+[]|\OT1/cmr/m/n/10 SANCOR
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 73--73
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 53--73
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+[2] [3]
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 74--74
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 75--75
+[]|\OT1/cmr/m/n/10 TORTA EX-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 75--75
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 76--76
+\OT1/cmr/m/n/10 QUE-SO SAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 76--76
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (3.72939pt too wide) in paragraph at lines 77--77
+[]|\OT1/cmr/m/n/10 BIZCOCHUELO| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 77--77
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 78--78
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 2970) in paragraph at lines 79--79
+[]|\OT1/cmr/m/n/10 LARIO FIAM-
+ []
+
+
+Underfull \hbox (badness 3219) in paragraph at lines 79--79
+\OT1/cmr/m/n/10 BRE CO-CI-DO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 79--79
+[]|\OT1/cmr/m/n/10 497.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 80--80
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 81--81
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 82--82
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+[]|\OT1/cmr/m/n/10 CAGNOLI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--83
+\OT1/cmr/m/n/10 LON-GA-NI-ZA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 83--83
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--84
+[]|\OT1/cmr/m/n/10 RONDINE
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--84
+\OT1/cmr/m/n/10 QUE-SO SAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 84--84
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 85--85
+[]|\OT1/cmr/m/n/10 SUPER PAN-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 85--85
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 86--86
+[]|\OT1/cmr/m/n/10 PALADINI
+ []
+
+
+Underfull \hbox (badness 1436) in paragraph at lines 86--86
+\OT1/cmr/m/n/10 QUE-SO PORT
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 86--86
+[]|\OT1/cmr/m/n/10 494.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--87
+[]|\OT1/cmr/m/n/10 MILKA
+ []
+
+
+Underfull \hbox (badness 6078) in paragraph at lines 87--87
+\OT1/cmr/m/n/10 OBLEA CHO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 87--87
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (15.46552pt too wide) in paragraph at lines 88--88
+[]|\OT1/cmr/m/n/10 HAMBURGUESAS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 88--88
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 89--89
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--90
+[]|\OT1/cmr/m/n/10 CIRUELAS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--90
+\OT1/cmr/m/n/10 x KG.TIPO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 90--90
+[]|\OT1/cmr/m/n/10 496.000| 
+ []
+
+
+Underfull \hbox (badness 4981) in paragraph at lines 91--91
+[]|\OT1/cmr/m/n/10 COTAR QUE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--91
+\OT1/cmr/m/n/10 SO CRE-MO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 91--91
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+[]|\OT1/cmr/m/n/10 CREMAC
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\OT1/cmr/m/n/10 MUZ-ZA-RE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--92
+\OT1/cmr/m/n/10 LLA CI-LIN-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 92--92
+[]|\OT1/cmr/m/n/10 496.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 93--93
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 73--93
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+[4] [5]
+Underfull \hbox (badness 10000) in paragraph at lines 94--94
+[]|\OT1/cmr/m/n/10 NARANJAS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 94--94
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
+[]|\OT1/cmr/m/n/10 CREMAC
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 95--95
+\OT1/cmr/m/n/10 QUE-SO HO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 95--95
+[]|\OT1/cmr/m/n/10 496.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 96--96
+[]|\OT1/cmr/m/n/10 J.P. PIZ-ZA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 96--96
+[]|\OT1/cmr/m/n/10 490.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
+[]|\OT1/cmr/m/n/10 LA SE-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
+\OT1/cmr/m/n/10 REN.QUESO
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 97--97
+\OT1/cmr/m/n/10 HO-LAN-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 97--97
+[]|\OT1/cmr/m/n/10 494.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 98--98
+[]|\OT1/cmr/m/n/10 489.000| 
+ []
+
+
+Underfull \hbox (badness 4660) in paragraph at lines 99--99
+[]|\OT1/cmr/m/n/10 PAN LAC-TAL
+ []
+
+
+Underfull \hbox (badness 1147) in paragraph at lines 99--99
+\OT1/cmr/m/n/10 BCO C /SAL-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 99--99
+[]|\OT1/cmr/m/n/10 492.000| 
+ []
+
+
+Underfull \hbox (badness 4660) in paragraph at lines 100--100
+[]|\OT1/cmr/m/n/10 PAN LAC-TAL
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 100--100
+[]|\OT1/cmr/m/n/10 489.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 101--101
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--102
+[]|\OT1/cmr/m/n/10 PALADINI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--102
+\OT1/cmr/m/n/10 MOR-TA-DE-
+ []
+
+
+Overfull \hbox (7.75714pt too wide) in paragraph at lines 102--102
+\OT1/cmr/m/n/10 LAc/PISTACHIO| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 102--102
+[]|\OT1/cmr/m/n/10 495.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 103--103
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--104
+[]|\OT1/cmr/m/n/10 PAN CHI-CO
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 104--104
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+[]|\OT1/cmr/m/n/10 PROMO 4
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+\OT1/cmr/m/n/10 HAM-BUR-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+\OT1/cmr/m/n/10 GUE-SAS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--105
+\OT1/cmr/m/n/10 GRAN-DES
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 105--105
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 106--106
+[]|\OT1/cmr/m/n/10 PALITOS DE
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 106--106
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 107--107
+[]|\OT1/cmr/m/n/10 PALITO DE
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 107--107
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--108
+[]|\OT1/cmr/m/n/10 RECREO
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--108
+\OT1/cmr/m/n/10 PAN-CE-TA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 108--108
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 109--109
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 3746) in paragraph at lines 110--110
+[]|\OT1/cmr/m/n/10 LEVADURA x
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 110--110
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--111
+\OT1/cmr/m/n/10 QUE-SO HO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 111--111
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 112--112
+\OT1/cmr/m/n/10 QUE-SO POR
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 112--112
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--113
+\OT1/cmr/m/n/10 QUE-SO BA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 113--113
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 93--113
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+[]|\OT1/cmr/m/n/10 MILKAUT
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--114
+\OT1/cmr/m/n/10 QUE-SO RE-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 114--114
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 115--115
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 116--116
+[]|\OT1/cmr/m/n/10 FELA CHO-RI-
+ []
+
+
+Underfull \hbox (badness 6461) in paragraph at lines 116--116
+\OT1/cmr/m/n/10 ZO CO-LO-RA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 116--116
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 117--117
+[]|\OT1/cmr/m/n/10 CREMAC
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 117--117
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 118--118
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--119
+[]|\OT1/cmr/m/n/10 CONITOS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 119--119
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 COBERTURA
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 120--120
+\OT1/cmr/m/n/10 PA-RA PIZ-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 120--120
+[]|\OT1/cmr/m/n/10 491.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 121--121
+[]|\OT1/cmr/m/n/10 LA PAU-LI-NA
+ []
+
+
+Underfull \hbox (badness 3471) in paragraph at lines 121--121
+\OT1/cmr/m/n/10 PORT SA-LUT
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 121--121
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 122--122
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 7308) in paragraph at lines 123--123
+[]|\OT1/cmr/m/n/10 PIZNPS BOL-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 123--123
+[]|\OT1/cmr/m/n/10 498.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+[]|\OT1/cmr/m/n/10 CAVIWA TU-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 124--124
+\OT1/cmr/m/n/10 RRON-de-MA-NI
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 124--124
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 125--125
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--126
+[]|\OT1/cmr/m/n/10 TUTUCAS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 126--126
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+[]|\OT1/cmr/m/n/10 LARIO JA-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 127--127
+\OT1/cmr/m/n/10 MON CRU-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 127--127
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 128--128
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 129--129
+[]|\OT1/cmr/m/n/10 LARIO BON-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 129--129
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 130--130
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 131--131
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 132--132
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--133
+[]|\OT1/cmr/m/n/10 AROS CE-BO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 133--133
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in alignment at lines 113--133
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+[7] [8]
+Underfull \hbox (badness 10000) in paragraph at lines 134--134
+[]|\OT1/cmr/m/n/10 AROS CE-BO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 134--134
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--135
+[]|\OT1/cmr/m/n/10 CREMAC
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 135--135
+\OT1/cmr/m/n/10 QUE-SO SAR-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 135--135
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--136
+[]|\OT1/cmr/m/n/10 MANI PE-LA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 136--136
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 137--137
+[]|\OT1/cmr/m/n/10 MANI PE-LA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 137--137
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 138--138
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 139--139
+[]|\OT1/cmr/m/n/10 MANI SA-LA-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 139--139
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+[]|\OT1/cmr/m/n/10 GRANIX
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 140--140
+\OT1/cmr/m/n/10 BO-CA-DI-TOS
+ []
+
+
+Overfull \hbox (11.2294pt too wide) in paragraph at lines 140--140
+\OT1/cmr/m/n/10 RELLc/AVELLxK| 
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 140--140
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 1748) in paragraph at lines 141--141
+[]|\OT1/cmr/m/n/10 ILOLAY QUE-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 141--141
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--142
+[]|\OT1/cmr/m/n/10 PAPA BAS-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 142--142
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--143
+[]|\OT1/cmr/m/n/10 PAPA BAS-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 143--143
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 144--144
+[]|\OT1/cmr/m/n/10 MAICITOS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 144--144
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--145
+[]|\OT1/cmr/m/n/10 MAICITOS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 145--145
+\OT1/cmr/m/n/10 PEHUA-MAR
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 145--145
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--146
+[]|\OT1/cmr/m/n/10 BISUTTI
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 146--146
+\OT1/cmr/m/n/10 CO-DE-GUI-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 146--146
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Overfull \hbox (5.25716pt too wide) in paragraph at lines 147--147
+[]|\OT1/cmr/m/n/10 ALMOHADITAS
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--147
+\OT1/cmr/m/n/10 FRU-TI-LLA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 147--147
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--148
+[]|\OT1/cmr/m/n/10 ALMOHADITA
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 148--148
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--149
+[]|\OT1/cmr/m/n/10 MANI SA-BO-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 149--149
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
+[]|\OT1/cmr/m/n/10 MANI SA-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 150--150
+\OT1/cmr/m/n/10 BO-RI-ZA-DOS
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 150--150
+[]|\OT1/cmr/m/n/10 500.000| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--151
+[]|\OT1/cmr/m/n/10 PAPAS FRI-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 151--151
+\OT1/cmr/m/n/10 TAS CON-GE-
+ []
+
+
+Overfull \hbox (4.32513pt too wide) in paragraph at lines 151--151
+[]|\OT1/cmr/m/n/10 499.000| 
+ []
+
+
+! Package inputenc Error: Unicode character ┴ (U+2534)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 1120 & S┴
+                 NDWICH TRIPLE & Datos de Prueba & 2083-08-16 & 2083-08-16 &...
+
+? 
+! Emergency stop.
+ ...                                              
+                                                  
+l.152 1120 & S┴
+                 NDWICH TRIPLE & Datos de Prueba & 2083-08-16 & 2083-08-16 &...
+
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+ 
+Here is how much of TeX's memory you used:
+ 3091 strings out of 478994
+ 45178 string characters out of 5864750
+ 433744 words of memory out of 5000000
+ 20554 multiletter control sequences out of 15000+600000
+ 404036 words of font info for 29 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 83i,5n,88p,364b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
