@@ -1,7 +1,7 @@
 /*
  * BD.c
  *
- * Copyright 2020 Esteban<esteban@Gigabyte>
+ * Copyright 2020 Esteban Noe Sarmiento Martinez <esteban@Gigabyte>
  *
  * This program is free software; you can redistribute it and /or modify
  * it under the terms of the GNU General Public License as published by
